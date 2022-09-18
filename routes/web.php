@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MasterBarangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +27,12 @@ Route::prefix('/master')->group(function() {
     
     //BARANG
     Route::prefix('/barang')->group(function() {
-        Route::get('/', [MasterBarangController::class, "homePage"]);
+        Route::get('/', [MasterBarangController::class, "ViewBarang"]);
     });
 
+    Route::prefix('/barang')->group(function() {
+        Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+    });
 
     //KARYAWAN
 });
