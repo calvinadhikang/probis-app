@@ -6,21 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <title>Home</title>
+    <style>
+        nav {
+            background-color: #7FB77E;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Toko Buah</a>
+            <a class="navbar-brand" href="#"><h1>Apps Toko Buah</h1></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{url('/penjualan')}}">Penjulalan</a>
+                    <a class="nav-link" aria-current="page" href="{{url('/penjualan')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href=" {{ url('/master/barang') }}">Master Barang</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Master Karyawan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
@@ -32,6 +40,7 @@
             </div>
         </div>
     </nav>
+    <br>
     {{-- Content --}}
     <div class="container">
         @yield('content')

@@ -21,5 +21,17 @@ Route::post('/', [LoginController::class, "loginAttempt"]);
 
 Route::get('/home', [HomeController::class, "homePage"]);
 
+// Master
+Route::prefix('/master')->group(function() {
+    
+    //BARANG
+    Route::prefix('/barang')->group(function() {
+        Route::get('/', [MasterBarangController::class, "homePage"]);
+    });
+
+
+    //KARYAWAN
+});
+
 // Penjualan
 Route::get('/penjualan', [HomeController::class, "penjualanPage"]);
