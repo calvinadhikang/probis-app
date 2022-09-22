@@ -27,10 +27,7 @@ Route::prefix('/master')->group(function() {
     
     //BARANG
     Route::prefix('/barang')->group(function() {
-        Route::get('/', [MasterBarangController::class, "ViewBarang"]);
-    });
-
-    Route::prefix('/barang')->group(function() {
+        Route::get('/view', [MasterBarangController::class, "ViewBarang"]);
         Route::get('/add', [MasterBarangController::class, "Addbarang"]);
     });
 

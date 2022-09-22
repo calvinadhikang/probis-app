@@ -14,10 +14,10 @@
     <form action="{{url('/')}}" method="POST">
         @csrf
         <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">Username</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="username" required>
-                </div>
+            <label class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="username" required>
+            </div>
         </div>
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Password</label>
