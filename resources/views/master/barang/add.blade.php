@@ -1,4 +1,4 @@
-@extends('home')
+@extends('partials/navbar')
 
 @section('content')
     <h1>Master Barang</h1>
