@@ -3,10 +3,10 @@
 @section('content')
 <div class="row my-4 ">
     <div class="col-6">
-        <a href="{{url('/')}}"><button class="btn btn-outline-primary w-100">Login</button></a>
+        <a href="{{url('/')}}"><button class="btn btn-outline-success w-100">Login</button></a>
     </div>
     <div class="col-6">
-        <a href="{{url('/register')}}"><button class="btn btn-primary w-100">Register</button></a>
+        <a href="{{url('/register')}}"><button class="btn btn-success w-100">Register</button></a>
     </div>
 </div>
 <hr>
@@ -43,7 +43,7 @@
                 <input type="password" class="form-control" name="confirm-password">
             </div>
         </div>
-        <div class="mb-3 row">
+        <div class="mb-3 row mx-2">
             <button class="btn btn-primary" type="submit">Sign Up</button>
         </div>
     </form>

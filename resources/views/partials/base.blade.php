@@ -10,6 +10,9 @@
         .space{
             height: 25%;
         }
+        body {
+            background-color: #F7F6DC;
+        }
     </style>
 </head>
 <body>
@@ -17,7 +20,7 @@
         <div class="space"></div>
         <div class="row">
             <div class="col-2"></div>
-            <div class="col-8 rounded border px-4">
+            <div class="col-8 rounded border px-4 bg-white">
                 @yield('content')
             </div>
             <div class="col-2"></div>
