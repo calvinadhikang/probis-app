@@ -32,6 +32,10 @@ Route::prefix('/master')->group(function() {
     });
 
     //KARYAWAN
+    Route::prefix('/karyawan')->group(function() {
+        Route::get('/', [MasterBarangController::class, "ViewBarang"]);
+        Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+    });
 });
 
 // Penjualan
