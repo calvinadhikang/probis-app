@@ -1,21 +1,29 @@
 @extends('home')
 
 @section('content')
-    <nav class="nav nav-pills nav-fill">
-        <a class="nav-link text-success" aria-current="page" href="{{ url('/master/barang/view') }}">View Barang</a>
-        <a class="nav-link bg-success active" href="{{ url('/master/barang/add') }}">Add Barang</a>
+    <h1>Master Barang</h1>
+    <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
+        <a class="nav-link text-success" aria-current="page" href="{{ url('/master/barang/') }}">View</a>
+        <a class="nav-link bg-success active " href="{{ url('/master/barang/add') }}">Add</a>
     </nav>
-
     <br>
     <br>
-
-    <form action="" method="POST">
-        @csrf
-        <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Nama Barang :</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="username" required>
-            </div>
-        </div>
-    </form>
+    <div class="bg-white p-4 rounded">
+        <form action="" method="POST">
+            @csrf
+            <label>Nama Barang</label>
+            <input type="text" class="form-control" name="nama" placeholder="Nama Barang">
+            <br>
+            <label>Harga Barang (Rp)</label>
+            <input type="text" class="form-control" name="harga" placeholder="Harga Barang">
+            <br>
+            <label>Merk</label>
+            <input type="text" class="form-control" name="merk" placeholder="Pilih Merk...">
+            <br>
+            <label>Jenis</label>
+            <input type="text" class="form-control" name="jenis" placeholder="Pilih Jenis...">
+            <br>
+            <button class="btn btn-primary w-100">Submit</button>
+        </form>
+    </div>
 @endsection

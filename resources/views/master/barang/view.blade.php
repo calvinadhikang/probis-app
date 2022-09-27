@@ -2,9 +2,10 @@
 
 @section('content')
     {{-- Tabs --}}
-    <nav class="nav nav-pills nav-fill">
-        <a class="nav-link active bg-success" href="{{ url('/master/barang/view') }}">View Barang</a>
-        <a class="nav-link text-success" href="{{ url('/master/barang/add') }}">Add Barang</a>
+    <h1>Master Barang</h1>
+    <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
+        <a class="nav-link active bg-success" href="{{ url('/master/barang/view') }}">View</a>
+        <a class="nav-link text-success" href="{{ url('/master/barang/add') }}">Add</a>
     </nav>
 
     <br>
