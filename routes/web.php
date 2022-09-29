@@ -24,7 +24,7 @@ Route::get('/home', [HomeController::class, "homePage"]);
 
 // Master
 Route::prefix('/master')->group(function() {
-    
+
     //BARANG
     Route::prefix('/barang')->group(function() {
         Route::get('/', [MasterBarangController::class, "ViewBarang"]);
@@ -36,6 +36,9 @@ Route::prefix('/master')->group(function() {
         Route::get('/', [MasterBarangController::class, "ViewBarang"]);
         Route::get('/add', [MasterBarangController::class, "Addbarang"]);
     });
+
+    // ivander coba
+    // ini coba dulu
 });
 
 // Penjualan
