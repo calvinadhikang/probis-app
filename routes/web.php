@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasterBarangController;
+use App\Http\Controllers\MasterKaryawanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,8 +34,11 @@ Route::prefix('/master')->group(function() {
 
     //KARYAWAN
     Route::prefix('/karyawan')->group(function() {
-        Route::get('/', [MasterBarangController::class, "ViewBarang"]);
+        Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
         Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+        Route::get('/detail', [MasterKaryawanController::class, "DetailKaryawan"]);
+        Route::get('/edit', [MasterKaryawanController::class, "EditKaryawan"]);
+
     });
 
     // ivander coba
