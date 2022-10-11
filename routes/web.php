@@ -39,6 +39,8 @@ Route::prefix('/master')->group(function() {
 
     // ivander coba
     // ini coba dulu
+    // ibw
+    // coba laptop
 });
 
 // Penjualan
