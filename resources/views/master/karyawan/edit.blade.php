@@ -44,24 +44,43 @@
     <div class="bg-white p-4 rounded">
         <form action="" method="POST">
             @csrf
+            <div class="row">
+                <div class="column" style="float: left;
+                width: 50%;
+                padding: 10px;
+                height: 300px;">
+
             <label>Username</label>
             <input type="text" class="form-control" name="username" placeholder="Username">
-            <br>
-            <label>Nama</label>
-            <input type="text" class="form-control" name="nama" placeholder="Nama Karyawan">
             <br>
             <label>Nomor Telepon</label>
             <input type="text" class="form-control" name="nomortelepon" placeholder="Nomor Telepon">
             <br>
-            <label>Jabatan</label>
-            <input type="text" class="form-control" name="jabatan" placeholder="Jabatan">
-            <br>
             <label>Jenis Kelamin</label>
             <input type="text" class="form-control" name="kelamin" placeholder="Kelamin">
             <br>
+                </div>
+                <div class="column" style="float: left;
+                width: 50%;
+                padding: 10px;
+                height: 300px;">
+
+            <label>Nama</label>
+            <input type="text" class="form-control" name="nama" placeholder="Nama Karyawan">
+            <br>
+
+            <label>Jabatan</label>
+            <input type="text" class="form-control" name="jabatan" placeholder="Jabatan">
+            <br>
+
             <label>Status</label>
             <input type="text" class="form-control" name="status" placeholder="Status">
             <br>
+
+                </div>
+            </div>
+            
+
             <button class="btn btn-primary w-100">Submit</button>
         </form>
     </div>

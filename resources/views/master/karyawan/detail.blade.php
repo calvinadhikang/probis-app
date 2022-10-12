@@ -24,40 +24,55 @@
 <div class="bg-white p-4 rounded">
     <form action="" method="POST">
         @csrf
-        <label>Username</label>
-        <br>
-        <h3>A</h3>
-        <br>
-        <br>
-        <label>Nama</label>
-        <br>
-        <h3>A</h3>
-        <br>
-        <br>
+        <div class="row">
+            <div class="column" style="float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px;">
+                <label>Username</label>
+                <br>
+                <h3>UsernameIvander</h3>
+                <br>
+                <br>
 
-        <label>Nomor Telepon</label>
-        <br>
-        <h3>A</h3>
-        <br>
-        <br>
+                <label>Nomor Telepon</label>
+                <br>
+                <h3>08999</h3>
+                <br>
+                <br>
 
-        <label>Jabatan</label>
-        <br>
-        <h3>A</h3>
-        <br>
-        <br>
+                <label>Jenis Kelamin</label>
+                <br>
+                <h3>Pria</h3>
+                <br>
+                <br>
 
-        <label>Jenis Kelamin</label>
-        <br>
-        <h3>A</h3>
-        <br>
-        <br>
+            </div>
+            <div class="column" style="float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px;">
+            <label>Nama</label>
+            <br>
+            <h3>Ivander Berwyn</h3>
+            <br>
+            <br>
+                <label>Jabatan</label>
+                <br>
+                <h3>Kasir</h3>
+                <br>
+                <br>
 
-        <label>Status</label>
-        <br>
-        <h3>A</h3>
-        <br>
-        <br>
+                <label>Status</label>
+                <br>
+                <h3>Aktif</h3>
+                <br>
+                <br>
+
+            </div>
+        </div>
+
+
 
     </form>
 @endsection
