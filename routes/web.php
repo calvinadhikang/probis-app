@@ -4,8 +4,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasterBarangController;
 use App\Http\Controllers\MasterKaryawanController;
+use App\Http\Controllers\MasterSupplierController;
 use App\Http\Controllers\MasterKategoriController;
 use App\Http\Controllers\MasterMerkController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +38,14 @@ Route::prefix('/master')->group(function() {
 
     //KARYAWAN
     Route::prefix('/karyawan')->group(function() {
+        Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
+        Route::get('/add', [MasterKaryawanController::class, "AddKaryawan"]);
+    });
+
+    Route::prefix('/supplier')->group(function() {
+        Route::get('/', [MasterSupplierController::class, "ViewSupplier"]);
+        Route::get('/add', [MasterSupplierController::class, "AddSupplier"]);
+    });
         Route::get('/', [MasterKaryawanController::class, "View"]);
         Route::get('/add', [MasterKaryawanController::class, "Add"]);
     });
@@ -52,10 +62,6 @@ Route::prefix('/master')->group(function() {
         Route::get('/add', [MasterKategoriController::class, "Add"]);
     });
 
-    // ivander coba
-    // ini coba dulu
-    // ibw
-    // coba laptop
 });
 
 // Penjualan
