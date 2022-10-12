@@ -3,6 +3,9 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasterBarangController;
+use App\Http\Controllers\MasterKaryawanController;
+use App\Http\Controllers\MasterKategoriController;
+use App\Http\Controllers\MasterMerkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,14 +30,26 @@ Route::prefix('/master')->group(function() {
 
     //BARANG
     Route::prefix('/barang')->group(function() {
-        Route::get('/', [MasterBarangController::class, "ViewBarang"]);
-        Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+        Route::get('/', [MasterBarangController::class, "View"]);
+        Route::get('/add', [MasterBarangController::class, "Add"]);
     });
 
     //KARYAWAN
     Route::prefix('/karyawan')->group(function() {
-        Route::get('/', [MasterBarangController::class, "ViewBarang"]);
-        Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+        Route::get('/', [MasterKaryawanController::class, "View"]);
+        Route::get('/add', [MasterKaryawanController::class, "Add"]);
+    });
+
+    //MERK
+    Route::prefix('/merk')->group(function() {
+        Route::get('/', [MasterMerkController::class, "View"]);
+        Route::get('/add', [MasterMerkController::class, "Add"]);
+    });
+    
+    //KATEGORI
+    Route::prefix('/kategori')->group(function() {
+        Route::get('/', [MasterKategoriController::class, "View"]);
+        Route::get('/add', [MasterKategoriController::class, "Add"]);
     });
 
     // ivander coba
