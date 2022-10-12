@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class MasterKaryawanController extends Controller
 {
+
      //
      public function ViewKaryawan()
      {
