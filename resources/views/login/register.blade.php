@@ -10,37 +10,32 @@
     </div>
 </div>
 <hr>
-<div class="mt-5">
+<div class="col-md-8">
     <form action="{{url('/register')}}" method="POST">
         @csrf
-        <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Nama</label>
+        <div class="form-group first mb-4">
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="nama">
+                <input type="text" class="form-control" name="nama" placeholder="Nama">
             </div>
         </div>
-        <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Email</label>
+        <div class="form-group last mb-4">
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="email">
+                <input type="text" class="form-control" name="email" placeholder="Email">
             </div>
         </div>
-        <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">Username</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="username">
-                </div>
-        </div>
-        <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Password</label>
+        <div class="form-group last mb-4">
             <div class="col-sm-10">
-                <input type="password" class="form-control" name="password">
+                <input type="text" class="form-control" name="username" placeholder="Your Username">
             </div>
         </div>
-        <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Confirm Password</label>
+        <div class="form-group last mb-4">
             <div class="col-sm-10">
-                <input type="password" class="form-control" name="confirm-password">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group last mb-4">
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password">
             </div>
         </div>
         <div class="mb-3 row mx-2">

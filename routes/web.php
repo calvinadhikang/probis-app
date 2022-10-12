@@ -3,6 +3,8 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasterBarangController;
+use App\Http\Controllers\MasterKaryawanController;
+use App\Http\Controllers\MasterSupplierController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,12 +35,14 @@ Route::prefix('/master')->group(function() {
 
     //KARYAWAN
     Route::prefix('/karyawan')->group(function() {
-        Route::get('/', [MasterBarangController::class, "ViewBarang"]);
-        Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+        Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
+        Route::get('/add', [MasterKaryawanController::class, "AddKaryawan"]);
     });
 
-    // ivander coba
-    // ini coba dulu
+    Route::prefix('/supplier')->group(function() {
+        Route::get('/', [MasterSupplierController::class, "ViewSupplier"]);
+        Route::get('/add', [MasterSupplierController::class, "AddSupplier"]);
+    });
 });
 
 // Penjualan
