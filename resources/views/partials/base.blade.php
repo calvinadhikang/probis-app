@@ -216,10 +216,10 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-6">
                     <img src="undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
                 </div>
-                <div class="col-md-6 contents">
+                <div class="col-6">
                   <div class="row justify-content-center">
                     @yield('content')
                   </div>
