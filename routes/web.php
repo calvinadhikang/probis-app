@@ -39,6 +39,9 @@ Route::prefix('/master')->group(function() {
     //KARYAWAN
     Route::prefix('/karyawan')->group(function() {
         Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
+        Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+        Route::get('/detail', [MasterKaryawanController::class, "DetailKaryawan"]);
+        Route::get('/edit', [MasterKaryawanController::class, "EditKaryawan"]);
         Route::get('/add', [MasterKaryawanController::class, "AddKaryawan"]);
     });
 
