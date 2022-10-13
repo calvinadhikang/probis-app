@@ -45,9 +45,11 @@ Route::prefix('/master')->group(function() {
         Route::get('/add', [MasterKaryawanController::class, "AddKaryawan"]);
     });
 
+    //SUPPLIER
     Route::prefix('/supplier')->group(function() {
         Route::get('/', [MasterSupplierController::class, "ViewSupplier"]);
         Route::get('/add', [MasterSupplierController::class, "AddSupplier"]);
+        Route::get('/detail', [MasterSupplierController::class, "DetailSupplier"]);
     });
     //     Route::get('/', [MasterKaryawanController::class, "View"]);
     //     Route::get('/add', [MasterKaryawanController::class, "Add"]);
