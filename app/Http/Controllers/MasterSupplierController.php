@@ -14,4 +14,16 @@ class MasterSupplierController extends Controller
     {
        return view('master.supplier.add');
     }
+    public function EditSupplier()
+    {
+       return view('master.supplier.edit');
+    }
+    public function AddBarangSupplier()
+    {
+       return view('master.addbarangsupply');
+    }
+    public function EditBarangSupplier()
+    {
+       return view('master.editbarangsupply');
+    }
 }
