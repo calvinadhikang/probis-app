@@ -18,7 +18,7 @@
 <body>
     <nav class="navbar navbar-expand-lg" id="nav">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><h1>Apps Toko Buah</h1></a>
+            {{-- <img src="Logo.png" width="100px" height="150px" alt="Image" class="img-fluid"> --}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,7 +31,10 @@
                     <a class="nav-link" href=" {{ url('/master/barang') }}">Master Barang</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Master Karyawan</a>
+                    <a class="nav-link" href="{{ url('/master/karyawan')}}">Master Karyawan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/master/supplier')}}">Master Supplier</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
