@@ -47,7 +47,10 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/transaksi') }}">Transaksi</a>
+                            <a class="nav-link" href="{{ url('/transaksi/penjualan') }}">Penjualan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/transaksi/retur') }}">Retur</a>
                         </li>
                     @endif
                 </ul>

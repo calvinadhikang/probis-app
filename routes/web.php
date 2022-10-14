@@ -7,7 +7,9 @@ use App\Http\Controllers\MasterKaryawanController;
 use App\Http\Controllers\MasterSupplierController;
 use App\Http\Controllers\MasterKategoriController;
 use App\Http\Controllers\MasterMerkController;
-
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\TransaksiPenjualanController;
+use App\Http\Controllers\TransaksiReturController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,7 +62,7 @@ Route::prefix('/master')->group(function() {
         Route::get('/', [MasterMerkController::class, "View"]);
         Route::get('/add', [MasterMerkController::class, "Add"]);
     });
-    
+
     //KATEGORI
     Route::prefix('/kategori')->group(function() {
         Route::get('/', [MasterKategoriController::class, "View"]);
@@ -69,5 +71,16 @@ Route::prefix('/master')->group(function() {
 
 });
 
-// Penjualan
-Route::get('/penjualan', [HomeController::class, "penjualanPage"]);
+Route::prefix('/transaksi')->group(function() {
+    // Penjualan
+    Route::prefix('/penjualan')->group(function() {
+        Route::get('/', [TransaksiPenjualanController::class, "view"]);
+        Route::get('/add', [TransaksiPenjualanController::class, "add"]);
+    });
+
+    // Retur
+    Route::prefix('/retur')->group(function() {
+        Route::get('/', [TransaksiReturController::class, "view"]);
+        Route::get('/add', [TransaksiReturController::class, "add"]);
+    });
+});
