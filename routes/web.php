@@ -36,6 +36,7 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/barang')->group(function() {
         Route::get('/', [MasterBarangController::class, "View"]);
         Route::get('/add', [MasterBarangController::class, "Add"]);
+        Route::get('/detail', [MasterBarangController::class, "Detail"]);
     });
 
     //KARYAWAN

@@ -25,9 +25,9 @@
             </div>
         </div>
     </div>
-    
+
     <br>
-    
+
     <table class="table table-striped">
         <thead class="text-bg-success">
             <tr>
@@ -49,7 +49,7 @@
                 <td>Heize</td>
                 <td>Sabun</td>
                 <td>
-                    <a href="" class="btn btn-primary">Detail</a>
+                    <a href="{{ url('/master/barang/detail') }}" class="btn btn-primary">Detail</a>
                     <a href="" class="btn btn-warning">Edit</a>
                 </td>
             </tr>
@@ -61,7 +61,7 @@
                 <td>Heize</td>
                 <td>Sabun</td>
                 <td>
-                    <a href="" class="btn btn-primary">Detail</a>
+                    <a href="{{ url('/master/barang/detail') }}" class="btn btn-primary">Detail</a>
                     <a href="" class="btn btn-warning">Edit</a>
                 </td>
             </tr>
@@ -73,7 +73,7 @@
                 <td>Heize</td>
                 <td>Sabun</td>
                 <td>
-                    <a href="" class="btn btn-primary">Detail</a>
+                    <a href="{{ url('/master/barang/detail') }}" class="btn btn-primary">Detail</a>
                     <a href="" class="btn btn-warning">Edit</a>
                 </td>
             </tr>

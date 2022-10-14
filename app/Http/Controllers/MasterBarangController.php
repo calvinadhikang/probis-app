@@ -15,4 +15,8 @@ class MasterBarangController extends Controller
     {
         return view('master.barang.add');
     }
+    public function Detail()
+    {
+        return view('master.barang.detail');
+    }
 }
