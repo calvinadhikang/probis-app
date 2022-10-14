@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Psy\Readline\Hoa\Console;
 
 class LoginController extends Controller
@@ -17,11 +18,14 @@ class LoginController extends Controller
 
     public function loginAttempt(Request $request){
         //@dd($request);
-        if($request['username']){
-            return redirect()->to('/home');
+        if($request['username'] == 'admin'){
+            // return redirect()->to('/home');
+            Session::put('isAdmin', true);
         }
         else{
-            return back();
+            // return back();
+            Session::put('isAdmin', false);
         }
+        return redirect('/home');
     }
 }
