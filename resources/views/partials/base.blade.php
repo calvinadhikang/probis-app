@@ -209,7 +209,6 @@
         .control--checkbox input:disabled:checked ~ .control__indicator {
         background-color: #7e0cf5;
         opacity: .2; }
-
     </style>
 </head>
 <body>

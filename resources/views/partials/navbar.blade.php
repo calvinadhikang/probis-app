@@ -9,9 +9,11 @@
     <style>
         #nav {
             background-color: #7FB77E;
+            background-color: #70fea2;
         }
         body {
             background-color: #F7F6DC;
+            background-color: rgb(236, 249, 185);
         }
     </style>
 </head>
@@ -37,7 +39,10 @@
                     <a class="nav-link" href="{{ url('/master/supplier')}}">Master Supplier</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="{{ url('/master/kategori') }}">Master Kategori</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/master/merk') }}">Master Merk</a>
                 </li>
                 </ul>
                 <span class="navbar-text">
