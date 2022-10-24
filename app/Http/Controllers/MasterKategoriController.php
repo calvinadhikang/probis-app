@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Psy\CodeCleaner\NamespaceAwarePass;
 
 class MasterKategoriController extends Controller
 {
@@ -13,8 +14,14 @@ class MasterKategoriController extends Controller
     }
     
     // POST FUNCTIONS
-    public function Add()
+    public function Add(Request $request)
     {
+        $nama = $request->nama;
+
+        if ($nama == "") {
+            return redirect()->back()->with("msg", "Inputan tidak boleh kosong !")->with('type', 'danger');
+        }
         
+        return redirect()->back()->with("msg", "Berhasil add kategori : $nama")->with('type', 'primary');
     }
 }

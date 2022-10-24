@@ -10,7 +10,7 @@
 
         body {
         font-family: "Roboto", sans-serif;
-        background-color: #b5e6f5 }
+        background-color: #b5f5d8 }
 
         p {
         color: #b3b3b3;
@@ -216,7 +216,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <img src="undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+                    <img src="{{ asset('/webImages/grocery.svg') }}" alt="Image" class="img-fluid">
                 </div>
                 <div class="col-6">
                   <div class="row justify-content-center">

@@ -61,13 +61,13 @@ Route::prefix('/master')->group(function() {
     //MERK
     Route::prefix('/merk')->group(function() {
         Route::get('/', [MasterMerkController::class, "View"]);
-        Route::get('/add', [MasterMerkController::class, "Add"]);
+        Route::post('/add', [MasterMerkController::class, "Add"]);
     });
 
     //KATEGORI
     Route::prefix('/kategori')->group(function() {
         Route::get('/', [MasterKategoriController::class, "View"]);
-        Route::get('/add', [MasterKategoriController::class, "Add"]);
+        Route::post('/add', [MasterKategoriController::class, "Add"]);
     });
 
 });
