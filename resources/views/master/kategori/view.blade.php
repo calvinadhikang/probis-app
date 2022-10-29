@@ -2,7 +2,7 @@
 
 @section('header')
 {{-- Tabs --}}
-<h1>Master Jenis Barang</h1>
+<h1>Master Kategori Barang</h1>
 <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
     <a class="nav-link active bg-success" href="{{ url('/master/barang/view') }}">View</a>
     <a class="nav-link text-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
