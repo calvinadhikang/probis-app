@@ -24,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LoginController::class, "loginPage"]);
-Route::get('/register', [LoginController::class, "registerPage"]);
 Route::post('/', [LoginController::class, "loginAttempt"]);
+
+Route::get('/register', [LoginController::class, "registerPage"]);
 
 Route::get('/home', [HomeController::class, "homePage"]);
 
