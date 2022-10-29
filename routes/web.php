@@ -68,6 +68,7 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/kategori')->group(function() {
         Route::get('/', [MasterKategoriController::class, "View"]);
         Route::post('/add', [MasterKategoriController::class, "Add"]);
+        Route::post('/toggle', [MasterKategoriController::class, "Toggle"]);
     });
 
 });

@@ -42,39 +42,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>id</td>
-                    <td>nama</td>
-                    <td>34</td>
-                    <td>
-                        <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
-                    </td>
-                    <td>
-                        <a href="" class="btn btn-warning">Toggle Status</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>id</td>
-                    <td>nama</td>
-                    <td>34</td>
-                    <td>
-                        <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
-                    </td>
-                    <td>
-                        <a href="" class="btn btn-warning">Toggle Status</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>id</td>
-                    <td>nama</td>
-                    <td>34</td>
-                    <td>
-                        <div class="bg-danger text-center rounded text-white p-1">Non-Aktif</div>
-                    </td>
-                    <td>
-                        <a href="" class="btn btn-warning">Toggle Status</a>
-                    </td>
-                </tr>
+                @forelse ($data as $item)
+
+                    <tr>
+                        <td>{{ $item->jenis }}</td>
+                        <td>{{ $item->nama }}</td>
+                        <td>0</td>
+                        <td>
+                            @if ($item->status == 1)
+                                <div class="btn btn-primary">
+                                    Aktif
+                                </div>
+                            @else
+                                <div class="btn btn-danger">
+                                    Non-Aktif
+                                </div>
+                            @endif
+                        </td>
+                        <td>
+                            <form action="{{ url('/master/kategori/toggle') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-warning" value="{{ $item->id }}" name="id">Ganti Status</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5">Belum ada Data !</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
