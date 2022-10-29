@@ -23,6 +23,10 @@ class LoginController extends Controller
 
         foreach ($data as $key => $value) {
             if ($value->username == $request->username && $value->password == $request->password) {
+                if ($value->status == 0) {
+                    return abort(403);
+                }
+
                 if ($value->jabatan == 0) {
                     # code...
                     Session::put('isAdmin', true);

@@ -306,11 +306,20 @@
             opacity: .2;
         }
 
+        .full-height{
+            height: 100vh;
+        }
+
+        flex-center{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 
 <body>
-    <div class="content">
+    <div class="content full-height">
         <div class="container">
             <div class="row">
                 <div class="col-6">

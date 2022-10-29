@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('nama');
             $table->string('email');
-            $table->integer('telepon');
+            $table->string('telepon');
             $table->integer('jenis_kelamin');
             $table->integer('jabatan');
             $table->integer('status');
