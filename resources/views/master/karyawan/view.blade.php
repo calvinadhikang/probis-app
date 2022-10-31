@@ -38,37 +38,27 @@
                 <th>AKSI</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>ibewe</td>
-                <td>081111111111</td>
-                <td>BOSSS</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>ganteng</td>
-                <td>08123456789</td>
-                <td>Kacung</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>banget</td>
-                <td>081987654321</td>
-                <td>Kasir</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-        </tbody>
+
+        @forelse ($karyawans as $karyawan)
+                    @php
+                    if ($karyawan->jabatan==0)
+                        $jabatan=="Admin"
+                    @endphp
+
+                    <tr>
+                        <td>{{ $karyawan->id }}</td>
+                        <td>{{ $karyawan->nama }}</td>
+                        <td>{{ $karyawan->telepon }}</td>
+                        <td>{{ $jabatan}}</td>
+
+                        <a href="" class="btn btn-primary">Detail</a>
+                        <a href="" class="btn btn-warning">Edit</a>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5">Belum ada Data !</td>
+                    </tr>
+                @endforelse
+
     </table>
 @endsection

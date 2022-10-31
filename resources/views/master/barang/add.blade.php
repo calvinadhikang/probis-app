@@ -9,7 +9,7 @@
     <br>
     <br>
     <div class="bg-white p-4 rounded">
-        <form action="" method="POST">
+        <form action="{{ url('/master/kategori/add') }}" method="POST">
             @csrf
             <label>Nama Barang</label>
             <input type="text" class="form-control" name="nama" placeholder="Nama Barang">
