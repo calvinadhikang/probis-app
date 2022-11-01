@@ -17,9 +17,14 @@ class MasterKaryawanController extends Controller
 
         ]);
     }
-    public function EditKaryawan()
+    public function ToEditKaryawan(Request $request)
     {
-        return view('master.karyawan.edit');
+        $karyawan = Karyawan::find($request->id);
+
+        return view('master.karyawan.edit', [
+            "karyawan" => $karyawan
+
+        ]);
     }
     public function ViewKaryawan()
     {
