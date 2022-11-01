@@ -28,46 +28,68 @@
             <div class="column" style="float: left;
             width: 50%;
             padding: 10px;
-            height: 300px;">
+            height: 400px;">
+
+                <label>Nama</label>
+                <br>
+                <h3>{{$karyawan->nama}}</h3>
+                <br>
+                <br>
+
                 <label>Username</label>
                 <br>
-                <h3>UsernameIvander</h3>
+                <h3>{{$karyawan->username}}</h3>
+                <br>
+                <br>
+
+                <label>Email</label>
+                <br>
+                <h3>{{$karyawan->email}}</h3>
                 <br>
                 <br>
 
                 <label>Nomor Telepon</label>
                 <br>
-                <h3>08999</h3>
+                <h3>{{$karyawan->telepon}}</h3>
                 <br>
                 <br>
 
-                <label>Jenis Kelamin</label>
-                <br>
-                <h3>Pria</h3>
-                <br>
-                <br>
+
 
             </div>
             <div class="column" style="float: left;
             width: 50%;
             padding: 10px;
-            height: 300px;">
-            <label>Nama</label>
-            <br>
-            <h3>Ivander Berwyn</h3>
-            <br>
-            <br>
-                <label>Jabatan</label>
-                <br>
-                <h3>Kasir</h3>
-                <br>
-                <br>
+            height: 400px;">
+                            <label>Jenis Kelamin</label>
+                            <br>
+                            @if($karyawan->jenis_kelamin ==0)
+                            <h3>Laki-laki</h3>
+                            @else
+                            <h3>Perempuan</h3>
+                            @endif
+                            <br>
+                            <br>
 
-                <label>Status</label>
-                <br>
-                <h3>Aktif</h3>
-                <br>
-                <br>
+                            <label>Jabatan</label>
+                            <br>
+                            @if($karyawan->jabatan ==0)
+                            <h3>Admin</h3>
+                            @else
+                            <h3>Kasir</h3>
+                            @endif
+                            <br>
+                            <br>
+
+                            <label>Status</label>
+                            <br>
+                            @if($karyawan->status ==0)
+                            <h3>Dipecat</h3>
+                            @else
+                            <h3>Aktif</h3>
+                            @endif
+                            <br>
+                            <br>
 
             </div>
         </div>

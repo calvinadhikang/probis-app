@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class MasterKaryawanController extends Controller
 {
-    public function DetailKaryawan()
+    public function DetailKaryawan(Request $request)
     {
-        return view('master.karyawan.detail');
+        $karyawan = Karyawan::find($request->id);
+
+        return view('master.karyawan.detail', [
+            "karyawan" => $karyawan
+
+        ]);
     }
     public function EditKaryawan()
     {
@@ -20,8 +25,7 @@ class MasterKaryawanController extends Controller
     {
         $karyawans = Karyawan::all();
         return view('master.karyawan.view', [
-            "karyawans" => $karyawans,
-            "jabatan"=>""
+            "karyawans" => $karyawans
         ]);
     }
     public function ToAddKaryawan()
