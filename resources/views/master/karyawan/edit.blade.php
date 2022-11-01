@@ -42,7 +42,7 @@
       </div>
 
     <div class="bg-white p-4 rounded">
-        <form action="" method="POST">
+        <form action="{{ route('editkaryawan', $karyawan->id) }}" method="POST">
             @csrf
             <div class="row">
                 <div class="column" style="float: left;
@@ -57,12 +57,13 @@
             <input type="text" class="form-control" name="nomortelepon" placeholder="Nomor Telepon" value={{$karyawan->telepon}}>
             <br>
             <label>Jenis Kelamin</label>
-            @if($karyawan->jenis_kelamin ==0)
-            <input type="text" class="form-control" name="kelamin" placeholder="Kelamin" value="Laki-laki">
+            @if($karyawan->jenis_kelamin ==0)'
+            <input type="radio" name="jenis_kelamin" value=0 checked="checked"> Laki-laki<br>
+            <input type="radio" name="jenis_kelamin" value=1> Perempuan<br>
 
             @else
-            <input type="text" class="form-control" name="kelamin" placeholder="Kelamin" value="Perempuan">
-
+            <input type="radio" name="jenis_kelamin" value=0 > Laki-laki<br>
+            <input type="radio" name="jenis_kelamin" value=1 checked="checked"> Perempuan<br>
             @endif
             <br>
 
@@ -80,12 +81,12 @@
 
             <label>Jabatan</label>
             @if($karyawan->jabatan ==0)
-            <input type="text" class="form-control" name="jabatan" placeholder="Jabatan" value="Admin">
-
+            <input type="radio" name="jabatan" value=0 checked="checked">Admin<br>
+            <input type="radio" name="jabatan" value=1 > Kasir<br>
 
             @else
-            <input type="text" class="form-control" name="jabatan" placeholder="Jabatan" value="Kasir">
-
+            <input type="radio" name="jabatan" value=0 >Admin<br>
+            <input type="radio" name="jabatan" value=1 checked="checked"> Kasir<br>
 
             @endif
 
@@ -93,12 +94,11 @@
 
             <label>Status</label>
             @if($karyawan->status ==0)
-            <input type="text" class="form-control" name="status" placeholder="status" value="Dipecat">
-
-
+            <input type="radio" name="status" value=0 >Dipecat<br>
+            <input type="radio" name="status" value=1 checked="checked"> Aktif<br>
             @else
-            <input type="text" class="form-control" name="status" placeholder="status" value="Aktif">
-
+            <input type="radio" name="status" value=0 checked="checked">Dipecat<br>
+            <input type="radio" name="status" value=1 > Aktif<br>
 
             @endif
             <br>
