@@ -48,7 +48,6 @@ class MasterKaryawanController extends Controller
         }
 
         $rules = [
-
             'usernama' => ['required', new CustomRule($listuserusername)],
             'nama' => "required",
             'password' => 'required',
@@ -67,7 +66,7 @@ class MasterKaryawanController extends Controller
         ];
         $request->validate($rules, $messages);
 
-        $usernama =            $listuserusername[]=$value->username;
+        $username =$value->username;
 
         $nama = $request->nama;
         $password = $request->password;
@@ -79,7 +78,7 @@ class MasterKaryawanController extends Controller
 
 
         $data = new Karyawan();
-        $data->username = $usernama;
+        $data->username = $username;
         $data->nama = $nama;
 
         $data->password = $password;
@@ -112,34 +111,34 @@ class MasterKaryawanController extends Controller
         }
         $data = Karyawan::find($request->id);
 
-        // if($request->password==$data->password)
-        // {
+        $password=$data->password;
 
-        // }
-        $rules = [
+// validate di edit ga bisa
+        // $rules = [
+        //     'usernama' => ['required', new CustomRule($listuserusername)],
+        //     'nama' => "required",
+        //     'password' => 'required',
+        //     'oldpassword'=> 'required|in:'.$password,
+        //     'conpassword' => ['required','same:password'],
+        //     'email' => ['required','email:rfc,dns'],
+        // ];
+        // $messages = [
+        //     "required" => "attribute kosong",
+        //     "in" => "oldpassword salah",
+        //     "integer" => "harus berupa angka",
+        //     "min_digits" => "panjang nomor harus 10 angka",
+        //     "same" => "password dan confirm password harus sama",
+        // ];
+        // $request->validate($rules, $messages);
 
-            'usernama' => ['required', new CustomRule($listuserusername)],
-            'nama' => "required",
-            'password' => 'required',
-            'conpassword' => ['required','same:password'],
-            'email' => ['required','email:rfc,dns'],
-            'telepon' => ['required', 'integer','min_digits:10'],
-            'jabatan' => 'required',
-            'jenis_kelamin' => 'required'
 
-        ];
-        $messages = [
-            "required" => "attribute kosong",
-            "integer" => "harus berupa angka",
-            "min_digits" => "panjang nomor harus 10 angka",
-            "same" => "password dan confirm password harus sama",
-        ];
-        $request->validate($rules, $messages);
 
-        $usernama = $request->usernama;
+
+        $username = $request->username;
         $nama = $request->nama;
         $password = $request->password;
         $email = $request->email;
+
 
         $telepon = $request->telepon;
         $jabatan = $request->jabatan;
@@ -147,12 +146,11 @@ class MasterKaryawanController extends Controller
 
         $status = $request->status;
 
+
         $data = Karyawan::find($request->id);
-        $data->username = $usernama;
+        $data->username = $username;
         $data->nama = $nama;
-
         $data->password = $password;
-
         $data->email = $email;
         $data->telepon = $telepon;
         $data->jabatan = $jabatan;

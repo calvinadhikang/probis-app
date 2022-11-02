@@ -7,40 +7,7 @@
     </nav>
     <br>
     <br>
-    <div class="container">
-        <h2>Modal Example</h2>
-        <!-- Button to Open the Modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-          Open modal
-        </button>
-
-        <!-- The Modal -->
-        <div class="modal" id="myModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                Modal body..
-              </div>
-
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-
+    <
     <div class="bg-white p-4 rounded">
         <form action="{{ route('editkaryawan', $karyawan->id) }}" method="POST">
             @csrf
@@ -52,12 +19,24 @@
 
             <label>Username</label>
             <input type="text" class="form-control" name="username" placeholder="Username" value={{$karyawan->username}}>
+            <span style="color: red;">{{ $errors->first('username') }}</span>
+
             <br>
             <label>Nomor Telepon</label>
-            <input type="text" class="form-control" name="nomortelepon" placeholder="Nomor Telepon" value={{$karyawan->telepon}}>
+            <input type="text" class="form-control" name="telepon" placeholder="Nomor Telepon" value={{$karyawan->telepon}}>
+            <span style="color: red;">{{ $errors->first('telepon') }}</span>
+
+            <br>
+
+            <label>Email</label>
+            <input type="text" class="form-control" name="email" placeholder="Email" value={{$karyawan->email}}>
+            <span style="color: red;">{{ $errors->first('email') }}</span>
+
             <br>
             <label>Jenis Kelamin</label>
-            @if($karyawan->jenis_kelamin ==0)'
+            <br>
+
+            @if($karyawan->jenis_kelamin ==0)
             <input type="radio" name="jenis_kelamin" value=0 checked="checked"> Laki-laki<br>
             <input type="radio" name="jenis_kelamin" value=1> Perempuan<br>
 
@@ -65,11 +44,14 @@
             <input type="radio" name="jenis_kelamin" value=0 > Laki-laki<br>
             <input type="radio" name="jenis_kelamin" value=1 checked="checked"> Perempuan<br>
             @endif
+            <span style="color: red;">{{ $errors->first('jenis_kelamin') }}</span>
+
             <br>
 
             <label>Nama</label>
             <input type="text" class="form-control" name="nama" placeholder="Nama Karyawan" value={{$karyawan->username}}>
             <br>
+            <span style="color: red;">{{ $errors->first('nama') }}</span>
 
             <br>
                 </div>
@@ -80,6 +62,7 @@
 
 
             <label>Jabatan</label>
+            <br>
             @if($karyawan->jabatan ==0)
             <input type="radio" name="jabatan" value=0 checked="checked">Admin<br>
             <input type="radio" name="jabatan" value=1 > Kasir<br>
@@ -89,25 +72,29 @@
             <input type="radio" name="jabatan" value=1 checked="checked"> Kasir<br>
 
             @endif
+            <span style="color: red;">{{ $errors->first('jabatan') }}</span>
 
             <br>
 
             <label>Status</label>
+            <br>
             @if($karyawan->status ==0)
-            <input type="radio" name="status" value=0 >Dipecat<br>
-            <input type="radio" name="status" value=1 checked="checked"> Aktif<br>
-            @else
             <input type="radio" name="status" value=0 checked="checked">Dipecat<br>
             <input type="radio" name="status" value=1 > Aktif<br>
+            @else
+            <input type="radio" name="status" value=0 >Dipecat<br>
+            <input type="radio" name="status" value=1 checked="checked"> Aktif<br>
 
             @endif
+            <span style="color: red;">{{ $errors->first('status') }}</span>
+
             <br>
 
             <label class="control-label" for="oldpassword">Old Password</label>
             <div class="controls">
                 <input type="password"  class="form-control" id="oldpassword" name="oldpassword" placeholder="Oldpasword"    class="input-xlarge" >
             </div>
-            <span style="color: white;">{{ $errors->first('oldpassword') }}</span>
+            <span style="color: red;">{{ $errors->first('oldpassword') }}</span>
             <br>
 
 
@@ -117,7 +104,7 @@
             <div class="controls">
                 <input type="password"  class="form-control" id="password" name="password" placeholder="Masukkan pasword"    class="input-xlarge" >
             </div>
-            <span style="color: white;">{{ $errors->first('password') }}</span>
+            <span style="color: red;">{{ $errors->first('password') }}</span>
 
             <br>
 
@@ -126,7 +113,7 @@
             <div class="controls">
                 <input type="password"  class="form-control" id="confirm_password" name="confirm_password" placeholder="Masukin Confirm password"  class="input-xlarge" >
             </div>
-            <span style="color: white;">{{ $errors->first('confirm_password') }}</span>
+            <span style="color: red;">{{ $errors->first('confirm_password') }}</span>
 
 
                 </div>
