@@ -2,24 +2,163 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
+use App\Rules\CustomRule;
 use Illuminate\Http\Request;
 
 class MasterKaryawanController extends Controller
 {
-    public function DetailKaryawan()
+    public function DetailKaryawan(Request $request)
     {
-        return view('master.karyawan.detail');
+        $karyawan = Karyawan::find($request->id);
+
+        return view('master.karyawan.detail', [
+            "karyawan" => $karyawan
+
+        ]);
     }
-    public function EditKaryawan()
+    public function ToEditKaryawan(Request $request)
     {
-        return view('master.karyawan.edit');
+        $karyawan = Karyawan::find($request->id);
+
+        return view('master.karyawan.edit', [
+            "karyawan" => $karyawan
+
+        ]);
     }
     public function ViewKaryawan()
     {
-        return view('master.karyawan.view');
+        $karyawans = Karyawan::all();
+        return view('master.karyawan.view', [
+            "karyawans" => $karyawans
+        ]);
     }
-    public function AddKaryawan()
+    public function ToAddKaryawan()
     {
         return view('master.karyawan.add');
+    }
+    public function AddKaryawan(Request $request)
+    {
+
+        $listkaryawan = Karyawan::all();
+        $listuserusername=[];
+        foreach ($listkaryawan as $value) {
+            $listuserusername[]=$value->username;
+
+        }
+
+        $rules = [
+            'usernama' => ['required', new CustomRule($listuserusername)],
+            'nama' => "required",
+            'password' => 'required',
+            'conpassword' => ['required','same:password'],
+            'email' => ['required','email:rfc,dns'],
+            'telepon' => ['required', 'integer','min_digits:10'],
+            'jabatan' => 'required',
+            'jenis_kelamin' => 'required'
+
+        ];
+        $messages = [
+            "required" => "attribute kosong",
+            "integer" => "harus berupa angka",
+            "min_digits" => "panjang nomor harus 10 angka",
+            "same" => "password dan confirm password harus sama",
+        ];
+        $request->validate($rules, $messages);
+
+        $username =$value->username;
+
+        $nama = $request->nama;
+        $password = $request->password;
+        $email = $request->email;
+
+        $telepon = $request->telepon;
+        $jabatan = $request->jabatan;
+        $jenis_kelamin = $request->jenis_kelamin;
+
+
+        $data = new Karyawan();
+        $data->username = $username;
+        $data->nama = $nama;
+
+        $data->password = $password;
+
+        $data->email = $email;
+        $data->telepon = $telepon;
+        $data->jabatan = $jabatan;
+        $data->jenis_kelamin = $jenis_kelamin;
+        $data->status = 1;
+
+        $data->save();
+
+        return redirect()->back()->with("msg", "Berhasil add karyawan : $nama")->with('type', 'primary');
+    }
+
+    public function EditKaryawan(Request $request)
+    {
+
+        $listkaryawan = Karyawan::all();
+        $listuserusername=[];
+        foreach ($listkaryawan as $value) {
+            if($value->id){
+
+            }
+            else{
+                $listuserusername[]=$value->username;
+
+            }
+
+        }
+        $data = Karyawan::find($request->id);
+
+        $password=$data->password;
+
+// validate di edit ga bisa
+        // $rules = [
+        //     'usernama' => ['required', new CustomRule($listuserusername)],
+        //     'nama' => "required",
+        //     'password' => 'required',
+        //     'oldpassword'=> 'required|in:'.$password,
+        //     'conpassword' => ['required','same:password'],
+        //     'email' => ['required','email:rfc,dns'],
+        // ];
+        // $messages = [
+        //     "required" => "attribute kosong",
+        //     "in" => "oldpassword salah",
+        //     "integer" => "harus berupa angka",
+        //     "min_digits" => "panjang nomor harus 10 angka",
+        //     "same" => "password dan confirm password harus sama",
+        // ];
+        // $request->validate($rules, $messages);
+
+
+
+
+        $username = $request->username;
+        $nama = $request->nama;
+        $password = $request->password;
+        $email = $request->email;
+
+
+        $telepon = $request->telepon;
+        $jabatan = $request->jabatan;
+        $jenis_kelamin = $request->jenis_kelamin;
+
+        $status = $request->status;
+
+
+        $data = Karyawan::find($request->id);
+        $data->username = $username;
+        $data->nama = $nama;
+        $data->password = $password;
+        $data->email = $email;
+        $data->telepon = $telepon;
+        $data->jabatan = $jabatan;
+        $data->jenis_kelamin = $jenis_kelamin;
+        $data->status = $status;
+
+
+        $data->save();
+        return redirect()->back()->with("msg", "Berhasil edit karyawan : $nama")->with('type', 'primary');
     }
 }

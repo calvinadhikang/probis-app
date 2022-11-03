@@ -35,40 +35,35 @@
                 <th>NAMA KARYAWAN</th>
                 <th>NO TELEPON</th>
                 <th>JABATAN</th>
-                <th>AKSI</th>
+                <th>DETAIL</th>
+                <th>EDIT</th>
+
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>ibewe</td>
-                <td>081111111111</td>
-                <td>BOSSS</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>ganteng</td>
-                <td>08123456789</td>
-                <td>Kacung</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>banget</td>
-                <td>081987654321</td>
-                <td>Kasir</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-        </tbody>
+
+        @forelse ($karyawans as $karyawan)
+
+
+
+
+                    <tr>
+                        <td>{{ $karyawan->id }}</td>
+                        <td>{{ $karyawan->nama }}</td>
+                        <td>{{ $karyawan->telepon }}</td>
+                        @if($karyawan->jabatan ==0)
+                            <td>Admin</td>
+                        @else
+                            <td>Kasir</td>
+                        @endif
+                        <td><a href="{{ route('detailkaryawan', $karyawan->id) }}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{ route('editkaryawan', $karyawan->id) }}" class="btn btn-warning">Edit</a></td>
+
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5">Belum ada Data !</td>
+                    </tr>
+                @endforelse
+
     </table>
 @endsection

@@ -44,9 +44,13 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/karyawan')->group(function() {
         Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
         Route::get('/add', [MasterBarangController::class, "Addbarang"]);
-        Route::get('/detail', [MasterKaryawanController::class, "DetailKaryawan"]);
-        Route::get('/edit', [MasterKaryawanController::class, "EditKaryawan"]);
-        Route::get('/add', [MasterKaryawanController::class, "AddKaryawan"]);
+        Route::get('/detail/{id}', [MasterKaryawanController::class, "DetailKaryawan"])->name('detailkaryawan');
+        Route::get('/edit/{id}', [MasterKaryawanController::class, "ToEditKaryawan"])->name('editkaryawan');
+        Route::post('/edit/{id}', [MasterKaryawanController::class, "EditKaryawan"])->name('editkaryawan');
+
+        Route::get('/add', [MasterKaryawanController::class, "ToAddKaryawan"]);
+        Route::post('/add', [MasterKaryawanController::class, "AddKaryawan"]);
+
     });
 
     //SUPPLIER
