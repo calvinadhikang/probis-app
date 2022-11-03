@@ -7,7 +7,9 @@ use App\Http\Controllers\MasterKaryawanController;
 use App\Http\Controllers\MasterSupplierController;
 use App\Http\Controllers\MasterKategoriController;
 use App\Http\Controllers\MasterMerkController;
-
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\TransaksiPenjualanController;
+use App\Http\Controllers\TransaksiReturController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LoginController::class, "loginPage"]);
-Route::get('/register', [LoginController::class, "registerPage"]);
 Route::post('/', [LoginController::class, "loginAttempt"]);
+
+Route::get('/register', [LoginController::class, "registerPage"]);
 
 Route::get('/home', [HomeController::class, "homePage"]);
 
@@ -34,20 +37,29 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/barang')->group(function() {
         Route::get('/', [MasterBarangController::class, "View"]);
         Route::get('/add', [MasterBarangController::class, "Add"]);
+        Route::get('/detail', [MasterBarangController::class, "Detail"]);
     });
 
     //KARYAWAN
     Route::prefix('/karyawan')->group(function() {
         Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
+        Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+        Route::get('/detail', [MasterKaryawanController::class, "DetailKaryawan"]);
+        Route::get('/edit', [MasterKaryawanController::class, "EditKaryawan"]);
         Route::get('/add', [MasterKaryawanController::class, "AddKaryawan"]);
     });
 
+    //SUPPLIER
     Route::prefix('/supplier')->group(function() {
         Route::get('/', [MasterSupplierController::class, "ViewSupplier"]);
         Route::get('/add', [MasterSupplierController::class, "AddSupplier"]);
+
         Route::get('/edit', [MasterSupplierController::class, "EditSupplier"]);
         Route::get('/addbarang', [MasterSupplierController::class, "AddBarangSupplier"]);
         Route::get('/editbarang', [MasterSupplierController::class, "EditBarangSupplier"]);
+
+        Route::get('/detail', [MasterSupplierController::class, "DetailSupplier"]);
+
     });
     //     Route::get('/', [MasterKaryawanController::class, "View"]);
     //     Route::get('/add', [MasterKaryawanController::class, "Add"]);
@@ -56,16 +68,28 @@ Route::prefix('/master')->group(function() {
     //MERK
     Route::prefix('/merk')->group(function() {
         Route::get('/', [MasterMerkController::class, "View"]);
-        Route::get('/add', [MasterMerkController::class, "Add"]);
+        Route::post('/add', [MasterMerkController::class, "Add"]);
     });
 
     //KATEGORI
     Route::prefix('/kategori')->group(function() {
         Route::get('/', [MasterKategoriController::class, "View"]);
-        Route::get('/add', [MasterKategoriController::class, "Add"]);
+        Route::post('/add', [MasterKategoriController::class, "Add"]);
+        Route::post('/toggle', [MasterKategoriController::class, "Toggle"]);
     });
 
 });
 
-// Penjualan
-Route::get('/penjualan', [HomeController::class, "penjualanPage"]);
+Route::prefix('/transaksi')->group(function() {
+    // Penjualan
+    Route::prefix('/penjualan')->group(function() {
+        Route::get('/', [TransaksiPenjualanController::class, "view"]);
+        Route::get('/add', [TransaksiPenjualanController::class, "add"]);
+    });
+
+    // Retur
+    Route::prefix('/retur')->group(function() {
+        Route::get('/', [TransaksiReturController::class, "view"]);
+        Route::get('/add', [TransaksiReturController::class, "add"]);
+    });
+});

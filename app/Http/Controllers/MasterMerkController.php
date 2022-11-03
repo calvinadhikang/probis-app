@@ -13,8 +13,10 @@ class MasterMerkController extends Controller
     }
     
     // POST FUNCTIONS
-    public function Add()
+    public function Add(Request $request)
     {
-        
+        $nama = $request->nama;
+
+        return redirect()->back()->with("msg", "Berhasil add merk : $nama")->with('type', 'success');
     }
 }

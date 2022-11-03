@@ -6,14 +6,20 @@ use Illuminate\Http\Request;
 
 class MasterKaryawanController extends Controller
 {
-
-     //
-     public function ViewKaryawan()
-     {
+    public function DetailKaryawan()
+    {
+        return view('master.karyawan.detail');
+    }
+    public function EditKaryawan()
+    {
+        return view('master.karyawan.edit');
+    }
+    public function ViewKaryawan()
+    {
         return view('master.karyawan.view');
-     }
-     public function AddKaryawan()
-     {
+    }
+    public function AddKaryawan()
+    {
         return view('master.karyawan.add');
-     }
+    }
 }

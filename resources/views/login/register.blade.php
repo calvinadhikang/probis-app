@@ -13,33 +13,23 @@
 <div class="col-md-8">
     <form action="{{url('/register')}}" method="POST">
         @csrf
-        <div class="form-group first mb-4">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="nama" placeholder="Nama">
-            </div>
+        <div class="form-group mb-4">
+            <input type="text" class="form-control" name="nama" placeholder="Nama">
         </div>
         <div class="form-group last mb-4">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="email" placeholder="Email">
-            </div>
+            <input type="text" class="form-control" name="email" placeholder="Email">
         </div>
         <div class="form-group last mb-4">
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="username" placeholder="Your Username">
-            </div>
+            <input type="text" class="form-control" name="username" placeholder="Your Username">
         </div>
         <div class="form-group last mb-4">
-            <div class="col-sm-10">
-                <input type="password" class="form-control" name="password" placeholder="Password">
-            </div>
+            <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <div class="form-group last mb-4">
-            <div class="col-sm-10">
-                <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password">
-            </div>
+            <input type="password" class="form-control" name="confirm-password" placeholder="Confirm Password">
         </div>
         <div class="mb-3 row mx-2">
-            <button class="btn btn-primary" type="submit">Sign Up</button>
+            <button class="btn btn-success" type="submit">Sign Up</button>
         </div>
     </form>
 </div>
