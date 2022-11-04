@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -12,20 +13,31 @@ class LoginController extends Controller
     public function loginPage(){
         return view('login/login');
     }
+
     public function registerPage(){
         return view('login/register');
     }
 
     public function loginAttempt(Request $request){
-        //@dd($request);
-        if($request['username'] == 'admin'){
-            // return redirect()->to('/home');
-            Session::put('isAdmin', true);
+        $data = Karyawan::all();
+
+        foreach ($data as $key => $value) {
+            if ($value->username == $request->username && $value->password == $request->password) {
+                if ($value->status == 0) {
+                    return abort(403);
+                }
+
+                if ($value->jabatan == 0) {
+                    # code...
+                    Session::put('isAdmin', true);
+                }else{
+                    Session::put('isAdmin', false);
+                }
+
+                return redirect('/home');
+            }
         }
-        else{
-            // return back();
-            Session::put('isAdmin', false);
-        }
-        return redirect('/home');
+
+        return back()->with('type', 'danger')->with('msg', 'User tidak ditemukan');
     }
 }

@@ -8,6 +8,8 @@
     </nav>
     <br>
     <br>
+    <a class="btn btn-success" href="{{ url('/master/supplier/') }}">Back</a>
+
     <div class="bg-white p-4 rounded">
         <form action="" method="POST">
             <div class="row">

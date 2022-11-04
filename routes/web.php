@@ -24,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LoginController::class, "loginPage"]);
-Route::get('/register', [LoginController::class, "registerPage"]);
 Route::post('/', [LoginController::class, "loginAttempt"]);
+
+Route::get('/register', [LoginController::class, "registerPage"]);
 
 Route::get('/home', [HomeController::class, "homePage"]);
 
@@ -43,10 +44,19 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/karyawan')->group(function() {
         Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
         Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+<<<<<<< HEAD
         Route::get('/detail', [MasterKaryawanController::class, "DetailKaryawan"]);
         Route::get('/edit', [MasterKaryawanController::class, "EditKaryawan"]);
         Route::get('/add', [MasterKaryawanController::class, "GoAddKaryawan"]);
         Route::post('/add', [MasterKaryawanController::class, "addKaryawan"]);
+=======
+        Route::get('/detail/{id}', [MasterKaryawanController::class, "DetailKaryawan"])->name('detailkaryawan');
+        Route::get('/edit/{id}', [MasterKaryawanController::class, "ToEditKaryawan"])->name('editkaryawan');
+        Route::post('/edit/{id}', [MasterKaryawanController::class, "EditKaryawan"])->name('editkaryawan');
+
+        Route::get('/add', [MasterKaryawanController::class, "ToAddKaryawan"]);
+        Route::post('/add', [MasterKaryawanController::class, "AddKaryawan"]);
+>>>>>>> 673161f2688f413f970d6413cd335ba320b56a3c
 
     });
 
@@ -54,7 +64,13 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/supplier')->group(function() {
         Route::get('/', [MasterSupplierController::class, "ViewSupplier"]);
         Route::get('/add', [MasterSupplierController::class, "AddSupplier"]);
+
+        Route::get('/edit', [MasterSupplierController::class, "EditSupplier"]);
+        Route::get('/addbarang', [MasterSupplierController::class, "AddBarangSupplier"]);
+        Route::get('/editbarang', [MasterSupplierController::class, "EditBarangSupplier"]);
+
         Route::get('/detail', [MasterSupplierController::class, "DetailSupplier"]);
+
     });
     //     Route::get('/', [MasterKaryawanController::class, "View"]);
     //     Route::get('/add', [MasterKaryawanController::class, "Add"]);
@@ -63,13 +79,14 @@ Route::prefix('/master')->group(function() {
     //MERK
     Route::prefix('/merk')->group(function() {
         Route::get('/', [MasterMerkController::class, "View"]);
-        Route::get('/add', [MasterMerkController::class, "Add"]);
+        Route::post('/add', [MasterMerkController::class, "Add"]);
     });
 
     //KATEGORI
     Route::prefix('/kategori')->group(function() {
         Route::get('/', [MasterKategoriController::class, "View"]);
-        Route::get('/add', [MasterKategoriController::class, "Add"]);
+        Route::post('/add', [MasterKategoriController::class, "Add"]);
+        Route::post('/toggle', [MasterKategoriController::class, "Toggle"]);
     });
 
 });

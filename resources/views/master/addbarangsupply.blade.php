@@ -9,17 +9,20 @@
     <br>
     <br>
     <div class="bg-white p-4 rounded">
-        <form action="{{ url('/master/kategori/add') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <label>Nama Barang</label>
             <input type="text" class="form-control" name="nama" placeholder="Nama Barang">
             <br>
+            
             <label>Harga Barang (Rp)</label>
             <input type="text" class="form-control" name="harga" placeholder="Harga Barang">
             <br>
-            <label>Merk</label>
-            <input type="text" class="form-control" name="merk" placeholder="Pilih Merk...">
+
+            <label>Stok</label>
+            <input type="text" class="form-control" name="stok" placeholder="Stok Barang">
             <br>
+
             <label>Jenis</label>
             <input type="text" class="form-control" name="jenis" placeholder="Pilih Jenis...">
             <br>
