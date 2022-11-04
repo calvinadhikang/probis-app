@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
-<<<<<<< HEAD
-=======
 use App\Rules\CustomRule;
->>>>>>> 673161f2688f413f970d6413cd335ba320b56a3c
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +30,6 @@ class MasterKaryawanController extends Controller
     // berhasil
     public function ViewKaryawan()
     {
-<<<<<<< HEAD
         $karyawan = DB::table('karyawan')->get();
         return view("master.karyawan.view", ["dataKaryawan" => $karyawan]);
     }
@@ -77,7 +73,6 @@ class MasterKaryawanController extends Controller
         //     "jk" => ["required"]
         // ]);
         // Karyawan::create($request->all());
-=======
         $karyawans = Karyawan::all();
         return view('master.karyawan.view', [
             "karyawans" => $karyawans
@@ -210,6 +205,5 @@ class MasterKaryawanController extends Controller
 
         $data->save();
         return redirect()->back()->with("msg", "Berhasil edit karyawan : $nama")->with('type', 'primary');
->>>>>>> 673161f2688f413f970d6413cd335ba320b56a3c
     }
 }
