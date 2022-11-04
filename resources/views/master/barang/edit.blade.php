@@ -54,6 +54,7 @@
                         <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
+                <button type="submit" class="btn btn-primary">Edit</button>
             </div>
         </form>
     </div>

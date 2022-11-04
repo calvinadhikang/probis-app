@@ -37,45 +37,29 @@
                 <th>STOK</th>
                 <th>MERK</th>
                 <th>JENIS</th>
-                <th>AKSI</th>
+                <th colspan="2">AKSI</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>id</td>
-                <td>nama</td>
-                <td>Rp 1000</td>
-                <td>10</td>
-                <td>Heize</td>
-                <td>Sabun</td>
-                <td>
-                    <a href="{{ url('/master/barang/detail') }}" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>id</td>
-                <td>nama</td>
-                <td>Rp 1000</td>
-                <td>10</td>
-                <td>Heize</td>
-                <td>Sabun</td>
-                <td>
-                    <a href="{{ url('/master/barang/detail') }}" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>id</td>
-                <td>nama</td>
-                <td>Rp 1000</td>
-                <td>10</td>
-                <td>Heize</td>
-                <td>Sabun</td>
-                <td>
-                    <a href="{{ url('/master/barang/detail') }}" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
+                @if(count($dataBarang) > 0)
+                @foreach ($dataBarang as $d)
+                    <tr>
+                        <td>{{$d->id}}</td>
+                        <td>{{$d->nama}}</td>
+                        <td>{{$d->harga}}</td>
+                        <td>{{$d->stok}}</td>
+                        <td>{{$d->merk}}</td>
+                        <td>{{$d->jenis}}</td>
+                        <td><a href="{{ route('detailBarang', $d->id) }}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{ route('editBarang', $d->id)}}" class="btn btn-warning">Edit</a></td>
+                    </tr>
+                @endforeach
+                @else
+                    <tr>
+                        <td colspan="5"><center>Tidak ada Item.</center></td>
+                    </tr>
+                @endif
             </tr>
         </tbody>
     </table>

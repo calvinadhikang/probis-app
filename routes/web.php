@@ -36,8 +36,12 @@ Route::prefix('/master')->group(function() {
     //BARANG
     Route::prefix('/barang')->group(function() {
         Route::get('/', [MasterBarangController::class, "View"]);
-        Route::get('/add', [MasterBarangController::class, "Add"]);
-        Route::get('/detail', [MasterBarangController::class, "Detail"]);
+        Route::get('/add', [MasterBarangController::class, "GoAdd"]);
+        Route::post('/add', [MasterBarangController::class, "Add"]);
+        Route::get('/detail/{id}', [MasterBarangController::class, "formDetail"])->name('detailBarang');
+        Route::get('/edit/{id}', [MasterBarangController::class, "formEdit"])->name('editBarang');
+        Route::post('/edit/{id}', [MasterBarangController::class, "edit"])->name('editBarang');
+
     });
     Route::prefix('/karyawan')->group(function() {
         Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
