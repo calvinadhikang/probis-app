@@ -12,27 +12,27 @@
         <form action="" method="POST">
             @csrf
             <label>Username</label>
-            <input type="text" class="form-control" name="nama" placeholder="Username Karyawan">
+            <input type="text" class="form-control" name="username" value="{{old('username')}}" placeholder="Username Karyawan">
             <br>
             <label>Nama</label>
-            <input type="text" class="form-control" name="harga" placeholder="Nama Karyawan">
+            <input type="text" class="form-control" name="nama" placeholder="Nama Karyawan">
             <br>
             <label>Password</label>
-            <input type="text" class="form-control" name="merk" placeholder="Password">
+            <input type="text" class="form-control" name="pass" placeholder="Password">
             <br>
             <label>Confirm Password</label>
-            <input type="text" class="form-control" name="jenis" placeholder="Confirm Password">
+            <input type="text" class="form-control" name="conPass" placeholder="Confirm Password">
             <br>
             <label>No Telepon</label>
-            <input type="text" class="form-control" name="jenis" placeholder="No Telepon">
+            <input type="text" class="form-control" name="notel" placeholder="No Telepon">
             <br>
             <label>Jabatan</label>
-            <input type="text" class="form-control" name="jenis" placeholder="Jabatan">
+            <input type="text" class="form-control" name="jabatan" placeholder="Jabatan">
             <br>
             <label>Jenis Kelamin</label>
-            <input type="text" class="form-control" name="jenis" placeholder="Jenis Kelamin">
+            <input type="text" class="form-control" name="jk" placeholder="Jenis Kelamin">
             <br>
-            <button class="btn btn-primary w-100">Submit</button>
+            <button class="btn btn-primary w-100" type="submit">Submit</button>
         </form>
     </div>
 @endsection

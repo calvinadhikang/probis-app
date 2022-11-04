@@ -33,42 +33,31 @@
             <tr>
                 <th>ID KARYAWAN</th>
                 <th>NAMA KARYAWAN</th>
+                <th>NAMA KARYAWAN</th>
+                <th>NAMA KARYAWAN</th>
                 <th>NO TELEPON</th>
                 <th>JABATAN</th>
                 <th>AKSI</th>
             </tr>
         </thead>
         <tbody>
+            @if(count($dataKaryawan) > 0)
+            @foreach ($dataKaryawan as $d)
+                <tr>
+                    <td>{{$d->id_karyawan}}</td>
+                    <td>{{$d->username_karyawan}}</td>
+                    <td>{{$d->nama_karyawan}}</td>
+                    <td>{{$d->password_karyawan}}</td>
+                    <td>{{$d->notel_karyawan}}</td>
+                    <td>{{$d->jabatan_karyawan}}</td>
+                    <td>{{$d->jk_karyawan}}</td>
+                </tr>
+            @endforeach
+            @else
             <tr>
-                <td>1</td>
-                <td>ibewe</td>
-                <td>081111111111</td>
-                <td>BOSSS</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
+                <td colspan="5"><center>Tidak ada Karyawan.</center></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>ganteng</td>
-                <td>08123456789</td>
-                <td>Kacung</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>banget</td>
-                <td>081987654321</td>
-                <td>Kasir</td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
+            @endif
         </tbody>
     </table>
 @endsection

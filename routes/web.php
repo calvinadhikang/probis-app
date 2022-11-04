@@ -45,7 +45,9 @@ Route::prefix('/master')->group(function() {
         Route::get('/add', [MasterBarangController::class, "Addbarang"]);
         Route::get('/detail', [MasterKaryawanController::class, "DetailKaryawan"]);
         Route::get('/edit', [MasterKaryawanController::class, "EditKaryawan"]);
-        Route::get('/add', [MasterKaryawanController::class, "AddKaryawan"]);
+        Route::get('/add', [MasterKaryawanController::class, "GoAddKaryawan"]);
+        Route::post('/add', [MasterKaryawanController::class, "addKaryawan"]);
+
     });
 
     //SUPPLIER
