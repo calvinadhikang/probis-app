@@ -42,21 +42,18 @@ Route::prefix('/master')->group(function() {
 
     //KARYAWAN
     Route::prefix('/karyawan')->group(function() {
-        Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
-        Route::get('/add', [MasterBarangController::class, "Addbarang"]);
-<<<<<<< HEAD
+        // Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
+        // Route::get('/add', [MasterBarangController::class, "Addbarang"]);
         Route::get('/detail', [MasterKaryawanController::class, "DetailKaryawan"]);
         Route::get('/edit', [MasterKaryawanController::class, "EditKaryawan"]);
         Route::get('/add', [MasterKaryawanController::class, "GoAddKaryawan"]);
         Route::post('/add', [MasterKaryawanController::class, "addKaryawan"]);
-=======
         Route::get('/detail/{id}', [MasterKaryawanController::class, "DetailKaryawan"])->name('detailkaryawan');
         Route::get('/edit/{id}', [MasterKaryawanController::class, "ToEditKaryawan"])->name('editkaryawan');
         Route::post('/edit/{id}', [MasterKaryawanController::class, "EditKaryawan"])->name('editkaryawan');
 
         Route::get('/add', [MasterKaryawanController::class, "ToAddKaryawan"]);
         Route::post('/add', [MasterKaryawanController::class, "AddKaryawan"]);
->>>>>>> 673161f2688f413f970d6413cd335ba320b56a3c
 
     });
 
