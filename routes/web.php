@@ -39,29 +39,6 @@ Route::prefix('/master')->group(function() {
         Route::get('/add', [MasterBarangController::class, "Add"]);
         Route::get('/detail', [MasterBarangController::class, "Detail"]);
     });
-
-    //KARYAWAN
-    // Route::prefix('/karyawan')->group(function() {
-    //     Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
-    //     Route::get('/add', [MasterBarangController::class, "Addbarang"]);
-
-    //     //RIll tolong di cek yang mana punyamu yaa..
-
-    //     //yang ini
-    //     Route::get('/detail', [MasterKaryawanController::class, "DetailKaryawan"]);
-    //     Route::get('/edit', [MasterKaryawanController::class, "EditKaryawan"]);
-    //     Route::get('/add', [MasterKaryawanController::class, "GoAddKaryawan"]);
-    //     Route::post('/add', [MasterKaryawanController::class, "addKaryawan"]);
-
-    //     //atau yang ini..
-    //     Route::get('/detail/{id}', [MasterKaryawanController::class, "DetailKaryawan"])->name('detailkaryawan');
-    //     Route::get('/edit/{id}', [MasterKaryawanController::class, "ToEditKaryawan"])->name('editkaryawan');
-    //     Route::post('/edit/{id}', [MasterKaryawanController::class, "EditKaryawan"])->name('editkaryawan');
-
-    //     Route::get('/add', [MasterKaryawanController::class, "ToAddKaryawan"]);
-    //     Route::post('/add', [MasterKaryawanController::class, "AddKaryawan"]);
-
-    // });
     Route::prefix('/karyawan')->group(function() {
         Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
         Route::get('/add', [MasterBarangController::class, "Addbarang"]);
