@@ -33,8 +33,6 @@
             <tr>
                 <th>ID KARYAWAN</th>
                 <th>NAMA KARYAWAN</th>
-                <th>NAMA KARYAWAN</th>
-                <th>NAMA KARYAWAN</th>
                 <th>NO TELEPON</th>
                 <th>JABATAN</th>
                 <th>DETAIL</th>
@@ -42,52 +40,25 @@
 
             </tr>
         </thead>
-<<<<<<< HEAD
-        <tbody>
-            @if(count($dataKaryawan) > 0)
-            @foreach ($dataKaryawan as $d)
-                <tr>
-                    <td>{{$d->id_karyawan}}</td>
-                    <td>{{$d->username_karyawan}}</td>
-                    <td>{{$d->nama_karyawan}}</td>
-                    <td>{{$d->password_karyawan}}</td>
-                    <td>{{$d->notel_karyawan}}</td>
-                    <td>{{$d->jabatan_karyawan}}</td>
-                    <td>{{$d->jk_karyawan}}</td>
-                </tr>
-            @endforeach
-            @else
-            <tr>
-                <td colspan="5"><center>Tidak ada Karyawan.</center></td>
-            </tr>
-            @endif
-        </tbody>
-=======
 
         @forelse ($karyawans as $karyawan)
+            <tr>
+                <td>{{ $karyawan->id }}</td>
+                <td>{{ $karyawan->nama }}</td>
+                <td>{{ $karyawan->telepon }}</td>
+                @if($karyawan->jabatan ==0)
+                    <td>Admin</td>
+                @else
+                    <td>Kasir</td>
+                @endif
+                <td><a href="{{ route('detailkaryawan', $karyawan->id) }}" class="btn btn-primary">Detail</a></td>
+                <td><a href="{{ route('editkaryawan', $karyawan->id) }}" class="btn btn-warning">Edit</a></td>
 
-
-
-
-                    <tr>
-                        <td>{{ $karyawan->id }}</td>
-                        <td>{{ $karyawan->nama }}</td>
-                        <td>{{ $karyawan->telepon }}</td>
-                        @if($karyawan->jabatan ==0)
-                            <td>Admin</td>
-                        @else
-                            <td>Kasir</td>
-                        @endif
-                        <td><a href="{{ route('detailkaryawan', $karyawan->id) }}" class="btn btn-primary">Detail</a></td>
-                        <td><a href="{{ route('editkaryawan', $karyawan->id) }}" class="btn btn-warning">Edit</a></td>
-
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5">Belum ada Data !</td>
-                    </tr>
-                @endforelse
-
->>>>>>> 673161f2688f413f970d6413cd335ba320b56a3c
+            </tr>
+        @empty
+            <tr>
+                <td colspan="5">Belum ada Data !</td>
+            </tr>
+        @endforelse
     </table>
 @endsection
