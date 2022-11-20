@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasterBarangController;
 use App\Http\Controllers\MasterKaryawanController;
@@ -98,4 +99,8 @@ Route::prefix('/transaksi')->group(function() {
         Route::get('/', [TransaksiReturController::class, "view"]);
         Route::get('/add', [TransaksiReturController::class, "add"]);
     });
+});
+
+Route::prefix('/laporan')->group(function(){
+    Route::get('/', [LaporanController::class, 'view']);
 });

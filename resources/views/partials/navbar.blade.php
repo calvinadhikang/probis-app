@@ -33,31 +33,34 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @if (Session::get('isAdmin'))
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=" {{ url('/master/barang') }}">Master Barang</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/master/karyawan')}}">Master Karyawan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/master/supplier')}}">Master Supplier</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/master/kategori') }}">Master Kategori</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/master/merk') }}">Master Merk</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{url('/home')}}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=" {{ url('/master/barang') }}">Master Barang</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/master/karyawan')}}">Master Karyawan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/master/supplier')}}">Master Supplier</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/master/kategori') }}">Master Kategori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/master/merk') }}">Master Merk</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/laporan') }}">Laporan</a>
+                        </li>
                     @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/transaksi/penjualan') }}">Penjualan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/transaksi/retur') }}">Retur</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/transaksi/penjualan') }}">Penjualan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/transaksi/retur') }}">Retur</a>
+                        </li>
                     @endif
                 </ul>
                 <span class="navbar-text">
