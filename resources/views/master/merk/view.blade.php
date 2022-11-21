@@ -12,94 +12,97 @@
 <br>
 <br>
 
-{{-- Isi  --}}
-<div class="container text-center">
-    <div class="row">
-        <div class="col align-self-start"></div>
-        <div class="col align-self-center"></div>
-        {{-- Supaya bisa di kanan --}}
-        <div class="col align-self-end">
-            <div class="input-group">
-                <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
-                <input type="text" class="form-control" placeholder="By Nama" aria-label="Username"
-                    aria-describedby="addon-wrapping">
+<div class="p-4 border rounded bg-white shadow">
+    {{-- Isi  --}}
+    <div class="container text-center">
+        <div class="row">
+            <div class="col align-self-start"></div>
+            <div class="col align-self-center"></div>
+            {{-- Supaya bisa di kanan --}}
+            <div class="col align-self-end">
+                <div class="input-group">
+                    <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
+                    <input type="text" class="form-control" placeholder="By Nama" aria-label="Username"
+                        aria-describedby="addon-wrapping">
+                </div>
             </div>
         </div>
     </div>
+
+    <br>
+
+    <table class="table table-striped">
+        <thead class="table-success">
+            <tr>
+                <th>ID MERK</th>
+                <th>NAMA MERK</th>
+                <th>Jumlah Produk dengan Merk</th>
+                <th>Status</th>
+                <th>AKSI</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($data as $item)
+                <tr>
+                    <td>{{$item->id}}</td>
+                    <td>{{$item->nama}}</td>
+                    <td>{{0}}</td>
+                    <td>
+                        @if ($item->status == 1)
+                            <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
+                        @else
+                            <div class="bg-danger text-center rounded text-white p-1">Non-Aktif</div>
+                        @endif
+                    </td>
+                    <td>
+                        <form action="/master/merk/toggle" method="POST">
+                            @csrf
+                            <button class="btn btn-warning" name="id" value="{{$item->id}}">Toggle Status</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5">Tidak ada Data !</td>
+                </tr>
+            @endforelse
+            {{-- <tr>
+                <td>id</td>
+                <td>nama</td>
+                <td>34</td>
+                <td>
+                    <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
+                </td>
+                <td>
+                    <a href="" class="btn btn-warning">Toggle Status</a>
+                </td>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>nama</td>
+                <td>34</td>
+                <td>
+                    <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
+                </td>
+                <td>
+                    <a href="" class="btn btn-warning">Toggle Status</a>
+                </td>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>nama</td>
+                <td>34</td>
+                <td>
+                    <div class="bg-danger text-center rounded text-white p-1">Non-Aktif</div>
+                </td>
+                <td>
+                    <a href="" class="btn btn-warning">Toggle Status</a>
+                </td>
+            </tr> --}}
+        </tbody>
+    </table>
 </div>
 
-<br>
-
-<table class="table table-striped">
-    <thead class="table-success">
-        <tr>
-            <th>ID MERK</th>
-            <th>NAMA MERK</th>
-            <th>Jumlah Produk dengan Merk</th>
-            <th>Status</th>
-            <th>AKSI</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse ($data as $item)
-            <tr>
-                <td>{{$item->id}}</td>
-                <td>{{$item->nama}}</td>
-                <td>{{0}}</td>
-                <td>
-                    @if ($item->status == 1)
-                        <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
-                    @else
-                        <div class="bg-danger text-center rounded text-white p-1">Non-Aktif</div>
-                    @endif
-                </td>
-                <td>
-                    <form action="/master/merk/toggle" method="POST">
-                        @csrf
-                        <button class="btn btn-warning" name="id" value="{{$item->id}}">Toggle Status</button>
-                    </form>
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="5">Tidak ada Data !</td>
-            </tr>
-        @endforelse
-        {{-- <tr>
-            <td>id</td>
-            <td>nama</td>
-            <td>34</td>
-            <td>
-                <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
-            </td>
-            <td>
-                <a href="" class="btn btn-warning">Toggle Status</a>
-            </td>
-        </tr>
-        <tr>
-            <td>id</td>
-            <td>nama</td>
-            <td>34</td>
-            <td>
-                <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
-            </td>
-            <td>
-                <a href="" class="btn btn-warning">Toggle Status</a>
-            </td>
-        </tr>
-        <tr>
-            <td>id</td>
-            <td>nama</td>
-            <td>34</td>
-            <td>
-                <div class="bg-danger text-center rounded text-white p-1">Non-Aktif</div>
-            </td>
-            <td>
-                <a href="" class="btn btn-warning">Toggle Status</a>
-            </td>
-        </tr> --}}
-    </tbody>
-</table>
 
 
 <!-- Modal -->
