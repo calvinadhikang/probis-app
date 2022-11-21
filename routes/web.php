@@ -76,6 +76,7 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/merk')->group(function() {
         Route::get('/', [MasterMerkController::class, "View"]);
         Route::post('/add', [MasterMerkController::class, "Add"]);
+        Route::post('/toggle', [MasterMerkController::class, "Toggle"]);
     });
 
     //KATEGORI

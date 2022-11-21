@@ -41,7 +41,31 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        @forelse ($data as $item)
+            <tr>
+                <td>{{$item->id}}</td>
+                <td>{{$item->nama}}</td>
+                <td>{{0}}</td>
+                <td>
+                    @if ($item->status == 1)
+                        <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
+                    @else
+                        <div class="bg-danger text-center rounded text-white p-1">Non-Aktif</div>
+                    @endif
+                </td>
+                <td>
+                    <form action="/master/merk/toggle" method="POST">
+                        @csrf
+                        <button class="btn btn-warning" name="id" value="{{$item->id}}">Toggle Status</button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="5">Tidak ada Data !</td>
+            </tr>
+        @endforelse
+        {{-- <tr>
             <td>id</td>
             <td>nama</td>
             <td>34</td>
@@ -73,7 +97,7 @@
             <td>
                 <a href="" class="btn btn-warning">Toggle Status</a>
             </td>
-        </tr>
+        </tr> --}}
     </tbody>
 </table>
 
@@ -87,6 +111,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ url('/master/merk/add') }}" method="POST">
+                @csrf
                 <div class="modal-body">
                     <input type="text" name="nama" id="" class="form-control" placeholder="Masukan Nama Merk Baru !">
                 </div>
