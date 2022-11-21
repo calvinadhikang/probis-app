@@ -31,7 +31,7 @@
 <br>
 
 <table class="table table-striped">
-    <thead class="text-bg-success">
+    <thead class="table-success">
         <tr>
             <th>ID MERK</th>
             <th>NAMA MERK</th>

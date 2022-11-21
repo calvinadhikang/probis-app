@@ -32,7 +32,7 @@
 
     <div class="p-3">
         <table class="table table-striped text-center">
-            <thead class="text-bg-success">
+            <thead class="table-success">
                 <tr>
                     <th>ID JENIS</th>
                     <th>NAMA JENIS</th>

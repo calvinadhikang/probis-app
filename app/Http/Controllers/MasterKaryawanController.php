@@ -39,59 +39,58 @@ class MasterKaryawanController extends Controller
     }
     public function AddKaryawan(Request $request)
     {
+        // dd('tambah karyawan');
 
-        $listkaryawan = Karyawan::all();
-        $listuserusername=[];
-        foreach ($listkaryawan as $value) {
-            $listuserusername[]=$value->username;
+        // $listkaryawan = Karyawan::all();
+        // $listuserusername=[];
+        // foreach ($listkaryawan as $value) {
+        //     $listuserusername[]=$value->username;
+        // }
 
-        }
+        // $rules = [
+        //     'usernama' => ['required', new CustomRule($listuserusername)],
+        //     'nama' => "required",
+        //     'password' => 'required',
+        //     'conpassword' => ['required','same:password'],
+        //     'email' => ['required','email:rfc,dns'],
+        //     'telepon' => ['required', 'integer','min_digits:10'],
+        //     'jabatan' => 'required',
+        //     'jenis_kelamin' => 'required'
+        // ];
+        // $messages = [
+        //     "required" => "attribute kosong",
+        //     "integer" => "harus berupa angka",
+        //     "min_digits" => "panjang nomor harus 10 angka",
+        //     "same" => "password dan confirm password harus sama",
+        // ];
+        // $request->validate($rules, $messages);
 
-        $rules = [
-            'usernama' => ['required', new CustomRule($listuserusername)],
-            'nama' => "required",
-            'password' => 'required',
-            'conpassword' => ['required','same:password'],
-            'email' => ['required','email:rfc,dns'],
-            'telepon' => ['required', 'integer','min_digits:10'],
-            'jabatan' => 'required',
-            'jenis_kelamin' => 'required'
-
-        ];
-        $messages = [
-            "required" => "attribute kosong",
-            "integer" => "harus berupa angka",
-            "min_digits" => "panjang nomor harus 10 angka",
-            "same" => "password dan confirm password harus sama",
-        ];
-        $request->validate($rules, $messages);
-
-        $username =$value->username;
-
+        $username =$request->username;
         $nama = $request->nama;
         $password = $request->password;
+        $confirmpassword = $request->input('confirm-password');
         $email = $request->email;
-
-        $telepon = $request->telepon;
+        $telepon = $request->telp;
         $jabatan = $request->jabatan;
         $jenis_kelamin = $request->jenis_kelamin;
+
+        if ($password != $confirmpassword) {
+            return redirect()->back()->with("msg", "Password dan Confirm tidak sama")->with('type', 'danger');
+        }
 
 
         $data = new Karyawan();
         $data->username = $username;
         $data->nama = $nama;
-
         $data->password = $password;
-
         $data->email = $email;
         $data->telepon = $telepon;
         $data->jabatan = $jabatan;
         $data->jenis_kelamin = $jenis_kelamin;
         $data->status = 1;
-
         $data->save();
 
-        return redirect()->back()->with("msg", "Berhasil add karyawan : $nama")->with('type', 'primary');
+        return redirect('/master/karyawan')->with("msg", "Berhasil add karyawan : $nama")->with('type', 'primary');
     }
 
     public function EditKaryawan(Request $request)

@@ -29,7 +29,7 @@
     <br>
 
     <table class="table table-striped">
-        <thead class="text-bg-success">
+        <thead class="table-success">
             <tr>
                 <th>ID SUPPLIER</th>
                 <th>NAMA SUPPLIER</th>
