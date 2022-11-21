@@ -93,6 +93,10 @@ Route::prefix('/transaksi')->group(function() {
     Route::prefix('/penjualan')->group(function() {
         Route::get('/', [TransaksiPenjualanController::class, "view"]);
         Route::get('/add', [TransaksiPenjualanController::class, "add"]);
+        Route::post('/add', [TransaksiPenjualanController::class, "AddAction"]);
+        Route::post('/addCart', [TransaksiPenjualanController::class, "tambah"]);
+        Route::post('/kurang', [TransaksiPenjualanController::class, "kurang"]);
+        Route::post('/checkout', [TransaksiPenjualanController::class, "checkout"]);
     });
 
     // Retur
@@ -104,4 +108,8 @@ Route::prefix('/transaksi')->group(function() {
 
 Route::prefix('/laporan')->group(function(){
     Route::get('/', [LaporanController::class, 'view']);
+});
+
+Route::get('/test', function(){
+    return view('partials.components.sidebar');
 });

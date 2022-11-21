@@ -79,7 +79,7 @@ class MasterBarangController extends Controller
             "harga" => ["required", "numeric"],
             "stok" => ["required", "numeric"],
             "merk" => ["required"],
-            "jenis" => ["required"]
+            "kategori" => ["required"]
         ]);
 
         $result = Barang::where('id', $id)->update([
@@ -87,7 +87,7 @@ class MasterBarangController extends Controller
             'harga' => $in["harga"],
             "stok" => $in["stok"],
             "merk" => $in["merk"],
-            "jenis" => $in["jenis"]
+            "kategori" => $in["kategori"]
         ]);
         if ($result) {
             return redirect()->back()->with("success", "Berhasil edit barang!");

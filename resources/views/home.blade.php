@@ -3,9 +3,13 @@
 @section('content')
     {{-- <h1>Selamat Datang</h1> --}}
     <br>
-    <h1>Overview</h1>
+    @if (Session::get('isAdmin'))
+        <h1>Overview</h1>
+    @else
+
+    @endif
     <br>
-    <div class="bg-white w-100 p-2 rounded-2">
+    <div class="bg-white w-100 p-4 rounded-2 shadow">
     @if (Session::get('isAdmin'))
         <div class="d-flex flex-wrap">
             <div class="bg-white p-2 border rounded m-3" style="width: 45%;">
@@ -47,7 +51,11 @@
             </div>
         </div>
     @else
-
+        <div class="">
+            <h1>Kerja Kerja Kerjaa...</h2>
+            <a href="/transaksi/penjualan">Halaman Penjualan</a>
+            <a href="/transaksi/retur">Halaman Retur</a>
+        </div>
     @endif
     </div>
 @endsection

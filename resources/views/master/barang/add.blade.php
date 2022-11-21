@@ -43,7 +43,7 @@
                     <select name="merk" class="form-control" id="" required>
                         <option value="" selected disabled>Pilih Merk</option>
                         @forelse ($merk as $item)
-                        <option value="{{$item->nama}}">{{$item->nama}}</option>
+                        <option value="{{$item->id}}">{{$item->nama}}</option>
                         @empty
 
                         @endforelse

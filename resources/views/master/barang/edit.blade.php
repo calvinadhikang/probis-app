@@ -49,8 +49,8 @@
                 </div>
                 <div class="w-50 p-2">
                     Jenis
-                    <input type="text" class="form-control" name="jenis" value="{{$barang->jenis}}">
-                    @error("jenis")
+                    <input type="text" class="form-control" name="kategori" value="{{$barang->kategori}}">
+                    @error("kategori")
                         <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>

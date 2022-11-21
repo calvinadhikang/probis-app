@@ -45,8 +45,9 @@
                 @if(count($dataBarang) > 0)
                 @foreach ($dataBarang as $d)
                     @php
-                        use App\Models\Kategori;
-                        $kategori = Kategori::find($d->kategori);
+                        // use App\Models\Kategori;
+                        // $kategori = Kategori::find($d->kategori);
+                        $kategori = DB::table('kategori')->where('id', '=', $d->kategori)->first();
                     @endphp
                     <tr>
                         <td>{{$d->id}}</td>
