@@ -36,7 +36,7 @@
                 <th>HARGA (Rp)</th>
                 <th>STOK</th>
                 <th>MERK</th>
-                <th>JENIS</th>
+                <th>KATEGORI</th>
                 <th colspan="2">AKSI</th>
             </tr>
         </thead>
@@ -44,13 +44,17 @@
             <tr>
                 @if(count($dataBarang) > 0)
                 @foreach ($dataBarang as $d)
+                    @php
+                        use App\Models\Kategori;
+                        $kategori = Kategori::find($d->kategori);
+                    @endphp
                     <tr>
                         <td>{{$d->id}}</td>
                         <td>{{$d->nama}}</td>
                         <td>{{$d->harga}}</td>
                         <td>{{$d->stok}}</td>
                         <td>{{$d->merk}}</td>
-                        <td>{{$d->jenis}}</td>
+                        <td>{{$kategori->nama}}</td>
                         <td><a href="{{ route('detailBarang', $d->id) }}" class="btn btn-primary">Detail</a></td>
                         <td><a href="{{ route('editBarang', $d->id)}}" class="btn btn-warning">Edit</a></td>
                     </tr>

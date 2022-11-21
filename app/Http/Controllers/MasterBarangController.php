@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Kategori;
+use App\Models\Merk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use function GuzzleHttp\Promise\all;
 
 class MasterBarangController extends Controller
 {
@@ -17,7 +21,13 @@ class MasterBarangController extends Controller
 
 
     public function GoAdd(){
-        return view('master.barang.add');
+        $dataMerk = Merk::all();
+        $dataKategori = Kategori::all();
+
+        return view('master.barang.add', [
+            "merk" => $dataMerk,
+            "kategori" => $dataKategori
+        ]);
     }
     public function Add(Request $request)
     {
@@ -26,7 +36,7 @@ class MasterBarangController extends Controller
             "harga" => ["required", "numeric"],
             "stok" => ["required", "numeric"],
             "merk" => ["required"],
-            "jenis" => ["required"]
+            "kategori" => ["required"]
         ]);
 
         $result = Barang::create([
@@ -34,7 +44,7 @@ class MasterBarangController extends Controller
             'harga' => $in["harga"],
             "stok" => $in["stok"],
             "merk" => $in["merk"],
-            "jenis" => $in["jenis"]
+            "kategori" => $in["kategori"]
         ]);
 
         if ($result) {

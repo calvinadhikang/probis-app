@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('stok');
             $table->string('merk');
-            $table->integer('jenis');
+            $table->integer('kategori');
             $table->timestamps();
         });
     }
