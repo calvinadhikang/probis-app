@@ -11,9 +11,24 @@ use stdClass;
 class TransaksiPenjualanController extends Controller
 {
     //GET
+    public function detail($id)
+    {
+        $data = DB::select("SELECT * FROM HTRANS WHERE id = $id LIMIT 1")[0];
+        $detail = DB::select("SELECT * FROM DTRANS WHERE htrans_id = $data->id");
+        # code...
+        return view('transaksi.penjualan.detail', [
+            "data" => $data,
+            "detail" => $detail
+        ]);
+    }
+
     public function View()
     {
-        return view('transaksi.penjualan.view');
+        $data = DB::select('SELECT * FROM HTRANS');
+
+        return view('transaksi.penjualan.view', [
+            "data" => $data
+        ]);
     }
 
     public function Add()
@@ -63,21 +78,36 @@ class TransaksiPenjualanController extends Controller
                 }
             }
 
-            $obj = $cart[$idx];
-            $obj->qty = $obj->qty + $request->qty;
-            $obj->subtotal = $obj->qty * $obj->harga;
+            if ($idx == -1) {
+                # kalau barang belum ada
+                $b = Barang::find($request->barang);
+
+                $obj = new stdClass();
+                $obj->id = $b->id;
+                $obj->nama = $b->nama;
+                $obj->qty = $request->qty;
+                $obj->harga = $b->harga;
+                $obj->subtotal = $request->qty * $b->harga;
+
+                $cart[] = $obj;
+            }else{
+                # kalau barang sudah ada
+                $obj = $cart[$idx];
+                $obj->qty = $obj->qty + $request->qty;
+                $obj->subtotal = $obj->qty * $obj->harga;
+            }
             Session::put('cart' , $cart);
         }
 
         return back();
     }
 
-    public function kurang(Request $request)
+    public function kurang($id)
     {
         $cart = Session::get('cart');
         $idx = -1;
         foreach ($cart as $key => $value) {
-            if ($request->id == $value->id) {
+            if ($id == $value->id) {
                 $idx = $key;
             }
         }
@@ -94,14 +124,14 @@ class TransaksiPenjualanController extends Controller
         return back();
     }
 
-    public function tambah(Request $request)
+    public function tambah($id)
     {
-        dd("tambah");
+        // dd("tambah");
         $cart = Session::get('cart');
 
         $idx = -1;
         foreach ($cart as $key => $value) {
-            if ($request->id == $value->id) {
+            if ($id == $value->id) {
                 $idx = $key;
             }
         }
@@ -111,13 +141,14 @@ class TransaksiPenjualanController extends Controller
         $obj->subtotal = $obj->qty * $obj->harga;
         Session::put('cart' , $cart);
 
-        // return back();
+        return back();
     }
 
     public function checkout(Request $request)
     {
-        if (Session::get('cart') == null) {
-            return back();
+        $cart = Session::get('cart');
+        if ($cart == null) {
+            return back()->with('msg', 'Keranjang tidak boleh kosong')->with('type', 'danger');
         }
 
         $nama = $request->nama;
@@ -130,12 +161,28 @@ class TransaksiPenjualanController extends Controller
         DB::beginTransaction();
 
         try {
+            $total = 0;
+            foreach ($cart as $key => $value) {
+                $total += $value->subtotal;
+            }
+
             //INSERT HEADER
-            DB::insert('insert into htrans (id, name) values (?, ?)', [1, 'Dayle']);
+            DB::insert("insert into htrans (nama, alamat, total, status) values ('$nama', '$alamat', $total, 0)");
+
+            $lastId = DB::getPdo()->lastInsertId();
+            foreach ($cart as $key => $value) {
+                # code...
+                DB::insert("insert into dtrans (htrans_id, barang_id, nama, qty, harga, subtotal) values ($lastId, $value->id, '$value->nama', $value->qty, $value->harga, $value->subtotal)");
+            }
 
             DB::commit();
+
+            Session::put('Cart', null);
+            return redirect('/transaksi/penjualan')->with('msg', 'Berhasil Checkout')->with('type', 'success');
         } catch (\Throwable $th) {
             DB::rollBack();
+
+            return back()->with('msg', 'Gagal Checkout')->with('type', 'warning');
         }
     }
 }

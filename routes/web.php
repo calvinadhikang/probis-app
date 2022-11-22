@@ -94,9 +94,10 @@ Route::prefix('/transaksi')->group(function() {
         Route::get('/', [TransaksiPenjualanController::class, "view"]);
         Route::get('/add', [TransaksiPenjualanController::class, "add"]);
         Route::post('/add', [TransaksiPenjualanController::class, "AddAction"]);
-        Route::post('/addCart', [TransaksiPenjualanController::class, "tambah"]);
-        Route::post('/kurang', [TransaksiPenjualanController::class, "kurang"]);
+        Route::get('/tambah/{id}', [TransaksiPenjualanController::class, "tambah"]);
+        Route::get('/kurang/{id}', [TransaksiPenjualanController::class, "kurang"]);
         Route::post('/checkout', [TransaksiPenjualanController::class, "checkout"]);
+        Route::get('/detail/{id}', [TransaksiPenjualanController::class, "detail"]);
     });
 
     // Retur

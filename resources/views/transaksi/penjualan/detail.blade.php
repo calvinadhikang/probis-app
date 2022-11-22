@@ -1,33 +1,42 @@
 @extends('../partials/navbar')
 
 @section('content')
-    <h1>List Penjualan</h1>
+    <h1>Detail Penjualan {{$data->nama}}</h1>
     <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
-        <a class="nav-link active bg-success" href="{{ url('/transaksi/penjualan') }}">View</a>
-        <a class="nav-link text-success" href="{{ url('/transaksi/penjualan/add') }}">Add</a>
+        <a class="nav-link active bg-success" href="{{ url('/transaksi/penjualan') }}">Back</a>
+        {{-- <a class="nav-link text-success" href="{{ url('/transaksi/penjualan/add') }}">Add</a> --}}
     </nav>
     <br>
     <div class="bg-white border shadow p-4 rounded">
-
+        <h3 class="text-center">Nomor Nota : {{$data->id}}</h3>
+        <br>
+        <h5>Nama Pembeli : {{$data->nama}}</h5>
+        <h5>Alamat :</h5>
+        <p>{{$data->alamat}}</p>
+        <hr>
+        <h5>Detail Nota</h5>
+        <br>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nama Customer</th>
-                    <th>Alamat</th>
-                    <th>Grand Total</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Aksi</th>
+                    <th>ID Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Qty Barang</th>
+                    <th>Harga Barang</th>
+                    <th>Subtotal</th>
+                    {{-- <th class="text-center">Status</th>
+                    <th class="text-center">Aksi</th> --}}
                 </tr>
             </thead>
             <tbody>
-                @forelse ($data as $item)
+                @forelse ($detail as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nama }}</td>
-                        <td>{{ $item->alamat }}</td>
-                        <td>{{ $item->total }}</td>
-                        <td>
+                        <td>{{ $item->qty }}</td>
+                        <td>{{ $item->harga }}</td>
+                        <td>{{ $item->subtotal }}</td>
+                        {{-- <td>
                             @if ($item->status == 0)
                                 <div class="p-2 rounded bg-warning text-light text-center">Processed</div>
                             @else
@@ -38,7 +47,7 @@
                             <a href="/transaksi/penjualan/detail/{{$item->id}}" class="p-2">
                                 <button class="btn btn-primary">Detail</button>
                             </a>
-                        </td>
+                        </td> --}}
                     </tr>
                 @empty
                     <tr>
@@ -47,5 +56,6 @@
                 @endforelse
             </tbody>
         </table>
+        <h5 class="text-end">Grand Total : {{ $data->total }}</h5>
     </div>
 @endsection
