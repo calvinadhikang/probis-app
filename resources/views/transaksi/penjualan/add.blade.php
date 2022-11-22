@@ -9,7 +9,8 @@
     </nav>
     <br>
     <div class="bg-white rounded p-4 my-2 shadow">
-        <form action="">
+        <form action="/transaksi/penjualan/checkout" method="POST">
+            @csrf
             <div class="mb-2">
                 Nama Customer
                 <input type="text" class="form-control" name="nama">
@@ -44,16 +45,17 @@
                                         @csrf
                                         <button class="btn btn-primary text-center" style="width: 50px;" type="submit">+</button>
                                     </form> --}}
-                                    <form action="/transaksi/penjualan/addCart" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $item->id }}">
-                                        <button class="btn btn-primary text-center" style="width: 50px;">+</button>
-                                    </form>
-                                    <form action="/transaksi/penjualan/kurang" method="POST">
+                                    <a href="/transaksi/penjualan/tambah/{{ $item->id }}">
+                                        <div class="btn btn-primary text-center" style="width: 50px;">+</div>
+                                    </a>
+                                    <a href="/transaksi/penjualan/kurang/{{ $item->id }}">
+                                        <div class="btn btn-danger text-center" style="width: 50px;">-</div>
+                                    </a>
+                                    {{-- <form action="/transaksi/penjualan/kurang" method="POST">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $item->id }}">
                                         <button class="btn btn-danger text-center" style="width: 50px;">-</button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </td>
                         </tr>

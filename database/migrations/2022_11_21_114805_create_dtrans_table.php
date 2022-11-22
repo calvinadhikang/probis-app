@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('dtrans', function (Blueprint $table) {
             $table->id();
+            $table->integer('htrans_id');
+            $table->integer('barang_id');
+            $table->string('nama');
+            $table->integer('qty');
+            $table->integer('harga');
+            $table->integer('subtotal');
             $table->timestamps();
         });
     }
