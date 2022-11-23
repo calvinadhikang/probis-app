@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Dtrans;
 use App\Models\Kategori;
 use App\Models\Merk;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use League\CommonMark\Extension\Table\Table;
 use stdClass;
@@ -67,6 +68,16 @@ class LaporanController extends Controller
                 'merk' => $merk,
                 'kategori' => $kategori,
             ]);
+
+            // $pdf = Pdf::loadView('laporan.barang' , [
+            //     'dari' => $dari,
+            //     'sampai' => $sampai,
+            //     'data' => $data,
+            //     'dataTop' => $dataTop,
+            //     'merk' => $merk,
+            //     'kategori' => $kategori,
+            // ]);
+            // return $pdf->download('laporanBarang.pdf');
         }
     }
 }
