@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class MasterSupplierController extends Controller
 {
+    public function add(Request $request)
+    {
+
+
+    }
+
     public function ViewSupplier()
     {
        return view('master.supplier.view');
@@ -26,8 +32,8 @@ class MasterSupplierController extends Controller
     {
        return view('master.editbarangsupply');
     }
-   public function DetailSupplier()
-   {
-      return view('master.supplier.detail');
-   }
+    public function DetailSupplier()
+    {
+        return view('master.supplier.detail');
+    }
 }

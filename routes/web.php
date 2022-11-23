@@ -67,6 +67,8 @@ Route::prefix('/master')->group(function() {
 
         Route::get('/detail', [MasterSupplierController::class, "DetailSupplier"]);
 
+
+        Route::post('/add', [MasterSupplierController::class, 'add']);
     });
     //     Route::get('/', [MasterKaryawanController::class, "View"]);
     //     Route::get('/add', [MasterKaryawanController::class, "Add"]);
@@ -109,6 +111,7 @@ Route::prefix('/transaksi')->group(function() {
 
 Route::prefix('/laporan')->group(function(){
     Route::get('/', [LaporanController::class, 'view']);
+    Route::post('/create', [LaporanController::class, 'create']);
 });
 
 Route::get('/test', function(){

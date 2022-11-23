@@ -9,7 +9,7 @@
     <br>
     <br>
     <div class="bg-white p-4 rounded">
-        <form action="" method="POST">
+        <form action="/add" method="POST">
             <div class="row">
                 <div class="column" style="background-color:float: left;
                 width: 50%;">
@@ -17,13 +17,13 @@
                   <input type="text" class="form-control" name="nama" placeholder="Nama Supplier">
                   <br>
                   <label>No Telepon</label>
-                <input type="text" class="form-control" name="merk" placeholder="No Telepon">
+                <input type="number" class="form-control" name="merk" placeholder="No Telepon">
                 <br>
                 </div>
                 <div class="column" style="background-color:float: left;
                 width: 50%;">
                   <label>Email</label>
-                  <input type="text" class="form-control" name="harga" placeholder="Email Supplier">
+                  <input type="email" class="form-control" name="harga" placeholder="Email Supplier">
                   <br>
 
                   <label>Alamat</label>
