@@ -117,3 +117,8 @@ Route::prefix('/laporan')->group(function(){
 Route::get('/test', function(){
     return view('partials.components.sidebar');
 });
+
+// AJAX ROUTE
+Route::get('/getBarang', [MasterBarangController::class, 'getBarangJSON']);
+Route::get('/getKategori', [MasterKategoriController::class, 'getKategoriJSON']);
+Route::get('/penjualanPerBulan', [TransaksiPenjualanController::class, 'getPenjualanPerBulan']);

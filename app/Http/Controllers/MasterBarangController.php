@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kategori;
 use App\Models\Merk;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,6 @@ class MasterBarangController extends Controller
         return view('master.barang.view',["dataBarang" => $updateIsi]);
     }
 
-
     public function GoAdd(){
         $dataMerk = Merk::all();
         $dataKategori = Kategori::all();
@@ -29,6 +29,7 @@ class MasterBarangController extends Controller
             "kategori" => $dataKategori
         ]);
     }
+
     public function Add(Request $request)
     {
         $in = $request->validate([
@@ -53,7 +54,6 @@ class MasterBarangController extends Controller
             return redirect()->back()->with("error", "Gagal add item!");
         }
     }
-
 
     public function formDetail(Request $request)
     {
@@ -95,5 +95,11 @@ class MasterBarangController extends Controller
         else{
             return redirect()->back()->with("error", "Gagal edit barang!");
         }
+    }
+
+    public function getBarangJSON()
+    {
+        $data = Barang::all();
+        return response()->json($data, 200);
     }
 }

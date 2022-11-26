@@ -18,6 +18,13 @@ class MasterKategoriController extends Controller
         ]);
     }
 
+    public function getKategoriJSON()
+    {
+        $data = Kategori::all();
+        return response()->json($data, 200);
+        # code...
+    }
+
     // POST FUNCTIONS
     public function Add(Request $request)
     {

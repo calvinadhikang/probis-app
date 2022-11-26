@@ -185,4 +185,16 @@ class TransaksiPenjualanController extends Controller
             return back()->with('msg', 'Gagal Checkout')->with('type', 'warning');
         }
     }
+
+    public function getPenjualanPerBulan()
+    {
+        //ini untuk ngambil data per tahun
+        $date = date('Y');
+        $data = DB::select("SELECT MONTH(created_at) AS month, SUM(total) AS total FROM Htrans WHERE YEAR(created_at) = $date GROUP BY YEAR(created_at), MONTH(created_at) ASC");
+
+        // ini untuk ngambil data semua tahun
+        // $data = DB::select("SELECT YEAR(created_at) AS year, MONTH(created_at) AS month, SUM(total) AS total FROM Htrans GROUP BY YEAR(created_at), MONTH(created_at)");
+
+        return response()->json($data, 200);
+    }
 }
