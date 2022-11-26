@@ -60,15 +60,15 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/supplier')->group(function() {
         Route::get('/', [MasterSupplierController::class, "ViewSupplier"]);
         Route::get('/add', [MasterSupplierController::class, "AddSupplier"]);
-
-        Route::get('/edit', [MasterSupplierController::class, "EditSupplier"]);
-        Route::get('/addbarang', [MasterSupplierController::class, "AddBarangSupplier"]);
+        Route::get('/edit/{id}', [MasterSupplierController::class, "EditSupplier"]);
         Route::get('/editbarang', [MasterSupplierController::class, "EditBarangSupplier"]);
-
-        Route::get('/detail', [MasterSupplierController::class, "DetailSupplier"]);
+        Route::get('/detail/{id}', [MasterSupplierController::class, "DetailSupplier"]);
 
 
         Route::post('/add', [MasterSupplierController::class, 'add']);
+        Route::post('/edit/{id}', [MasterSupplierController::class, "edit"]);
+        Route::post('/addBarang/{id}', [MasterSupplierController::class, "AddBarangSupplier"]);
+        Route::post('/removeBarang/{id}', [MasterSupplierController::class, "RemoveBarangSupplier"]);
     });
     //     Route::get('/', [MasterKaryawanController::class, "View"]);
     //     Route::get('/add', [MasterKaryawanController::class, "Add"]);

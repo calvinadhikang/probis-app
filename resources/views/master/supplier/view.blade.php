@@ -11,72 +11,56 @@
     <br>
     <br>
 
-    {{-- Isi  --}}
-    <div class="container text-center">
-        <div class="row">
-            <div class="col align-self-start"></div>
-            <div class="col align-self-center"></div>
-            {{-- Supaya bisa di kanan --}}
-            <div class="col align-self-end">
-                <div class="input-group">
-                    <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
-                    <input type="text" class="form-control" placeholder="By Nama" aria-label="Username" aria-describedby="addon-wrapping">
+    {{-- Isi --}}
+    <div class="bg-white p-4 rounded border shadow">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col align-self-start"></div>
+                <div class="col align-self-center"></div>
+                {{-- Supaya bisa di kanan --}}
+                <div class="col align-self-end">
+                    <form action="/master/supplier" method="GET">
+                        <div class="input-group">
+                            <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
+                            <input type="text" class="form-control" placeholder="By Nama" aria-label="Username" aria-describedby="addon-wrapping" name="search" value="{{ $search }}">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+
+        <br>
+
+        <table class="table table-striped w-100">
+            <thead class="table-success text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>NAMA</th>
+                    <th>EMAIL</th>
+                    <th>TELEPON</th>
+                    <th>ALAMAT</th>
+                    <th>AKSI</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($data as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->telepon }}</td>
+                        <td>{{ $item->alamat }}</td>
+                        <td class="text-center">
+                            <a href="/master/supplier/detail/{{ $item->id }}"><button class="btn btn-primary">Detail</button></a>
+                            <a href="/master/supplier/edit/{{ $item->id }}"><button class="btn btn-warning">Edit</button></a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7">Tidak ada data</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
-
-    <br>
-
-    <table class="table table-striped">
-        <thead class="table-success">
-            <tr>
-                <th>ID SUPPLIER</th>
-                <th>NAMA SUPPLIER</th>
-                <th>EMAIL</th>
-                <th>NO TELEPON</th>
-                <th>ALAMAT</th>
-                <th>STATUS</th>
-                <th>AKSI</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>ibewe thermoking</td>
-                <td>ibewe@gmail.com</td>
-                <td>081111111111</td>
-                <td>jalan gatel no 12</td>
-                <td><a href="" class="btn btn-success">Aktif</a></td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>ganteng thermoking</td>
-                <td>ganteng@gmail.com</td>
-                <td>081111111111</td>
-                <td>jalan gatel no 12</td>
-                <td><a href="" class="btn btn-success">Aktif</a></td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>banget thermoking</td>
-                <td>banget@gmail.com</td>
-                <td>081111111111</td>
-                <td>jalan gatel no 12</td>
-                <td><a href="" class="btn btn-danger">Non-Aktif</a></td>
-                <td>
-                    <a href="" class="btn btn-primary">Detail</a>
-                    <a href="" class="btn btn-warning">Edit</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 @endsection

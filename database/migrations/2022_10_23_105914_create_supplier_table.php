@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('email');
             $table->integer('telepon');
-            $table->integer('status');
             $table->timestamps();
         });
     }

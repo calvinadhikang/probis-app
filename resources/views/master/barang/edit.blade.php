@@ -12,20 +12,20 @@
         <form method="POST">
             @csrf
             <div class="d-flex flex-wrap mb-2">
-                <div class="w-50 p-2">
+                <div class="w-100 p-2">
                     Nama Barang
                     <input type="text" class="form-control" name="nama" value="{{$barang->nama}}">
                     @error("nama")
                         <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
-                <div class="w-50 p-2">
+                {{-- <div class="w-50 p-2">
                     ID Barang
                     <input type="text" class="form-control" name="id" value="{{$barang->id}}">
                     @error("id")
                         <small style="color:red">{{$message}}</small>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="w-50 p-2">
                     Stok Barang
                     <input type="text" class="form-control" name="stok" value="{{$barang->stok}}">

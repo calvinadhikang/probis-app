@@ -14,10 +14,15 @@ use function GuzzleHttp\Promise\all;
 class MasterBarangController extends Controller
 {
     //
-    public function View()
+    public function View(Request $request)
     {
-        $updateIsi = DB::table('barang')->get();
-        return view('master.barang.view',["dataBarang" => $updateIsi]);
+        $search = $request->search;
+        if ($search) {
+            $updateIsi = DB::select("SELECT * FROM BARANG WHERE NAMA LIKE '%$search%'");
+        }else{
+            $updateIsi = DB::table('barang')->get();
+        }
+        return view('master.barang.view',["dataBarang" => $updateIsi, 'search'=>$search]);
     }
 
     public function GoAdd(){
@@ -58,9 +63,12 @@ class MasterBarangController extends Controller
     public function formDetail(Request $request)
     {
         $barang = Barang::find($request->id);
-
+        $merk = Merk::find($barang->merk);
+        $kategori = Merk::find($barang->kategori);
         return view('master.barang.detail', [
-            "barang" => $barang
+            "barang" => $barang,
+            "merk" => $merk,
+            "kategori" => $kategori,
         ]);
     }
 

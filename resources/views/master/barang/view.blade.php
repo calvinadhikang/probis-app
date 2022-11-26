@@ -11,17 +11,20 @@
     <br>
     <br>
 
-    {{-- Isi  --}}
+    <div class="bg-white p-4 rounded shadow border">
+        {{-- Isi  --}}
     <div class="container text-center">
         <div class="row">
             <div class="col align-self-start"></div>
             <div class="col align-self-center"></div>
             {{-- Supaya bisa di kanan --}}
             <div class="col align-self-end">
-                <div class="input-group">
-                    <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
-                    <input type="text" class="form-control" placeholder="By Nama" aria-label="Username" aria-describedby="addon-wrapping">
-                </div>
+                <form action="/master/barang" method="GET">
+                    <div class="input-group">
+                        <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
+                        <input type="text" class="form-control" placeholder="By Nama" aria-label="Username" aria-describedby="addon-wrapping" name="search" value="{{ $search }}">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -45,16 +48,15 @@
                 @if(count($dataBarang) > 0)
                 @foreach ($dataBarang as $d)
                     @php
-                        // use App\Models\Kategori;
-                        // $kategori = Kategori::find($d->kategori);
                         $kategori = DB::table('kategori')->where('id', '=', $d->kategori)->first();
+                        $merk = DB::table('merks')->where('id', '=', $d->merk)->first();
                     @endphp
                     <tr>
                         <td>{{$d->id}}</td>
                         <td>{{$d->nama}}</td>
                         <td>{{$d->harga}}</td>
                         <td>{{$d->stok}}</td>
-                        <td>{{$d->merk}}</td>
+                        <td>{{$merk->nama}}</td>
                         <td>{{$kategori->nama}}</td>
                         <td><a href="{{ route('detailBarang', $d->id) }}" class="btn btn-primary">Detail</a></td>
                         <td><a href="{{ route('editBarang', $d->id)}}" class="btn btn-warning">Edit</a></td>
@@ -68,4 +70,5 @@
             </tr>
         </tbody>
     </table>
+    </div>
 @endsection

@@ -66,39 +66,6 @@
                     <td colspan="5">Tidak ada Data !</td>
                 </tr>
             @endforelse
-            {{-- <tr>
-                <td>id</td>
-                <td>nama</td>
-                <td>34</td>
-                <td>
-                    <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
-                </td>
-                <td>
-                    <a href="" class="btn btn-warning">Toggle Status</a>
-                </td>
-            </tr>
-            <tr>
-                <td>id</td>
-                <td>nama</td>
-                <td>34</td>
-                <td>
-                    <div class="bg-primary text-center rounded text-white p-1">Aktif</div>
-                </td>
-                <td>
-                    <a href="" class="btn btn-warning">Toggle Status</a>
-                </td>
-            </tr>
-            <tr>
-                <td>id</td>
-                <td>nama</td>
-                <td>34</td>
-                <td>
-                    <div class="bg-danger text-center rounded text-white p-1">Non-Aktif</div>
-                </td>
-                <td>
-                    <a href="" class="btn btn-warning">Toggle Status</a>
-                </td>
-            </tr> --}}
         </tbody>
     </table>
 </div>
