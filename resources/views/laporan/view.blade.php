@@ -20,23 +20,39 @@
             </select>
 
             <br>
-            <br>
 
-            <h3>Masukan Tanggal Laporan</h3>
-            <hr>
-            <div class="d-flex justify-content-between" >
-                <div style="width: 48%;">
-                    <label for="">Dari :</label>
-                    <input type="date" name="dari" id="" class="form-control" required>
+            <div id="tgl">
+                <h3>Masukan Tanggal Laporan</h3>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <div style="width: 48%;">
+                        <label for="">Dari :</label>
+                        <input type="date" name="dari" id="inDari" class="form-control" >
+                    </div>
+                    <div style="width: 48%;">
+                        <label for="">Sampai :</label>
+                        <input type="date" name="sampai" id="inSampai" class="form-control" >
+                    </div>
                 </div>
-                <div style="width: 48%;">
-                    <label for="">Sampai :</label>
-                    <input type="date" name="sampai" id="" class="form-control" required>
-                </div>
+                <br>
             </div>
-            <br>
             <button class="btn btn-primary">Buat Laporan</button>
         </form>
     </div>
 </div>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        let tipe = ''
+        $('select').on('change', function() {
+            tipe = this.value
+            console.log(tipe)
+            if (tipe == 'barang') {
+                $('#tgl').hide()
+            } else {
+                $('#tgl').show()
+            }
+        });
+    })
+</script>
 @endsection

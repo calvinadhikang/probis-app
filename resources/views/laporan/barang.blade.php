@@ -22,13 +22,15 @@
 </head>
 
 <body class="bg-white">
-    <div class="container">
+    <div class="p-4">
         <div class="text-center">
             <h1>Laporan Barang</h1>
             <h4>Periode : {{$dari}} - {{$sampai}}</h4>
             <hr>
             <br>
             <h3>Top 5 Barang Best Seller</h3>
+            <canvas id="top5" class="w-100"></canvas>
+            <br>
             <table class="table table-striped">
                 <tr>
                     <th>ID</th>
@@ -48,7 +50,8 @@
                 @endforelse
             </table>
             <br>
-            <h3>List Barang</h3>
+            <br>
+            <h3 class="text-start">List Barang</h3>
             <table class="table table-striped">
                 <tr>
                     <th>ID</th>
@@ -74,5 +77,75 @@
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+</script>
+<script>
+    $(document).ready(function(){
+        getTop5Barang();
+    })
 
+    function getTop5Barang(){
+        $.ajax({
+            type: 'GET',
+            url: '/barang/top5',
+            success: function(data){
+                generateChart(data);
+            }
+        })
+    }
+
+    function generateChart(res){
+        arrLabel = []
+        arrData = []
+        console.log(res)
+        res.forEach(element => {
+            arrLabel.push(element.nama)
+            arrData.push(element.total)
+        });
+
+        const labels = arrLabel;
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Total Penjualan',
+                data: arrData,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+
+        new Chart($('#top5'), config);
+    }
+</script>
 </html>

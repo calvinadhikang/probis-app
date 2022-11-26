@@ -2,14 +2,14 @@
 
 @section('content')
 @if (Session::get('isAdmin'))
-<h1>Overview</h1>
+<h1>Dashboard</h1>
 @else
 
 @endif
 <div class="bg-white w-100 p-4 rounded-2 shadow">
     @if (Session::get('isAdmin'))
-        <div class="d-flex flex-wrap">
-            <div class="bg-white p-2 border rounded m-3" style="width: 45%;">
+        <div class="d-flex flex-wrap justify-content-between">
+            <div class="bg-white p-2 border rounded" style="width: 45%;">
                 <div class="text-center">
                     <h3>Jumlah Karyawan</h3>
                     <img src="{{ asset('/webImages/employee.svg') }}" alt="Image" class="img-fluid" style="height: 200px;">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white p-2 rounded border m-3" style="width: 45%;">
+            <div class="bg-white p-2 rounded border" style="width: 45%;">
                 <div class="text-center">
                     <h3>Data Barang</h3>
                     <img src="{{ asset('/webImages/goods.svg') }}" alt="Image" class="img-fluid" style="height: 200px;">
@@ -43,10 +43,11 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white p-4 rounded border m-3" style="width: 100%;">
-                <h1>Statistik Pendapatan</h1>
-                <canvas class="w-100" id="statistikPenjualan"></canvas>
-            </div>
+        </div>
+        <br>
+        <div class="bg-white p-4 rounded border w-100">
+            <h1>Statistik Pendapatan</h1>
+            <canvas class="w-100" id="statistikPenjualan"></canvas>
         </div>
     @else
         <div class="">

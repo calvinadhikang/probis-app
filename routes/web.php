@@ -122,3 +122,4 @@ Route::get('/test', function(){
 Route::get('/getBarang', [MasterBarangController::class, 'getBarangJSON']);
 Route::get('/getKategori', [MasterKategoriController::class, 'getKategoriJSON']);
 Route::get('/penjualanPerBulan', [TransaksiPenjualanController::class, 'getPenjualanPerBulan']);
+Route::get('/barang/top5', [TransaksiPenjualanController::class, 'top5Barang']);

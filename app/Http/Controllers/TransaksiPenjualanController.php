@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Dtrans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -11,6 +12,37 @@ use stdClass;
 class TransaksiPenjualanController extends Controller
 {
     //GET
+    public function top5Barang()
+    {
+        $data = Barang::all();
+        $DtransData = Dtrans::all();
+        # code...
+        $dataTop = [];
+        foreach ($data as $key => $value) {
+            $obj = new stdClass();
+            $obj->id = $value->id;
+            $obj->nama = $value->nama;
+            $obj->harga = $value->harga;
+            $obj->jumlah = 0;
+
+            $dataTop[] = $obj;
+        }
+
+        foreach ($dataTop as $key => $valueData) {
+            foreach ($DtransData as $key => $value) {
+                if ($value->barang_id == $valueData->id) {
+                    $valueData->jumlah = $valueData->jumlah + $value->qty;
+                }
+            }
+            $valueData->total = $valueData->jumlah * $valueData->harga;
+        }
+
+        usort($dataTop, fn($a, $b) => strcmp($b->total, $a->total));
+        $dataTop = array_slice($dataTop, 0, 5, true);
+
+        return response()->json($dataTop, 200);
+    }
+
     public function detail($id)
     {
         $data = DB::select("SELECT * FROM HTRANS WHERE id = $id LIMIT 1")[0];
