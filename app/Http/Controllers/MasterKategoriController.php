@@ -4,17 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Psy\CodeCleaner\NamespaceAwarePass;
 
 class MasterKategoriController extends Controller
 {
     // GET FUNCTIONS
-    public function View()
+    public function View(Request $request)
     {
-        $data = Kategori::all();
+        $search = $request->search;
+        if ($search) {
+            $data = DB::select("SELECT * FROM KATEGORI WHERE NAMA LIKE '%$search%'");
+        }else{
+            $data = Kategori::all();
+        }
 
         return view('master.kategori.view', [
-            "data" => $data
+            "data" => $data,
+            'search' => $search
         ]);
     }
 

@@ -77,6 +77,7 @@ class MasterSupplierController extends Controller
     {
         $supp = Supplier::find($id);
         $barang = Barang::find($request->barang);
+        $harga = $request->harga;
 
         //check sudah ada
         $list = AsalBarang::where('id_supplier','=',$supp->id)->get();
@@ -90,6 +91,7 @@ class MasterSupplierController extends Controller
         $obj = new AsalBarang();
         $obj->id_barang = $barang->id;
         $obj->id_supplier = $supp->id;
+        $obj->harga = $harga;
         $obj->save();
 
         return back()->with('msg', "berhasil tambah barang $barang->nama")->with('type', 'success');

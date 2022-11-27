@@ -19,10 +19,12 @@
                 <div class="col align-self-center"></div>
                 {{-- Supaya bisa di kanan --}}
                 <div class="col align-self-end">
-                    <div class="input-group">
-                        <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
-                        <input type="text" class="form-control" placeholder="By Nama" aria-label="Username" aria-describedby="addon-wrapping">
-                    </div>
+                    <form action="/master/karyawan">
+                        <div class="input-group">
+                            <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
+                            <input type="text" class="form-control" placeholder="By Nama" aria-label="Username" name="search" value="{{ $search }}" aria-describedby="addon-wrapping">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

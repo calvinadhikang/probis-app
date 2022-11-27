@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Karyawan;
 use App\Rules\CustomRule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MasterKaryawanController extends Controller
 {
@@ -26,11 +27,17 @@ class MasterKaryawanController extends Controller
 
         ]);
     }
-    public function ViewKaryawan()
+    public function ViewKaryawan(Request $request)
     {
-        $karyawans = Karyawan::all();
+        if ($request->search) {
+            $karyawans = DB::select("SELECT * FROM KARYAWAN WHERE NAMA LIKE '%$request->search%'");
+        }else{
+            $karyawans = Karyawan::all();
+        }
+
         return view('master.karyawan.view', [
-            "karyawans" => $karyawans
+            "karyawans" => $karyawans,
+            'search' => $request->search
         ]);
     }
     public function ToAddKaryawan()
@@ -39,32 +46,6 @@ class MasterKaryawanController extends Controller
     }
     public function AddKaryawan(Request $request)
     {
-        // dd('tambah karyawan');
-
-        // $listkaryawan = Karyawan::all();
-        // $listuserusername=[];
-        // foreach ($listkaryawan as $value) {
-        //     $listuserusername[]=$value->username;
-        // }
-
-        // $rules = [
-        //     'usernama' => ['required', new CustomRule($listuserusername)],
-        //     'nama' => "required",
-        //     'password' => 'required',
-        //     'conpassword' => ['required','same:password'],
-        //     'email' => ['required','email:rfc,dns'],
-        //     'telepon' => ['required', 'integer','min_digits:10'],
-        //     'jabatan' => 'required',
-        //     'jenis_kelamin' => 'required'
-        // ];
-        // $messages = [
-        //     "required" => "attribute kosong",
-        //     "integer" => "harus berupa angka",
-        //     "min_digits" => "panjang nomor harus 10 angka",
-        //     "same" => "password dan confirm password harus sama",
-        // ];
-        // $request->validate($rules, $messages);
-
         $username =$request->username;
         $nama = $request->nama;
         $password = $request->password;
@@ -95,58 +76,28 @@ class MasterKaryawanController extends Controller
 
     public function EditKaryawan(Request $request)
     {
-
-        $listkaryawan = Karyawan::all();
-        $listuserusername=[];
-        foreach ($listkaryawan as $value) {
-            if($value->id){
-
-            }
-            else{
-                $listuserusername[]=$value->username;
-
-            }
-
-        }
-        $data = Karyawan::find($request->id);
-
-        $password=$data->password;
-
-// validate di edit ga bisa
-        // $rules = [
-        //     'usernama' => ['required', new CustomRule($listuserusername)],
-        //     'nama' => "required",
-        //     'password' => 'required',
-        //     'oldpassword'=> 'required|in:'.$password,
-        //     'conpassword' => ['required','same:password'],
-        //     'email' => ['required','email:rfc,dns'],
-        // ];
-        // $messages = [
-        //     "required" => "attribute kosong",
-        //     "in" => "oldpassword salah",
-        //     "integer" => "harus berupa angka",
-        //     "min_digits" => "panjang nomor harus 10 angka",
-        //     "same" => "password dan confirm password harus sama",
-        // ];
-        // $request->validate($rules, $messages);
-
-
-
-
         $username = $request->username;
-        $nama = $request->nama;
-        $password = $request->password;
-        $email = $request->email;
-
-
         $telepon = $request->telepon;
-        $jabatan = $request->jabatan;
+        $email = $request->email;
         $jenis_kelamin = $request->jenis_kelamin;
+        $nama = $request->nama;
 
+        $jabatan = $request->jabatan;
         $status = $request->status;
-
+        $password = $request->password;
+        $oldpassword = $request->oldpassword;
+        $confirm_password = $request->confirm_password;
 
         $data = Karyawan::find($request->id);
+        //cek old pass harus sama
+        if ($data->password != $oldpassword) {
+            return back()->with('msg', 'Password lama salah')->with('type', 'danger');
+        }
+
+        if ($password != $confirm_password) {
+            return back()->with('msg', 'Password dan Confirmation salah')->with('type', 'danger');
+        }
+
         $data->username = $username;
         $data->nama = $nama;
         $data->password = $password;
@@ -155,9 +106,8 @@ class MasterKaryawanController extends Controller
         $data->jabatan = $jabatan;
         $data->jenis_kelamin = $jenis_kelamin;
         $data->status = $status;
-
-
         $data->save();
+
         return redirect()->back()->with("msg", "Berhasil edit karyawan : $nama")->with('type', 'primary');
     }
 }

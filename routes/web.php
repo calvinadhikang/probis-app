@@ -8,6 +8,7 @@ use App\Http\Controllers\MasterKaryawanController;
 use App\Http\Controllers\MasterSupplierController;
 use App\Http\Controllers\MasterKategoriController;
 use App\Http\Controllers\MasterMerkController;
+use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\TransaksiPenjualanController;
 use App\Http\Controllers\TransaksiReturController;
@@ -102,6 +103,13 @@ Route::prefix('/transaksi')->group(function() {
         Route::get('/detail/{id}', [TransaksiPenjualanController::class, "detail"]);
     });
 
+    // Pembelian
+    Route::prefix('/pembelian')->group(function () {
+        Route::get('/', [PembelianController::class, 'view']);
+        Route::get('/detail/{id}', [PembelianController::class, 'detail']);
+        Route::get('/add', [PembelianController::class, 'addview']);
+    });
+
     // Retur
     Route::prefix('/retur')->group(function() {
         Route::get('/', [TransaksiReturController::class, "view"]);
@@ -123,3 +131,7 @@ Route::get('/getBarang', [MasterBarangController::class, 'getBarangJSON']);
 Route::get('/getKategori', [MasterKategoriController::class, 'getKategoriJSON']);
 Route::get('/penjualanPerBulan', [TransaksiPenjualanController::class, 'getPenjualanPerBulan']);
 Route::get('/barang/top5', [TransaksiPenjualanController::class, 'top5Barang']);
+
+Route::get('/test', function(){
+    return view('welcome');
+});

@@ -4,16 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Merk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MasterMerkController extends Controller
 {
     // GET FUNCTIONS
-    public function View()
+    public function View(Request $request)
     {
-        $data = Merk::all();
+        $search = $request->search;
+        if ($search) {
+            $data = DB::select("SELECT * FROM MERKS WHERE NAMA LIKE '%$search%'");
+        }else{
+            $data = Merk::all();
+        }
 
         return view('master.merk.view', [
-            'data' => $data
+            'data' => $data,
+            'search' => $search
         ]);
     }
 

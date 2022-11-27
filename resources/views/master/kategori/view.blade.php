@@ -12,18 +12,20 @@
 
 @section('content')
 {{-- Isi  --}}
-<div class="bg-white p-2 rounded">
+<div class="bg-white p-2 rounded border shadow">
     <div class="container text-center">
         <div class="row">
             <div class="col align-self-start"></div>
             <div class="col align-self-center"></div>
             {{-- Supaya bisa di kanan --}}
             <div class="col align-self-end pt-4">
-                <div class="input-group">
-                    <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
-                    <input type="text" class="form-control" placeholder="By Nama" aria-label="Username"
-                        aria-describedby="addon-wrapping">
-                </div>
+                <form action="/master/kategori" method="GET">
+                    <div class="input-group">
+                        <span class="input-group-text text-bg-success" id="addon-wrapping">Search</span>
+                        <input type="text" class="form-control" placeholder="By Nama" aria-label="Username"
+                        value="{{ $search }}" name="search"    aria-describedby="addon-wrapping">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -34,8 +36,8 @@
         <table class="table table-striped text-center">
             <thead class="table-success">
                 <tr>
-                    <th>ID JENIS</th>
-                    <th>NAMA JENIS</th>
+                    <th>ID</th>
+                    <th>NAMA</th>
                     <th>JUMLAH PRODUK DENGAN KATEGORI</th>
                     <th>STATUS</th>
                     <th>AKSI</th>
@@ -43,11 +45,13 @@
             </thead>
             <tbody>
                 @forelse ($data as $item)
-
+                    @php
+                        $count = DB::select("SELECT COUNT(*) AS qty FROM BARANG WHERE KATEGORI = $item->id")[0];
+                    @endphp
                     <tr>
-                        <td>{{ $item->jenis }}</td>
+                        <td>{{ $item->id }}</td>
                         <td>{{ $item->nama }}</td>
-                        <td>0</td>
+                        <td>{{ $count->qty }}</td>
                         <td>
                             @if ($item->status == 1)
                                 <div class="btn btn-primary">

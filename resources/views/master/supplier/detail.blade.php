@@ -57,7 +57,8 @@
             <tr>
                 <th>ID</th>
                 <th>Nama</th>
-                <th>Harga Jual (Rp)</th>
+                <th>Harga Jual</th>
+                <th>Harga Beli</th>
                 <th>Merk</th>
                 <th>Jenis</th>
                 <th>Aksi</th>
@@ -74,6 +75,7 @@
                     <td>{{ $b->id }}</td>
                     <td>{{ $b->nama }}</td>
                     <td>Rp {{ number_format($b->harga) }}</td>
+                    <td>Rp {{ number_format($item->harga) }}</td>
                     <td>{{ $merk->nama }}</td>
                     <td>{{ $kategori->nama }}</td>
                     <td>
@@ -104,6 +106,7 @@
             <form action="{{ url("/master/supplier/addBarang/".$data->id) }}" method="POST">
                 @csrf
                 <div class="modal-body">
+                    <label for="">Nama Barang</label>
                     <select name="barang" class="form-control">
                         @forelse ($barang as $item)
                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -111,6 +114,9 @@
 
                         @endforelse
                     </select>
+                    <br>
+                    <label for="">Masukan harga beli barang</label>
+                    <input type="number" name="harga" placeholder="Harga beli barang.." class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
