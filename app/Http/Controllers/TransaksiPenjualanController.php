@@ -84,7 +84,7 @@ class TransaksiPenjualanController extends Controller
     public function AddAction(Request $request)
     {
         if ($request->qty <= 0) {
-            return back()->with('msg', 'QTY minimal 1');
+            return back()->with('msg', 'QTY minimal 1')->with('type', 'danger');
         }
 
         $cart = Session::get('cart');

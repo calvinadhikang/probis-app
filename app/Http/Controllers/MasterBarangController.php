@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AsalBarang;
 use App\Models\Barang;
 use App\Models\Kategori;
 use App\Models\Merk;
+use App\Models\Supplier;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,8 +28,8 @@ class MasterBarangController extends Controller
     }
 
     public function GoAdd(){
-        $dataMerk = Merk::all();
-        $dataKategori = Kategori::all();
+        $dataMerk = Merk::where('status','=',1)->get();
+        $dataKategori = Kategori::where('status','=',1)->get();
 
         return view('master.barang.add', [
             "merk" => $dataMerk,
@@ -65,10 +67,27 @@ class MasterBarangController extends Controller
         $barang = Barang::find($request->id);
         $merk = Merk::find($barang->merk);
         $kategori = Merk::find($barang->kategori);
+
+        $asal = AsalBarang::where('id_barang','=',$barang->id)->get();
+
+        $supplier = [];
+        foreach ($asal as $key => $value) {
+            // dd($value);
+            $obj = Supplier::find($value->id_supplier);
+
+            $temp = $obj;
+            $temp->harga = $value->harga;
+
+            $supplier[] = $obj;
+        }
+
+        // dd($supplier);
+
         return view('master.barang.detail', [
             "barang" => $barang,
             "merk" => $merk,
             "kategori" => $kategori,
+            "supplier" => $supplier,
         ]);
     }
 

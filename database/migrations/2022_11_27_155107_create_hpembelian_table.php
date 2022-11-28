@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('hpembelian', function (Blueprint $table) {
             $table->id();
+            $table->integer('supplier_id');
+            $table->bigInteger('total');
             $table->timestamps();
         });
     }

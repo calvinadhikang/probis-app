@@ -1,7 +1,7 @@
 @extends('partials/base');
 
 @section('content')
-<div class="col-md-8">
+<div class="col-md-8 bg-white border p-4 shadow rounded">
     <div class="mb-4 text-center">
         <h3>Sign In</h3>
     </div>
@@ -14,9 +14,8 @@
         <div class="form-group last mb-4">
             <input type="password" class="form-control" name="password" required placeholder="Password">
         </div>
-        {{-- <a href="{{url('/')}}"><button class="btn btn-success w-100">Login</button></a> --}}
         <button class="btn btn-success w-100" type="submit">Sign In</button>
     </form>
-    <a href="{{url('/register')}}"><button class="btn btn-outline-success w-100">Register</button></a>
+    {{-- <a href="{{url('/register')}}"><button class="btn btn-outline-success w-100">Register</button></a> --}}
 </div>
 @endsection

@@ -108,6 +108,8 @@ Route::prefix('/transaksi')->group(function() {
         Route::get('/', [PembelianController::class, 'view']);
         Route::get('/detail/{id}', [PembelianController::class, 'detail']);
         Route::get('/add', [PembelianController::class, 'addview']);
+
+        Route::post('/load', [PembelianController::class, 'load']);
     });
 
     // Retur

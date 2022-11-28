@@ -45,10 +45,13 @@
         </thead>
         <tbody>
             @forelse ($data as $item)
+                    @php
+                        $count = DB::select("SELECT COUNT(*) AS qty FROM BARANG WHERE MERK = $item->id")[0];
+                    @endphp
                 <tr>
                     <td>{{$item->id}}</td>
                     <td>{{$item->nama}}</td>
-                    <td>{{0}}</td>
+                    <td>{{$count->qty}}</td>
                     <td>
                         @if ($item->status == 1)
                             <div class="bg-primary text-center rounded text-white p-1">Aktif</div>

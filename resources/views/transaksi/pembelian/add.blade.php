@@ -9,19 +9,50 @@
     </nav>
     <br>
     <div class="bg-white rounded p-4 my-2 shadow">
-        <form action="" method="POST">
+        <form action="load" method="POST">
             @csrf
-            <div class="mb-2">
-                Nama Customer
-                <input type="text" class="form-control" name="nama">
-            </div>
-            <div class="mb-2">
-                Alamat Customer
-                <input type="text" class="form-control" name="alamat">
-            </div>
+            <div class="row">
+                <div class="col-10">
+                    <select name="supplier" class="form-control">
+                        @if (!Session::has('supplier'))
+                            <option value="" selected disabled>Pilih Supplier</option>
+                        @else
+                            <option value="" selected disabled>Kosongi Supplier Sekarang</option>
+                        @endif
 
+
+
+                        @forelse ($supplier as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @empty
+
+                        @endforelse
+                    </select>
+                </div>
+                <div class="col">
+                    @if (!Session::has('supplier'))
+                        <button class="btn btn-primary w-100">Load Data</button>
+                    @else
+                        <button class="btn btn-danger w-100">Load Data Baru</button>
+                    @endif
+                </div>
+            </div>
+            @if (Session::has('supplier'))
+                <span class="text-danger">Pilih ulang supplier dengan memilih supplier baru / pilih 'Kosongi supplier sekarang' untuk memilih ulang supplier <br> lalu tekan tombol <b>'Load Data baru'</b></span>
+            @endif
+        </form>
+        <hr>
+        @if (!Session::has('supplier'))
+            <h1 class="text-center">Pilih supplier dulu, lalu klik tombol <br><span class="text-primary">'Load Data'</span> diatas</h1>
+        @else
+            @php
+                $supp = Session::get('supplier');
+            @endphp
+            <h1>Memilih dari supplier : {{ $supp->nama }}</h1>
+            <br>
             <h3>Cart</h3>
             <h6>Total : Rp 0</h6>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -38,9 +69,11 @@
             </table>
             <br>
             <button class="btn btn-primary">Checkout</button>
-        </form>
+        @endif
     </div>
     <br>
+
+    @if (Session::has('supplier'))
     <div class="bg-white rounded p-4 shadow">
         <h3>Tambah Barang</h3>
         <form action="/transaksi/penjualan/add" method="POST">
@@ -49,11 +82,14 @@
                 <div class="" style="width: 70%;">
                     Pilih Barang...
                     <select class="form-control" name="barang" required>
-                        {{-- @forelse ($dataBarang as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama }} - Rp {{ $item->harga }}</option>
+                        @php
+                            $dataBarang = Session::get('dataBarangSupp')
+                        @endphp
+                        @forelse ($dataBarang as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }} - Rp {{ number_format($item->harga) }}</option>
                         @empty
-                            <option value="" selected disabled>Belum ada barang...</option>
-                        @endforelse --}}
+
+                        @endforelse
                     </select>
                 </div>
                 <div class="w-25">
@@ -64,6 +100,9 @@
             <button class="btn btn-primary">Tambah Ke Keranjang</button>
         </form>
     </div>
+    @endif
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="backModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
