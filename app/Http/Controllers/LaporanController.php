@@ -122,5 +122,36 @@ class LaporanController extends Controller
                 'data' => $data
             ]);
         }
+        else if ($jenis == 'retur') {
+            $tgl = $request->tgl;
+            if ($tgl == null) {
+                return back()->with('msg', 'Tanggal tidak boleh kosong')->with('type', 'danger');
+            }
+
+            $durasi = $request->durasi;
+            if ($durasi == 'hari') {
+                # code...
+                $data = DB::select("SELECT * FROM HRETUR WHERE CREATED_AT BETWEEN '$tgl 00:00:00' AND '$tgl 23:59:59'");
+                // dd($data);
+            }
+            else if ($durasi == 'bulan') {
+                # code...
+                $month = explode('-', $tgl)[1];
+                $tgl = date('F', strtotime($tgl));
+                $data = DB::select("SELECT * FROM HRETUR WHERE MONTH(CREATED_AT) = $month");
+            }
+            else if ($durasi == 'tahun') {
+                # code...
+                $year = explode('-', $tgl)[0];
+                $tgl = date('Y', strtotime($tgl));
+                $data = DB::select("SELECT * FROM HRETUR WHERE YEAR(CREATED_AT) = $year");
+            }
+
+            return view('laporan.retur', [
+                'tgl' => $tgl,
+                'durasi' => $durasi,
+                'data' => $data
+            ]);
+        }
     }
 }

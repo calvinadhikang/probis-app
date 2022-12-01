@@ -74,7 +74,7 @@
             if (tipe == 'barang') {
                 $('#tgl').hide()
                 $('#penjualan').hide()
-            } else if (tipe == 'penjualan'){
+            } else if (tipe == 'penjualan' || tipe == 'retur'){
                 $('#penjualan').show()
                 $('#tgl').hide()
             } else {
