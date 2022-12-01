@@ -3,12 +3,13 @@
 @section('content')
     <h1>List Retur</h1>
     <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
-        <a class="nav-link active bg-success" href="{{ url('/transaksi/retur') }}">View</a>
-        <a class="nav-link text-success" href="{{ url('/transaksi/retur/pilih') }}">Add</a>
+        <a class="nav-link text-success" href="{{ url('/transaksi/retur') }}">View</a>
+        <a class="nav-link bg-success active" href="{{ url('/transaksi/retur/add') }}">Add</a>
     </nav>
     <br>
     <div class="bg-white p-4 rounded border shadow">
-        <h3>Transaksi Retur</h3>
+        <h3>Pilih Transaksi Untuk Di Retur</h3>
+        <br>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -29,8 +30,8 @@
                     <td>{{ $item->total }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
-                        <form action="/transaksi/retur/detail/{{ $item->id }}" method="GET">
-                            <button class="btn btn-primary">Detail</button>
+                        <form action="/transaksi/retur/add" method="GET">
+                            <button class="btn btn-warning" value="{{ $item->id }}" name="id">Retur</button>
                         </form>
                     </td>
                 </tr>

@@ -122,6 +122,9 @@ Route::prefix('/transaksi')->group(function() {
     Route::prefix('/retur')->group(function() {
         Route::get('/', [TransaksiReturController::class, "view"]);
         Route::get('/add', [TransaksiReturController::class, "add"]);
+        Route::get('/detail/{id}', [TransaksiReturController::class, "detail"]);
+        Route::get('/pilih', [TransaksiReturController::class, "pilih"]);
+        Route::post('/create', [TransaksiReturController::class, "create"]);
     });
 });
 

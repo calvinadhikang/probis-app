@@ -1,9 +1,9 @@
 @extends('../partials/navbar')
 
 @section('content')
-    <h1>Detail Penjualan {{$data->nama}}</h1>
+    <h1>Detail Retur {{$data->nama}}</h1>
     <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
-        <a class="nav-link active bg-success" href="{{ url('/transaksi/penjualan') }}">Back</a>
+        <a class="nav-link active bg-success" href="{{ url('/transaksi/retur') }}">Back</a>
         {{-- <a class="nav-link text-success" href="{{ url('/transaksi/penjualan/add') }}">Add</a> --}}
     </nav>
     <br>
@@ -15,11 +15,7 @@
         <p>{{$data->alamat}}</p>
         <h5>Tanggal :</h5>
         <p>{{$data->created_at}}</p>
-        @if ($data->status == 0)
-            <div class="p-2 rounded-pill text-bg-success text-center" style="width: 15%">Penjualan</div>
-        @else
-            <div class="p-2 rounded-pill text-bg-warning text-center" style="width: 15%">Retur</div>
-        @endif
+        <div class="p-2 rounded-pill text-bg-warning text-center" style="width: 15%">Retur</div>
         <hr>
         <h5>Detail Nota</h5>
         <br>
