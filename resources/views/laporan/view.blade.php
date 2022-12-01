@@ -36,6 +36,26 @@
                 </div>
                 <br>
             </div>
+
+            <div id="penjualan">
+                <h3>Masukan Tipe Penjualan</h3>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <label for="">Masukan Durasi Penjualan</label>
+                        <select name="durasi" class="form-control">
+                            <option value="hari">Hari</option>
+                            <option value="bulan">Bulan</option>
+                            <option value="tahun">Tahun</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="">Masukan Tanggal</label>
+                        <input type="date" name="tgl" class="form-control">
+                    </div>
+                </div>
+                <br>
+            </div>
             <button class="btn btn-primary">Buat Laporan</button>
         </form>
     </div>
@@ -44,13 +64,22 @@
 <script>
     $(document).ready(function(){
         let tipe = ''
-        $('select').on('change', function() {
+
+        $('#tgl').hide()
+        $('#penjualan').hide()
+
+        $('#jenis-input').on('change', function() {
             tipe = this.value
-            console.log(tipe)
+
             if (tipe == 'barang') {
                 $('#tgl').hide()
+                $('#penjualan').hide()
+            } else if (tipe == 'penjualan'){
+                $('#penjualan').show()
+                $('#tgl').hide()
             } else {
-                $('#tgl').show()
+                $('#tgl').hide()
+                $('#penjualan').hide()
             }
         });
     })

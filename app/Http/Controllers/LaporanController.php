@@ -7,7 +7,9 @@ use App\Models\Dtrans;
 use App\Models\Kategori;
 use App\Models\Merk;
 use Barryvdh\DomPDF\Facade\Pdf;
+use GuzzleHttp\RetryMiddleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use League\CommonMark\Extension\Table\Table;
 use stdClass;
 
@@ -22,14 +24,18 @@ class LaporanController extends Controller
     public function create(Request $request)
     {
         $jenis = $request->jenis;
-        $dari = $request->dari;
-        $sampai = $request->sampai;
-
-        $sampai = date('d-m-Y', strtotime($sampai));
-        $dari = date('d-m-Y', strtotime($dari));
-
 
         if ($jenis == 'barang') {
+            // $dari = $request->dari;
+            // $sampai = $request->sampai;
+
+            // if ($dari == "" || $sampai == "") {
+            //     return back()->with('msg', 'Tanggal tidak boleh kosong')->with('type', 'danger');
+            // }
+
+            // $sampai = date('d-m-Y', strtotime($sampai));
+            // $dari = date('d-m-Y', strtotime($dari));
+
             $data = Barang::all();
             $merk = Merk::all();
             $kategori = Kategori::all();
@@ -61,8 +67,7 @@ class LaporanController extends Controller
             $dataTop = array_slice($dataTop, 0, 5, true);
 
             return view('laporan.barang', [
-                'dari' => $dari,
-                'sampai' => $sampai,
+                'tgl' => date("Y-M-d"),
                 'data' => $data,
                 'dataTop' => $dataTop,
                 'merk' => $merk,
@@ -78,6 +83,37 @@ class LaporanController extends Controller
             //     'kategori' => $kategori,
             // ]);
             // return $pdf->download('laporanBarang.pdf');
+        }
+        else if ($jenis == 'penjualan') {
+            $tgl = $request->tgl;
+            if ($tgl == null) {
+                return back()->with('msg', 'Tanggal tidak boleh kosong')->with('type', 'danger');
+            }
+
+            $durasi = $request->durasi;
+            if ($durasi == 'hari') {
+                # code...
+                $data = DB::select("SELECT * FROM HTRANS WHERE CREATED_AT BETWEEN '$tgl 00:00:00' AND '$tgl 23:59:59'");
+                // dd($data);
+            }
+            else if ($durasi == 'bulan') {
+                # code...
+                $month = explode('-', $tgl)[1];
+                $tgl = date('F', strtotime($tgl));
+                $data = DB::select("SELECT * FROM HTRANS WHERE MONTH(CREATED_AT) = $month");
+            }
+            else if ($durasi == 'tahun') {
+                # code...
+                $year = explode('-', $tgl)[0];
+                $tgl = date('Y', strtotime($tgl));
+                $data = DB::select("SELECT * FROM HTRANS WHERE YEAR(CREATED_AT) = $year");
+            }
+
+            return view('laporan.penjualan', [
+                'tgl' => $tgl,
+                'durasi' => $durasi,
+                'data' => $data
+            ]);
         }
     }
 }

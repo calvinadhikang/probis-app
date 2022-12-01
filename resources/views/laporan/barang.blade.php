@@ -12,12 +12,10 @@
             background-color: #7FB77E;
             background-color: #70fea2;
         }
-
         body {
             background-color: #F7F6DC;
             background-color: rgb(236, 249, 185);
         }
-
     </style>
 </head>
 
@@ -25,7 +23,10 @@
     <div class="p-4">
         <div class="text-center">
             <h1>Laporan Barang</h1>
-            <h4>Periode : {{$dari}} - {{$sampai}}</h4>
+            <h4>Periode : {{$tgl}}</h4>
+            <div class="text-end">
+                <a href="/laporan" class="btn btn-danger">Kembali</a>
+            </div>
             <hr>
             <br>
             <h3>Top 5 Barang Best Seller</h3>
