@@ -13,6 +13,8 @@
         <h5>Nama Pembeli : {{$data->nama}}</h5>
         <h5>Alamat :</h5>
         <p>{{$data->alamat}}</p>
+        <h5>Tanggal :</h5>
+        <p>{{$data->created_at}}</p>
         <hr>
         <h5>Detail Nota</h5>
         <br>

@@ -21,21 +21,18 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @forelse ($data as $item)
+                @forelse ($data as $item)
+                @php
+                    $supp = DB::select("SELECT * FROM SUPPLIER WHERE ID = $item->supplier_id")[0];
+                @endphp
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->nama }}</td>
-                        <td>{{ $item->alamat }}</td>
+                        <td>{{ $supp->nama }}</td>
+                        <td>{{ $supp->email }}</td>
                         <td>{{ $item->total }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>
-                            @if ($item->status == 0)
-                                <div class="p-2 rounded bg-warning text-light text-center">Processed</div>
-                            @else
-                                <div class="p-2 rounded bg-success text-light text-center">Done</div>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="/transaksi/penjualan/detail/{{$item->id}}" class="p-2">
+                            <a href="/transaksi/pembelian/detail/{{$item->id}}" class="p-2">
                                 <button class="btn btn-primary">Detail</button>
                             </a>
                         </td>
@@ -44,7 +41,7 @@
                     <tr>
                         <td colspan="6">Belum ada data transaksi...</td>
                     </tr>
-                @endforelse --}}
+                @endforelse
             </tbody>
         </table>
     </div>

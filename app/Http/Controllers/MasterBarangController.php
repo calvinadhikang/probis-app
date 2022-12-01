@@ -50,7 +50,7 @@ class MasterBarangController extends Controller
         $result = Barang::create([
             'nama' => $in["nama"],
             'harga' => $in["harga"],
-            "stok" => $in["stok"],
+            "stok" => 0,
             "merk" => $in["merk"],
             "kategori" => $in["kategori"]
         ]);

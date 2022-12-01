@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('dpembelian_id');
             $table->integer('barang_id');
+            $table->integer('harga');
             $table->integer('qty');
             $table->integer('subtotal');
             $table->timestamps();

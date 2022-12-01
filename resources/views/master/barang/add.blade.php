@@ -11,13 +11,22 @@
     <div class="bg-white p-4 rounded shadow border">
         <form method="POST">
             @csrf
-            <label>Nama Barang</label>
-            <input type="text" class="form-control" name="nama" placeholder="Nama Barang">
-            @error("nama")
-                <small style="color:red">{{$message}}</small>
-            @enderror
+
             <br>
             <div class="d-flex justify-content-between">
+                <div class="" style="width: 45%">
+                    <label>Nama Barang</label>
+                    <input type="text" class="form-control" name="nama" placeholder="Nama Barang">
+                    @error("nama")
+                        <small style="color:red">{{$message}}</small>
+                    @enderror
+
+                    {{-- <label>Stok</label>
+                    <input type="number" class="form-control" name="stok" placeholder="Jumlah Stok">
+                    @error("stok")
+                        <small style="color:red">{{$message}}</small>
+                    @enderror --}}
+                </div>
                 <div class="" style="width: 45%">
                     <label>Harga Barang (Rp)</label>
                     <input type="number" class="form-control" name="harga" placeholder="Harga Barang">
@@ -25,13 +34,7 @@
                         <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
-                <div class="" style="width: 45%">
-                    <label>Stok</label>
-                    <input type="number" class="form-control" name="stok" placeholder="Jumlah Stok">
-                    @error("stok")
-                        <small style="color:red">{{$message}}</small>
-                    @enderror
-                </div>
+
             </div>
             <br>
             <div class="d-flex justify-content-between">

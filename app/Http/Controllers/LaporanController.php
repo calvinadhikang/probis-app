@@ -84,6 +84,13 @@ class LaporanController extends Controller
             // ]);
             // return $pdf->download('laporanBarang.pdf');
         }
+        else if ($jenis == 'stok') {
+            $data = Barang::all();
+            return view('laporan.stok', [
+                'data' => $data,
+                'tgl' => date("Y-M-d")
+            ]);
+        }
         else if ($jenis == 'penjualan') {
             $tgl = $request->tgl;
             if ($tgl == null) {

@@ -17,7 +17,7 @@
                     <th>Alamat</th>
                     <th>Grand Total</th>
                     <th>Tanggal</th>
-                    <th class="text-center">Status</th>
+                    {{-- <th class="text-center">Status</th> --}}
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -29,13 +29,13 @@
                         <td>{{ $item->alamat }}</td>
                         <td>{{ $item->total }}</td>
                         <td>{{ $item->created_at }}</td>
-                        <td>
+                        {{-- <td>
                             @if ($item->status == 0)
                                 <div class="p-2 rounded bg-warning text-light text-center">Processed</div>
                             @else
                                 <div class="p-2 rounded bg-success text-light text-center">Done</div>
                             @endif
-                        </td>
+                        </td> --}}
                         <td>
                             <a href="/transaksi/penjualan/detail/{{$item->id}}" class="p-2">
                                 <button class="btn btn-primary">Detail</button>
@@ -44,7 +44,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6">Belum ada data transaksi...</td>
+                        <td colspan="5">Belum ada data transaksi...</td>
                     </tr>
                 @endforelse
             </tbody>

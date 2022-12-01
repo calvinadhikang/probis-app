@@ -13,6 +13,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\TransaksiPenjualanController;
 use App\Http\Controllers\TransaksiReturController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,8 +109,13 @@ Route::prefix('/transaksi')->group(function() {
         Route::get('/', [PembelianController::class, 'view']);
         Route::get('/detail/{id}', [PembelianController::class, 'detail']);
         Route::get('/add', [PembelianController::class, 'addview']);
+        Route::get('/checkout', [PembelianController::class, 'checkout']);
+
+        Route::get('/tambah/{id}', [PembelianController::class, "tambah"]);
+        Route::get('/kurang/{id}', [PembelianController::class, "kurang"]);
 
         Route::post('/load', [PembelianController::class, 'load']);
+        Route::post('/add', [PembelianController::class, 'add']);
     });
 
     // Retur
@@ -126,6 +132,10 @@ Route::prefix('/laporan')->group(function(){
 
 Route::get('/test', function(){
     return view('partials.components.sidebar');
+});
+Route::get('/logout', function(){
+    Session::flush();
+    return redirect('/');
 });
 
 // AJAX ROUTE

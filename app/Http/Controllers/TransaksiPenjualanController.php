@@ -187,7 +187,7 @@ class TransaksiPenjualanController extends Controller
         $alamat = $request->alamat;
 
         if ($alamat == "" || $nama == "") {
-            return back();
+            return back()->with('msg', 'Nama dan Alamat tidak boleh kosong')->with('type', 'danger');
         }
 
         DB::beginTransaction();
@@ -198,23 +198,53 @@ class TransaksiPenjualanController extends Controller
                 $total += $value->subtotal;
             }
 
-            //INSERT HEADER
-            DB::insert("insert into htrans (nama, alamat, total, status) values ('$nama', '$alamat', $total, 0)");
+            $time = date('Y-m-d H:i:s');
+            // dd($time);
 
-            $lastId = DB::getPdo()->lastInsertId();
+            //INSERT HEADER
+            $lastId = DB::table('htrans')->insertGetId(array(
+                'nama' => $nama,
+                'alamat' => $alamat,
+                'total' => $total,
+                'status' => 0,
+                'created_at' => $time,
+                'updated_at' => $time,
+            ));
+            // DB::insert("insert into htrans (nama, alamat, total, status, created_at, updated_at) values ('$nama', '$alamat', $total, 0, $time, $time)");
+
+            // $lastId = DB::getPdo()->lastInsertId();
             foreach ($cart as $key => $value) {
                 # code...
-                DB::insert("insert into dtrans (htrans_id, barang_id, nama, qty, harga, subtotal) values ($lastId, $value->id, '$value->nama', $value->qty, $value->harga, $value->subtotal)");
+                DB::table('dtrans')->insert(array(
+                    'htrans_id' => $lastId,
+                    'barang_id' => $value->id,
+                    'nama' => $value->nama,
+                    'qty' => $value->qty,
+                    'harga' => $value->harga,
+                    'subtotal' => $value->subtotal,
+                    'created_at' => $time,
+                    'updated_at' => $time,
+                ));
+
+                $toEdit = Barang::find($value->id);
+                $toEdit->stok = $toEdit->stok - $value->qty;
+                if ($toEdit->stok < 0) {
+                    DB::rollBack();
+                    return back()->with('msg', 'Gagal Checkout, STOK BARANG '.$toEdit->nama.' tidak cukup')->with('type', 'warning');
+                }
+                $toEdit->save();
+
+                // DB::insert("insert into dtrans (htrans_id, barang_id, nama, qty, harga, subtotal, created_at, updated_at) values ($lastId, $value->id, '$value->nama', $value->qty, $value->harga, $value->subtotal), $time, $time");
             }
 
             DB::commit();
 
             Session::put('Cart', null);
             return redirect('/transaksi/penjualan')->with('msg', 'Berhasil Checkout')->with('type', 'success');
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
-            return back()->with('msg', 'Gagal Checkout')->with('type', 'warning');
+            return back()->with('msg', 'Gagal Checkout'.$e->getMessage())->with('type', 'warning');
         }
     }
 

@@ -1,18 +1,22 @@
 @extends('../partials/navbar')
 
 @section('content')
-    <h1>Detail Penjualan {{$data->nama}}</h1>
+    <h1>Detail Pembelian {{$supplier->nama}}</h1>
     <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
-        <a class="nav-link active bg-success" href="{{ url('/transaksi/penjualan') }}">Back</a>
+        <a class="nav-link active bg-success" href="{{ url('/transaksi/pembelian') }}">Back</a>
         {{-- <a class="nav-link text-success" href="{{ url('/transaksi/penjualan/add') }}">Add</a> --}}
     </nav>
     <br>
     <div class="bg-white border shadow p-4 rounded">
         <h3 class="text-center">Nomor Nota : {{$data->id}}</h3>
         <br>
-        <h5>Nama Pembeli : {{$data->nama}}</h5>
+        <h5>Nama Supplier : {{$supplier->nama}}</h5>
         <h5>Alamat :</h5>
-        <p>{{$data->alamat}}</p>
+        <p>{{$supplier->alamat}}</p>
+        <h5>Email :</h5>
+        <p>{{$supplier->email}}</p>
+        <h5>Tanggal :</h5>
+        <p>{{$supplier->created_at}}</p>
         <hr>
         <h5>Detail Nota</h5>
         <br>
@@ -24,30 +28,19 @@
                     <th>Qty Barang</th>
                     <th>Harga Barang</th>
                     <th>Subtotal</th>
-                    {{-- <th class="text-center">Status</th>
-                    <th class="text-center">Aksi</th> --}}
                 </tr>
             </thead>
             <tbody>
                 @forelse ($detail as $item)
+                @php
+                    $b = DB::select("SELECT * FROM BARANG WHERE ID = $item->barang_id")[0];
+                @endphp
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->nama }}</td>
+                        <td>{{ $b->nama }}</td>
                         <td>{{ $item->qty }}</td>
                         <td>{{ $item->harga }}</td>
                         <td>{{ $item->subtotal }}</td>
-                        {{-- <td>
-                            @if ($item->status == 0)
-                                <div class="p-2 rounded bg-warning text-light text-center">Processed</div>
-                            @else
-                                <div class="p-2 rounded bg-success text-light text-center">Done</div>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="/transaksi/penjualan/detail/{{$item->id}}" class="p-2">
-                                <button class="btn btn-primary">Detail</button>
-                            </a>
-                        </td> --}}
                     </tr>
                 @empty
                     <tr>

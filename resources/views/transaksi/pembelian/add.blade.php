@@ -47,11 +47,19 @@
         @else
             @php
                 $supp = Session::get('supplier');
+                $total = 0;
             @endphp
+            @if (Session::has('cartPembelian'))
+                @php
+                    foreach (Session::get('cartPembelian') as $key => $value) {
+                        $total += $value->subtotal;
+                    }
+                @endphp
+            @endif
             <h1>Memilih dari supplier : {{ $supp->nama }}</h1>
             <br>
             <h3>Cart</h3>
-            <h6>Total : Rp 0</h6>
+            <h6>Total : Rp {{ number_format($total) }}</h6>
 
             <table class="table table-striped">
                 <thead>
@@ -64,11 +72,35 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @forelse ($data as $item)
+                    <tr>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->qty }}</td>
+                        <td>Rp {{ number_format($item->harga) }}</td>
+                        <td>Rp {{ number_format($item->subtotal) }}</td>
+                        <td>
+                            <div class="d-flex justify-content-between">
+                                <a href="/transaksi/pembelian/tambah/{{ $item->id }}">
+                                    <div class="btn btn-primary text-center" style="width: 50px;">+</div>
+                                </a>
+                                <a href="/transaksi/pembelian/kurang/{{ $item->id }}">
+                                    <div class="btn btn-danger text-center" style="width: 50px;">-</div>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5">Belum ada data..</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
             <br>
-            <button class="btn btn-primary">Checkout</button>
+            <form action="/transaksi/pembelian/checkout" method="GET">
+                @csrf
+                <button class="btn btn-primary">Checkout</button>
+            </form>
         @endif
     </div>
     <br>
@@ -76,7 +108,7 @@
     @if (Session::has('supplier'))
     <div class="bg-white rounded p-4 shadow">
         <h3>Tambah Barang</h3>
-        <form action="/transaksi/penjualan/add" method="POST">
+        <form action="/transaksi/pembelian/add" method="POST">
             @csrf
             <div class="d-flex flex-wrap mb-2 justify-content-between">
                 <div class="" style="width: 70%;">
@@ -117,7 +149,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <a href="{{ url('/transaksi/penjualan') }}"><button type="submit" class="btn btn-danger">Back</button></a>
+                <a href="{{ url('/transaksi/pembelian') }}"><button type="submit" class="btn btn-danger">Back</button></a>
             </div>
         </div>
     </div>
