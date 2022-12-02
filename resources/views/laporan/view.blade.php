@@ -57,6 +57,7 @@
                 <br>
             </div>
             <button class="btn btn-primary">Buat Laporan</button>
+            <button class="btn btn-primary" name="download" value="1">Download Laporan</button>
         </form>
     </div>
 </div>

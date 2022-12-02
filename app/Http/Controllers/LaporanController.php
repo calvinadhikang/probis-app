@@ -66,6 +66,18 @@ class LaporanController extends Controller
             usort($dataTop, fn($a, $b) => strcmp($b->total, $a->total));
             $dataTop = array_slice($dataTop, 0, 5, true);
 
+            if ($request->download == 1) {
+                # code...
+                $pdf = Pdf::loadView('laporan.barang' , [
+                    'tgl' => date("Y-M-d"),
+                    'data' => $data,
+                    'dataTop' => $dataTop,
+                    'merk' => $merk,
+                    'kategori' => $kategori,
+                ]);
+                return $pdf->download('laporanBarang.pdf');
+            }
+
             return view('laporan.barang', [
                 'tgl' => date("Y-M-d"),
                 'data' => $data,
@@ -74,18 +86,19 @@ class LaporanController extends Controller
                 'kategori' => $kategori,
             ]);
 
-            // $pdf = Pdf::loadView('laporan.barang' , [
-            //     'dari' => $dari,
-            //     'sampai' => $sampai,
-            //     'data' => $data,
-            //     'dataTop' => $dataTop,
-            //     'merk' => $merk,
-            //     'kategori' => $kategori,
-            // ]);
-            // return $pdf->download('laporanBarang.pdf');
         }
         else if ($jenis == 'stok') {
             $data = Barang::all();
+
+            if ($request->download == 1) {
+                # code...
+                $pdf = Pdf::loadView('laporan.stok' , [
+                    'data' => $data,
+                    'tgl' => date("Y-M-d")
+                ]);
+                return $pdf->download('laporanStok.pdf');
+            }
+
             return view('laporan.stok', [
                 'data' => $data,
                 'tgl' => date("Y-M-d")
@@ -114,6 +127,16 @@ class LaporanController extends Controller
                 $year = explode('-', $tgl)[0];
                 $tgl = date('Y', strtotime($tgl));
                 $data = DB::select("SELECT * FROM HTRANS WHERE YEAR(CREATED_AT) = $year");
+            }
+
+            if ($request->download == 1) {
+                # code...
+                $pdf = Pdf::loadView('laporan.penjualan' , [
+                    'tgl' => $tgl,
+                    'durasi' => $durasi,
+                    'data' => $data
+                ]);
+                return $pdf->download('laporanPenjualan.pdf');
             }
 
             return view('laporan.penjualan', [
@@ -145,6 +168,16 @@ class LaporanController extends Controller
                 $year = explode('-', $tgl)[0];
                 $tgl = date('Y', strtotime($tgl));
                 $data = DB::select("SELECT * FROM HRETUR WHERE YEAR(CREATED_AT) = $year");
+            }
+
+            if ($request->download == 1) {
+                # code...
+                $pdf = Pdf::loadView('laporan.retur' , [
+                    'tgl' => $tgl,
+                    'durasi' => $durasi,
+                    'data' => $data
+                ]);
+                return $pdf->download('laporanRetur.pdf');
             }
 
             return view('laporan.retur', [
