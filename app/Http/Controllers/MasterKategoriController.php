@@ -14,9 +14,9 @@ class MasterKategoriController extends Controller
     {
         $search = $request->search;
         if ($search) {
-            $data = DB::select("SELECT * FROM KATEGORI WHERE NAMA LIKE '%$search%'");
+            $data = DB::table('kategori')->where('nama', 'like', "%$search%")->paginate(5);
         }else{
-            $data = Kategori::all();
+            $data = DB::table('kategori')->paginate(5);
         }
 
         return view('master.kategori.view', [

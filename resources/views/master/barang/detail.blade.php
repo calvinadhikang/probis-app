@@ -3,8 +3,7 @@
 @section('content')
     <h1>Detail Barang</h1>
     <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
-        <a class="nav-link text-success" aria-current="page" href="{{ url('/master/barang/') }}">View</a>
-        <a class="nav-link bg-success active " href="{{ url('/master/barang/add') }}">Add</a>
+        <a class="nav-link text-bg-success active" aria-current="page" href="{{ url('/master/barang/') }}">Back</a>
     </nav>
     <br>
     <br>
@@ -29,7 +28,6 @@
             </tr>
             <tbody>
                 @forelse ($supplier as $item)
-
                     <tr>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->email }}</td>

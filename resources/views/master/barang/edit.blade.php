@@ -9,7 +9,7 @@
     <br>
     <br>
     <div class="bg-white p-4 rounded">
-        <form method="POST">
+        <form method="POST" action="/master/barang/editAction/{{ $barang->id }}">
             @csrf
             <div class="d-flex flex-wrap mb-2">
                 <div class="w-100 p-2">
@@ -19,13 +19,6 @@
                         <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
-                {{-- <div class="w-50 p-2">
-                    ID Barang
-                    <input type="text" class="form-control" name="id" value="{{$barang->id}}">
-                    @error("id")
-                        <small style="color:red">{{$message}}</small>
-                    @enderror
-                </div> --}}
                 <div class="w-50 p-2">
                     Stok Barang
                     <input type="text" class="form-control" name="stok" value="{{$barang->stok}}">
@@ -41,21 +34,43 @@
                     @enderror
                 </div>
                 <div class="w-50 p-2">
-                    Merk
-                    <input type="text" class="form-control" name="merk" value="{{$barang->merk}}">
+                    Merk (hanya pilih bila mau diganti)
+                    {{-- <input type="text" class="form-control" name="merk" value="{{$barang->merk}}"> --}}
+                    <select name="merk" class="form-control">
+                        @forelse ($merk as $item)
+                        @if ($barang->merk == $item->id)
+                            <option value="{{ $item->id }}" selected>{{ $item->nama }}</option>
+                        @else
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @endif
+                        @empty
+
+                        @endforelse
+                    </select>
                     @error("merk")
                         <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="w-50 p-2">
-                    Jenis
-                    <input type="text" class="form-control" name="kategori" value="{{$barang->kategori}}">
+                    Kategori (hanya pilih bila mau diganti)
+                    {{-- <input type="text" class="form-control" name="merk" value="{{$barang->kategori}}"> --}}
+                    <select name="kategori" class="form-control">
+                        @forelse ($kategori as $item)
+                        @if ($barang->kategori == $item->id)
+                            <option value="{{ $item->id }}" selected>{{ $item->nama }}</option>
+                        @else
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @endif
+                        @empty
+
+                        @endforelse
+                    </select>
                     @error("kategori")
                         <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Edit</button>
             </div>
+            <button type="submit" class="btn btn-primary">Edit</button>
         </form>
     </div>
 @endsection

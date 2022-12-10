@@ -11,16 +11,16 @@ class MasterMerkController extends Controller
     // GET FUNCTIONS
     public function View(Request $request)
     {
-        $search = $request->search;
-        if ($search) {
-            $data = DB::select("SELECT * FROM MERKS WHERE NAMA LIKE '%$search%'");
+        $key = $request->search;
+        if ($key) {
+            $data = DB::table('merks')->where('nama', 'like', "%$key%")->paginate(5);
         }else{
-            $data = Merk::all();
+            $data = DB::table('merks')->paginate(5);
         }
 
         return view('master.merk.view', [
             'data' => $data,
-            'search' => $search
+            'search' => $key
         ]);
     }
 

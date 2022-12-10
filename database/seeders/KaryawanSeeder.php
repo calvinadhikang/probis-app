@@ -27,26 +27,6 @@ class KaryawanSeeder extends Seeder
         $karyawan->status = 1;
         $karyawan->save();
 
-        $karyawan = new Karyawan;
-        $karyawan->username = "karyawan";
-        $karyawan->password = "karyawan";
-        $karyawan->nama = "karyawan1";
-        $karyawan->email = "karyawan1@gmail.com";
-        $karyawan->telepon = '4564564561';
-        $karyawan->jenis_kelamin = 1;
-        $karyawan->jabatan = 1;
-        $karyawan->status = 1;
-        $karyawan->save();
-
-        $karyawan = new Karyawan;
-        $karyawan->username = "non";
-        $karyawan->password = "non";
-        $karyawan->nama = "karyawan12";
-        $karyawan->email = "karyawan12@gmail.com";
-        $karyawan->telepon = '4564564561';
-        $karyawan->jenis_kelamin = 1;
-        $karyawan->jabatan = 1;
-        $karyawan->status = 0;
-        $karyawan->save();
+        Karyawan::factory()->count(50)->create();
     }
 }

@@ -43,9 +43,9 @@ class MasterSupplierController extends Controller
     {
         $search = $request->search;
         if ($search) {
-            $data = DB::select("SELECT * FROM SUPPLIER WHERE NAMA LIKE '%$search%'");
+            $data = DB::table('supplier')->where('nama','LIKE',"%$search%")->paginate(5);
         }else{
-            $data = Supplier::all();
+            $data = Supplier::paginate(5);
         }
         return view('master.supplier.view', [
             'data'=>$data,

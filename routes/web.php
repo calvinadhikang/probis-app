@@ -40,20 +40,21 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/barang')->group(function() {
         Route::get('/', [MasterBarangController::class, "View"]);
         Route::get('/add', [MasterBarangController::class, "GoAdd"]);
-        Route::post('/add', [MasterBarangController::class, "Add"]);
         Route::get('/detail/{id}', [MasterBarangController::class, "formDetail"])->name('detailBarang');
         Route::get('/edit/{id}', [MasterBarangController::class, "formEdit"])->name('editBarang');
-        Route::post('/edit/{id}', [MasterBarangController::class, "edit"])->name('editBarang');
 
+        Route::post('/addBarang', [MasterBarangController::class, "Add"]);
+        Route::post('/editAction/{id}', [MasterBarangController::class, "edit"]);
     });
+
+    // KARYAWAN
     Route::prefix('/karyawan')->group(function() {
         Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
-        // Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+        Route::get('/add', [MasterKaryawanController::class, "ToAddKaryawan"]);
         Route::get('/detail/{id}', [MasterKaryawanController::class, "DetailKaryawan"])->name('detailkaryawan');
         Route::get('/edit/{id}', [MasterKaryawanController::class, "ToEditKaryawan"])->name('editkaryawan');
-        Route::post('/edit/{id}', [MasterKaryawanController::class, "EditKaryawan"])->name('editkaryawan');
 
-        Route::get('/add', [MasterKaryawanController::class, "ToAddKaryawan"]);
+        Route::post('/edit/{id}', [MasterKaryawanController::class, "EditKaryawan"])->name('editkaryawan');
         Route::post('/add', [MasterKaryawanController::class, "AddKaryawan"]);
 
     });
@@ -143,9 +144,14 @@ Route::get('/logout', function(){
 
 // AJAX ROUTE
 Route::get('/getBarang', [MasterBarangController::class, 'getBarangJSON']);
+Route::get('/searchBarang', [MasterBarangController::class, 'searchBarangJSON']);
+Route::get('/searchKaryawan', [MasterKaryawanController::class, 'searchKaryawanJSON']);
+
+
 Route::get('/getKategori', [MasterKategoriController::class, 'getKategoriJSON']);
 Route::get('/penjualanPerBulan', [TransaksiPenjualanController::class, 'getPenjualanPerBulan']);
 Route::get('/barang/top5', [TransaksiPenjualanController::class, 'top5Barang']);
+
 
 Route::get('/test', function(){
     return view('welcome');

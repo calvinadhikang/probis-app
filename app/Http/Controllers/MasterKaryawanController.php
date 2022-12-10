@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\DB;
 
 class MasterKaryawanController extends Controller
 {
-    public function DetailKaryawan(Request $request)
+    public function DetailKaryawan($id)
     {
-        $karyawan = Karyawan::find($request->id);
+        $karyawan = Karyawan::find($id);
 
         return view('master.karyawan.detail', [
             "karyawan" => $karyawan
-
         ]);
     }
+
     public function ToEditKaryawan(Request $request)
     {
         $karyawan = Karyawan::find($request->id);
@@ -27,23 +27,27 @@ class MasterKaryawanController extends Controller
 
         ]);
     }
+
     public function ViewKaryawan(Request $request)
     {
-        if ($request->search) {
-            $karyawans = DB::select("SELECT * FROM KARYAWAN WHERE NAMA LIKE '%$request->search%'");
+        $key = $request->search;
+        if ($key != "") {
+            $data = DB::table('karyawan')->where('nama', 'like', "%$key%")->paginate(10);
         }else{
-            $karyawans = Karyawan::all();
+            $data = DB::table('karyawan')->paginate(10);
         }
 
         return view('master.karyawan.view', [
-            "karyawans" => $karyawans,
-            'search' => $request->search
+            'data' => $data,
+            'search' => $key
         ]);
     }
+
     public function ToAddKaryawan()
     {
         return view('master.karyawan.add');
     }
+
     public function AddKaryawan(Request $request)
     {
         $username =$request->username;

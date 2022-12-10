@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Database\Factories\KaryawanFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

@@ -19,47 +19,76 @@ class MasterBarangController extends Controller
     public function View(Request $request)
     {
         $search = $request->search;
-        if ($search) {
-            $updateIsi = DB::select("SELECT * FROM BARANG WHERE NAMA LIKE '%$search%'");
+
+        if ($search != "") {
+            $data = DB::table('barang')
+            ->where('barang.nama', 'like', "%$search%")
+            ->paginate(5);
         }else{
-            $updateIsi = DB::table('barang')->get();
+            $data = DB::table('barang')
+            ->paginate(5);
         }
-        return view('master.barang.view',["dataBarang" => $updateIsi, 'search'=>$search]);
+
+        return view('master.barang.view',[
+            "data" => $data,
+            'search' => $search
+        ]);
     }
 
     public function GoAdd(){
+        $supplier = Supplier::all();
         $dataMerk = Merk::where('status','=',1)->get();
         $dataKategori = Kategori::where('status','=',1)->get();
 
+        if (count($supplier) <= 0) {
+            return redirect('/master/supplier/add')->with('msg', 'Tidak ada Supplier yang terdaftar, silahkan tambah Supplier terlebih dahulu')->with('type', 'warning');
+        }
+        if (count($dataKategori) <= 0) {
+            return redirect('/master/kategori')->with('msg', 'Tidak ada Merk Barang yang terdaftar, silahkan tambah Merk Barang terlebih dahulu')->with('type', 'warning');
+        }
+        if (count($dataMerk) <= 0) {
+            return redirect('/master/merk')->with('msg', 'Tidak ada Merk Barang terdaftar, silahkan tambah Merk Barang terlebih dahulu')->with('type', 'warning');
+        }
+
         return view('master.barang.add', [
             "merk" => $dataMerk,
-            "kategori" => $dataKategori
+            "kategori" => $dataKategori,
+            'supplier' => $supplier
         ]);
     }
 
     public function Add(Request $request)
     {
-        $in = $request->validate([
-            "nama" => ["required"],
-            "harga" => ["required", "numeric"],
-            "stok" => ["required", "numeric"],
-            "merk" => ["required"],
-            "kategori" => ["required"]
+        $request->validate([
+            'nama' => 'required',
+            'harga' => 'required',
+            'kategori' => 'required',
+            'merk' => 'required',
         ]);
 
-        $result = Barang::create([
-            'nama' => $in["nama"],
-            'harga' => $in["harga"],
-            "stok" => 0,
-            "merk" => $in["merk"],
-            "kategori" => $in["kategori"]
-        ]);
-
-        if ($result) {
-            return redirect()->back()->with("success", "Berhasil add item!");
-        }else{
-            return redirect()->back()->with("error", "Gagal add item!");
+        //cek duplicate
+        $duplicate = Barang::where('nama', '=', $request->nama)->get();
+        if (count($duplicate) > 0) {
+            return redirect('/master/barang')->with('msg', 'Error barang sudah ada, silahkan tambah di Menu Supplier')->with('type', 'danger');
         }
+
+        //insert barang
+        $b = new Barang();
+        $b->nama = $request->nama;
+        $b->harga = $request->hargajual;
+        $b->stok = 0;
+        $b->kategori = $request->kategori;
+        $b->merk = $request->merk;
+        $b->save();
+
+        //insert asal_barang
+        $asal = new AsalBarang();
+        $asal->id_supplier = $request->supplier;
+        $asal->id_barang = $b->id;
+        $asal->harga = $request->harga;
+        $asal->save();
+
+        return redirect('/master/barang')->with('msg', 'Berhasil tambah barang')->with('type', 'success');
     }
 
     public function formDetail(Request $request)
@@ -93,21 +122,29 @@ class MasterBarangController extends Controller
 
     public function formEdit(Request $request){
         $barang = Barang::find($request->id);
+        $kategori = Kategori::all();
+        $merk = Merk::all();
 
         return view('master.barang.edit', [
-            "barang" => $barang
+            "barang" => $barang,
+            'merk' => $merk,
+            'kategori' => $kategori,
         ]);
     }
 
     public function edit(Request $request, $id){
         $in = $request->validate([
-            "id" => ["required"],
             "nama" => ["required"],
             "harga" => ["required", "numeric"],
             "stok" => ["required", "numeric"],
             "merk" => ["required"],
             "kategori" => ["required"]
         ]);
+
+        // $b = Barang::find($id);
+        // $b->nama = $in['nama'];
+        // $b->harga = $in['nama'];
+        // $b->save();
 
         $result = Barang::where('id', $id)->update([
             'nama' => $in["nama"],
@@ -116,17 +153,32 @@ class MasterBarangController extends Controller
             "merk" => $in["merk"],
             "kategori" => $in["kategori"]
         ]);
-        if ($result) {
-            return redirect()->back()->with("success", "Berhasil edit barang!");
-        }
-        else{
-            return redirect()->back()->with("error", "Gagal edit barang!");
-        }
+
+        return redirect('/master/barang')->with("msg", "Berhasil edit barang!")->with('type','success');
     }
 
     public function getBarangJSON()
     {
         $data = Barang::all();
+        return response()->json($data, 200);
+    }
+
+    public function searchBarangJSON(Request $request)
+    {
+        $search = $request->search;
+
+        if ($search != "") {
+            $data = DB::select("SELECT b.id as id, b.nama as nama, b.harga as harga, b.stok as stok, k.nama as kategori, m.nama as merk FROM barang b, kategori k, merks m
+            WHERE b.KATEGORI = K.id
+            AND b.merk = m.id
+            AND b.nama LIKE '%$search%'");
+
+        }else{
+            $data = DB::select("SELECT b.id as id, b.nama as nama, b.harga as harga, b.stok as stok, k.nama as kategori, m.nama as merk FROM barang b, kategori k, merks m
+            WHERE b.KATEGORI = K.id
+            AND b.merk = m.id;");
+        }
+
         return response()->json($data, 200);
     }
 }

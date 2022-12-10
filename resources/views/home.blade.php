@@ -17,11 +17,11 @@
                 <br>
                 <div class="d-flex">
                     <div class="w-50 text-center mx-3 bg-info rounded-3 text-white p-2">
-                        <h4>Admin</h4>
+                        <h4>Jumlah Admin</h4>
                         <b>{{ $jmlhAdmin }}</b>
                     </div>
                     <div class="w-50 text-center mx-3 bg-warning rounded-3 text-white p-2">
-                        <h4>Kasir</h4>
+                        <h4>Jumlah Kasir</h4>
                         <b>{{ $jmlhKasir }}</b>
                     </div>
                 </div>
@@ -34,11 +34,11 @@
                 <br>
                 <div class="d-flex">
                     <div class="w-50 text-center mx-3 bg-primary rounded-3 text-white p-2">
-                        <h4>Barang</h4>
+                        <h4>Jumlah Barang</h4>
                         <b id="countBarang">{{ $jmlhBarang }}</b>
                     </div>
                     <div class="w-50 text-center mx-3 bg-warning rounded-3 text-white p-2">
-                        <h4>Kategori</h4>
+                        <h4>Jumlah Kategori</h4>
                         <b id="countKategori">{{ $jmlhKategori }}</b>
                     </div>
                 </div>

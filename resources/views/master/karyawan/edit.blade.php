@@ -70,7 +70,7 @@
                 <input type="radio" name="jabatan" value=1> Kasir<br>
 
                 @else
-                <input type="radio" name="jabatan" value=0>Admin<br>
+                <input type="radio" name="jabatan" value=0> Admin<br>
                 <input type="radio" name="jabatan" value=1 checked="checked"> Kasir<br>
 
                 @endif
@@ -81,10 +81,10 @@
                 <label>Status</label>
                 <br>
                 @if($karyawan->status ==0)
-                <input type="radio" name="status" value=0 checked="checked">Dipecat<br>
+                <input type="radio" name="status" value=0 checked="checked"> Non-Aktif<br>
                 <input type="radio" name="status" value=1> Aktif<br>
                 @else
-                <input type="radio" name="status" value=0>Dipecat<br>
+                <input type="radio" name="status" value=0> Non-Aktif<br>
                 <input type="radio" name="status" value=1 checked="checked"> Aktif<br>
 
                 @endif
