@@ -39,13 +39,13 @@ class HtransSeeder extends Seeder
         $h->status = 0;
         $h->save();
 
-        // // HTRANS 4
-        // $h = new Htrans();
-        // $h->nama = "Customer 4";
-        // $h->alamat = "Trawas";
-        // $h->total = 2000;
-        // $h->status = 0;
-        // $h->save();
+        // HTRANS 4
+        $h = new Htrans();
+        $h->nama = "Customer 4";
+        $h->alamat = "Trawas";
+        $h->total = 2000;
+        $h->status = 0;
+        $h->save();
 
         // // HTRANS 5
         // $h = new Htrans();
