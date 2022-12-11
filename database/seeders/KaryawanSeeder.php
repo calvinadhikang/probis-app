@@ -27,6 +27,7 @@ class KaryawanSeeder extends Seeder
         $karyawan->status = 1;
         $karyawan->save();
 
+<<<<<<< HEAD
         // KARYAWAN 2
         $karyawan = new Karyawan;
         $karyawan->username = "karyawan";
@@ -86,5 +87,8 @@ class KaryawanSeeder extends Seeder
         $karyawan->jabatan = 1;
         $karyawan->status = 0;
         $karyawan->save();
+=======
+        Karyawan::factory()->count(50)->create();
+>>>>>>> fd8cbf3c87e96ac25876425cd78c2d45ff459186
     }
 }

@@ -7,108 +7,59 @@
         data-bs-toggle="modal" data-bs-target="#backModal"
         href="{{ url('/transaksi/retur') }}">Back</a>
     </nav>
-    <div class="bg-white rounded p-4 my-2">
-        <form action="">
-            {{-- <div class="mb-2">
-                Nama Customer
-                <input type="text" class="form-control" name="">
-            </div>
-            <div class="mb-2">
-                Alamat Customer
-                <input type="text" class="form-control" name="">
-            </div> --}}
-
-            <h3>List Penjualan</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama Customer</th>
-                        <th>Alamat</th>
-                        <th>Harga</th>
-                        <th>Tanggal</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Dikang</td>
-                        <td>Jalan Surabaya</td>
-                        <td>1000</td>
-                        <td>
-                            2 April 2022
-                        </td>
-                        <td>
-                            <form action="">
-                                <button class="btn btn-primary">Tambah</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
+    <br>
     <div class="bg-white rounded p-4">
-        <h3>Detail Retur</h3>
+        <h2 class="text-center">Detail Retur Nota {{ $data->id }}</h2>
+        <hr>
         <div class="d-flex flex-wrap mb-2">
             <div class="w-50 p-2">
                 Nama Customer
-                <h4>Dikang</h4>
+                <h4>{{ $data->nama }}</h4>
             </div>
             <div class="w-50 p-2">
                 Alamat
-                <h4>Jalan Surabaya</h4>
+                <h4>{{ $data->alamat }}</h4>
             </div>
             <div class="w-50 p-2">
                 Total Harga
-                <h4>1000</h4>
+                <h4>{{ $data->total }}</h4>
             </div>
             <div class="w-50 p-2">
                 Tanggal
-                <h4>2 April 2022</h4>
+                <h4>{{ $data->created_at }}</h4>
             </div>
         </div>
         <br>
         <h3>Detail Transaksi</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>NAMA BARANG</th>
-                    <th>HARGA (Rp)</th>
-                    <th>QTY</th>
-                    <th>MERK</th>
-                    <th>JENIS</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>nama</td>
-                    <td>Rp 1000</td>
-                    <td>10</td>
-                    <td>Heize</td>
-                    <td>Sabun</td>
-                </tr>
-                <tr>
-                    <td>nama</td>
-                    <td>Rp 1000</td>
-                    <td>10</td>
-                    <td>Heize</td>
-                    <td>Sabun</td>
-                </tr>
-                <tr>
-                    <td>nama</td>
-                    <td>Rp 1000</td>
-                    <td>10</td>
-                    <td>Heize</td>
-                    <td>Sabun</td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
-        <form action="">
+        <form action="/transaksi/retur/create" method="POST">
+            @csrf
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>NAMA BARANG</th>
+                        <th>HARGA (Rp)</th>
+                        <th>QTY</th>
+                        <th>Jumlah Di Retur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($detail as $item)
+                    <tr>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->harga }}</td>
+                        <td>{{ $item->qty }}</td>
+                        <td>
+                            <input type="number" name="jumlah[]" value="0" class="form-control">
+                        </td>
+                    </tr>
+                    @empty
+
+                    @endforelse
+                </tbody>
+            </table>
             <button class="btn btn-primary">Add Retur</button>
         </form>
+        <br>
     </div>
 
 <!-- Modal -->

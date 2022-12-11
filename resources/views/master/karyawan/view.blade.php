@@ -4,7 +4,7 @@
     {{-- Tabs --}}
     <h1>Master Karyawan</h1>
     <nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
-        <a class="nav-link active bg-success" href="{{ url('/master/karyawan/view') }}">View</a>
+        <a class="nav-link active bg-success" href="{{ url('/master/karyawan') }}">View</a>
         <a class="nav-link text-success" href="{{ url('/master/karyawan/add') }}">Add</a>
     </nav>
 
@@ -31,36 +31,51 @@
 
         <br>
 
-        <table class="table table-striped">
-            <thead class="table-success">
-                <tr>
-                    <th>ID KARYAWAN</th>
-                    <th>NAMA KARYAWAN</th>
-                    <th>NO TELEPON</th>
-                    <th>JABATAN</th>
-                    <th>DETAIL</th>
-                    <th>EDIT</th>
-                </tr>
-            </thead>
-
-            @forelse ($karyawans as $karyawan)
-                <tr>
-                    <td>{{ $karyawan->id }}</td>
-                    <td>{{ $karyawan->nama }}</td>
-                    <td>{{ $karyawan->telepon }}</td>
-                    @if($karyawan->jabatan ==0)
-                        <td>Admin</td>
-                    @else
-                        <td>Kasir</td>
-                    @endif
-                    <td><a href="{{ route('detailkaryawan', $karyawan->id) }}" class="btn btn-primary">Detail</a></td>
-                    <td><a href="{{ route('editkaryawan', $karyawan->id) }}" class="btn btn-warning">Edit</a></td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5">Belum ada Data !</td>
-                </tr>
-            @endforelse
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-success">
+                    <tr>
+                        <th>ID</th>
+                        <th>NAMA</th>
+                        <th>NO TELEPON</th>
+                        <th>JABATAN</th>
+                        <th colspan="2">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody id="list">
+                    @forelse ($data as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->telepon }}</td>
+                        @if ($item->jabatan == 0)
+                            <td>
+                                <div class="p-2 text-bg-primary text-center rounded">
+                                    Admin
+                                </div>
+                            </td>
+                        @else
+                        <td>
+                            <div class="p-2 text-bg-warning text-center rounded">
+                                Kasir
+                            </div>
+                        </td>
+                        @endif
+                        <td>
+                            <a class="btn btn-outline-primary" href="{{ url('master/karyawan/detail/'.$item->id) }}">Detail Karyawan</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-warning" href="{{ url('master/karyawan/edit/'.$item->id) }}">Edit Karyawan</a>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <th colspan="6">Data '{{ $search }}' Tidak Ada...</th>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            {{ $data->withQueryString()->links() }}
+        </div>
     </div>
 @endsection

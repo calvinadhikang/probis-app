@@ -1,100 +1,48 @@
-@extends('home')
+@extends('/partials/navbar')
 
 @section('content')
-<header>Detail Karyawan</header>
-<nav class="navbar navbar-expand-lg" id="nav">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{url('/master/karyawan')}}">View</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href=" {{ url('/master/karyawan/edit') }}">Edit</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Back</a>
-            </li>
-
-        </div>
-    </div>
-
-    </div>
+<h1>Detail Karyawan</h1>
+<nav class="nav nav-pills nav-fill w-25 bg-white p-1 rounded">
+    <a class="nav-link active text-bg-success" href="{{ url('/master/karyawan') }}">Back to view</a>
 </nav>
-<div class="bg-white p-4 rounded">
-    <form action="" method="POST">
-        @csrf
-        <div class="row">
-            <div class="column" style="float: left;
-            width: 50%;
-            padding: 10px;
-            height: 400px;">
 
-                <label>Nama</label>
-                <br>
-                <h3>{{$karyawan->nama}}</h3>
-                <br>
-                <br>
+<br>
+<br>
 
-                <label>Username</label>
-                <br>
-                <h3>{{$karyawan->username}}</h3>
-                <br>
-                <br>
+<div class="bg-white border p-4 shadow rounded">
+    <div class="row">
+        <div class="col"><h3>Nomor ID :</h3></div>
+        <div class="col"><h3>{{ $karyawan->id }}</h3></div>
+    </div>
+    <div class="row">
+        <div class="col"><h3>Nama :</h3></div>
+        <div class="col"><h3>{{ $karyawan->nama }}</h3></div>
+    </div>
+    <div class="row">
+        <div class="col"><h3>Username :</h3></div>
+        <div class="col"><h3>{{ $karyawan->username }}</h3></div>
+    </div>
+    <hr>
+    <p>Email : {{ $karyawan->email }}</p>
+    <p>No Telepon : {{ $karyawan->telepon }}</p>
+    @php
+        $jk = "Laki-laki";
+        if ($karyawan->jenis_kelamin == 1) {
+            "Perempuan";
+        }
 
-                <label>Email</label>
-                <br>
-                <h3>{{$karyawan->email}}</h3>
-                <br>
-                <br>
+        $jabatan = "Admin";
+        if ($karyawan->jabatan == 1) {
+            $jabatan = "Kasir";
+        }
 
-                <label>Nomor Telepon</label>
-                <br>
-                <h3>{{$karyawan->telepon}}</h3>
-                <br>
-                <br>
-
-
-
-            </div>
-            <div class="column" style="float: left;
-            width: 50%;
-            padding: 10px;
-            height: 400px;">
-                            <label>Jenis Kelamin</label>
-                            <br>
-                            @if($karyawan->jenis_kelamin ==0)
-                            <h3>Laki-laki</h3>
-                            @else
-                            <h3>Perempuan</h3>
-                            @endif
-                            <br>
-                            <br>
-
-                            <label>Jabatan</label>
-                            <br>
-                            @if($karyawan->jabatan ==0)
-                            <h3>Admin</h3>
-                            @else
-                            <h3>Kasir</h3>
-                            @endif
-                            <br>
-                            <br>
-
-                            <label>Status</label>
-                            <br>
-                            @if($karyawan->status ==0)
-                            <h3>Dipecat</h3>
-                            @else
-                            <h3>Aktif</h3>
-                            @endif
-                            <br>
-                            <br>
-
-            </div>
-        </div>
-
-
-
-    </form>
+        $status = "Aktif";
+        if ($karyawan->status == 0) {
+            $status = "Non-Aktif";
+        }
+    @endphp
+    <p>Jenis Kelamin : {{ $jk }}</p>
+    <p>Jabatan : {{ $jabatan }}</p>
+    <p>Status : {{ $status }}</p>
+</div>
 @endsection

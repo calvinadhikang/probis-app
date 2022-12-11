@@ -13,6 +13,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\TransaksiPenjualanController;
 use App\Http\Controllers\TransaksiReturController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,20 +40,21 @@ Route::prefix('/master')->group(function() {
     Route::prefix('/barang')->group(function() {
         Route::get('/', [MasterBarangController::class, "View"]);
         Route::get('/add', [MasterBarangController::class, "GoAdd"]);
-        Route::post('/add', [MasterBarangController::class, "Add"]);
         Route::get('/detail/{id}', [MasterBarangController::class, "formDetail"])->name('detailBarang');
         Route::get('/edit/{id}', [MasterBarangController::class, "formEdit"])->name('editBarang');
-        Route::post('/edit/{id}', [MasterBarangController::class, "edit"])->name('editBarang');
 
+        Route::post('/addBarang', [MasterBarangController::class, "Add"]);
+        Route::post('/editAction/{id}', [MasterBarangController::class, "edit"]);
     });
+
+    // KARYAWAN
     Route::prefix('/karyawan')->group(function() {
         Route::get('/', [MasterKaryawanController::class, "ViewKaryawan"]);
-        // Route::get('/add', [MasterBarangController::class, "Addbarang"]);
+        Route::get('/add', [MasterKaryawanController::class, "ToAddKaryawan"]);
         Route::get('/detail/{id}', [MasterKaryawanController::class, "DetailKaryawan"])->name('detailkaryawan');
         Route::get('/edit/{id}', [MasterKaryawanController::class, "ToEditKaryawan"])->name('editkaryawan');
-        Route::post('/edit/{id}', [MasterKaryawanController::class, "EditKaryawan"])->name('editkaryawan');
 
-        Route::get('/add', [MasterKaryawanController::class, "ToAddKaryawan"]);
+        Route::post('/edit/{id}', [MasterKaryawanController::class, "EditKaryawan"])->name('editkaryawan');
         Route::post('/add', [MasterKaryawanController::class, "AddKaryawan"]);
 
     });
@@ -108,14 +110,22 @@ Route::prefix('/transaksi')->group(function() {
         Route::get('/', [PembelianController::class, 'view']);
         Route::get('/detail/{id}', [PembelianController::class, 'detail']);
         Route::get('/add', [PembelianController::class, 'addview']);
+        Route::get('/checkout', [PembelianController::class, 'checkout']);
+
+        Route::get('/tambah/{id}', [PembelianController::class, "tambah"]);
+        Route::get('/kurang/{id}', [PembelianController::class, "kurang"]);
 
         Route::post('/load', [PembelianController::class, 'load']);
+        Route::post('/add', [PembelianController::class, 'add']);
     });
 
     // Retur
     Route::prefix('/retur')->group(function() {
         Route::get('/', [TransaksiReturController::class, "view"]);
         Route::get('/add', [TransaksiReturController::class, "add"]);
+        Route::get('/detail/{id}', [TransaksiReturController::class, "detail"]);
+        Route::get('/pilih', [TransaksiReturController::class, "pilih"]);
+        Route::post('/create', [TransaksiReturController::class, "create"]);
     });
 });
 
@@ -127,12 +137,21 @@ Route::prefix('/laporan')->group(function(){
 Route::get('/test', function(){
     return view('partials.components.sidebar');
 });
+Route::get('/logout', function(){
+    Session::flush();
+    return redirect('/');
+});
 
 // AJAX ROUTE
 Route::get('/getBarang', [MasterBarangController::class, 'getBarangJSON']);
+Route::get('/searchBarang', [MasterBarangController::class, 'searchBarangJSON']);
+Route::get('/searchKaryawan', [MasterKaryawanController::class, 'searchKaryawanJSON']);
+
+
 Route::get('/getKategori', [MasterKategoriController::class, 'getKategoriJSON']);
 Route::get('/penjualanPerBulan', [TransaksiPenjualanController::class, 'getPenjualanPerBulan']);
 Route::get('/barang/top5', [TransaksiPenjualanController::class, 'top5Barang']);
+
 
 Route::get('/test', function(){
     return view('welcome');

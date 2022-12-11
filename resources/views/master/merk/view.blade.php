@@ -73,6 +73,7 @@
             @endforelse
         </tbody>
     </table>
+    {{ $data->withQueryString()->links() }}
 </div>
 
 

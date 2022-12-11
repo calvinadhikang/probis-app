@@ -30,45 +30,42 @@
     </div>
 
     <br>
-
-    <table class="table table-striped">
-        <thead class="table-success">
-            <tr>
-                <th>ID BARANG</th>
-                <th>NAMA BARANG</th>
-                <th>HARGA (Rp)</th>
-                <th>STOK</th>
-                <th>MERK</th>
-                <th>KATEGORI</th>
-                <th colspan="2">AKSI</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                @if(count($dataBarang) > 0)
-                @foreach ($dataBarang as $d)
-                    @php
-                        $kategori = DB::table('kategori')->where('id', '=', $d->kategori)->first();
-                        $merk = DB::table('merks')->where('id', '=', $d->merk)->first();
-                    @endphp
-                    <tr>
-                        <td>{{$d->id}}</td>
-                        <td>{{$d->nama}}</td>
-                        <td>{{$d->harga}}</td>
-                        <td>{{$d->stok}}</td>
-                        <td>{{$merk->nama}}</td>
-                        <td>{{$kategori->nama}}</td>
-                        <td><a href="{{ route('detailBarang', $d->id) }}" class="btn btn-primary">Detail</a></td>
-                        <td><a href="{{ route('editBarang', $d->id)}}" class="btn btn-warning">Edit</a></td>
-                    </tr>
-                @endforeach
-                @else
-                    <tr>
-                        <td colspan="5"><center>Tidak ada Item.</center></td>
-                    </tr>
-                @endif
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th>ID</th>
+                    <th>NAMA</th>
+                    <th>HARGA (Rp)</th>
+                    <th>STOK</th>
+                    <th>MERK</th>
+                    <th>KATEGORI</th>
+                    <th colspan="2">AKSI</th>
+                </tr>
+            </thead>
+            <tbody id="list">
+                @forelse ($data as $item)
+                @php
+                    $merk = DB::table('merks')->where('id','=', $item->merk)->first();
+                    $kategori = DB::table('kategori')->where('id','=', $item->kategori)->first();
+                @endphp
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->nama }}</td>
+                    <td>Rp {{ number_format($item->harga) }}</td>
+                    <td>{{ $item->stok }}</td>
+                    <td>{{ $merk->nama }}</td>
+                    <td>{{ $kategori->nama }}</td>
+                    <td><a href="/master/barang/edit/{{ $item->id }}" class="btn btn-warning">Edit</a></td>
+                    <td><a href="/master/barang/detail/{{ $item->id }}" class="btn btn-primary">Detail</a></td>
+                </tr>
+                @empty
+                <tr>
+                    <th colspan="6">Data '{{ $search }}' Tidak Ada...</th>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+        {{ $data->withQueryString()->links() }}
     </div>
 @endsection

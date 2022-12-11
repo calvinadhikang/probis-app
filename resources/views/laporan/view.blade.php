@@ -57,6 +57,7 @@
                 <br>
             </div>
             <button class="btn btn-primary">Buat Laporan</button>
+            <button class="btn btn-primary" name="download" value="1">Download Laporan</button>
         </form>
     </div>
 </div>
@@ -74,7 +75,7 @@
             if (tipe == 'barang') {
                 $('#tgl').hide()
                 $('#penjualan').hide()
-            } else if (tipe == 'penjualan'){
+            } else if (tipe == 'penjualan' || tipe == 'retur'){
                 $('#penjualan').show()
                 $('#tgl').hide()
             } else {

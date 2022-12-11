@@ -64,10 +64,12 @@
                             <a class="nav-link" href="{{ url('/transaksi/retur') }}">Retur</a>
                         </li>
                     @endif
+                        <li class="nav-item">
+                            <a href="{{ url('/logout') }}">
+                                <button class="btn btn-dark">Logout</button>
+                            </a>
+                        </li>
                 </ul>
-                <span class="navbar-text">
-                    {{ Session::get('isAdmin') }}
-                </span>
             </div>
         </div>
     </nav>

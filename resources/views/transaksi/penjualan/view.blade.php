@@ -31,9 +31,9 @@
                         <td>{{ $item->created_at }}</td>
                         <td>
                             @if ($item->status == 0)
-                                <div class="p-2 rounded bg-warning text-light text-center">Processed</div>
+                                <div class="p-2 rounded bg-success text-light text-center">Penjualan</div>
                             @else
-                                <div class="p-2 rounded bg-success text-light text-center">Done</div>
+                                <div class="p-2 rounded bg-warning text-light text-center">Retur</div>
                             @endif
                         </td>
                         <td>
@@ -44,7 +44,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6">Belum ada data transaksi...</td>
+                        <td colspan="5">Belum ada data transaksi...</td>
                     </tr>
                 @endforelse
             </tbody>
