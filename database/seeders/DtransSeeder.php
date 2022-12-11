@@ -15,7 +15,7 @@ class DtransSeeder extends Seeder
      */
     public function run()
     {
-        // HTRANS 1
+        // DTRANS 1
         $d = new Dtrans();
         $d->htrans_id = 1;
         $d->barang_id = 1;
@@ -25,6 +25,7 @@ class DtransSeeder extends Seeder
         $d->subtotal = 2000;
         $d->save();
 
+        // DTRANS 2
         $d = new Dtrans();
         $d->htrans_id = 1;
         $d->barang_id = 2;
@@ -34,7 +35,7 @@ class DtransSeeder extends Seeder
         $d->subtotal = 1000;
         $d->save();
 
-        // HTRANS 2
+        // DTRANS 3
         $d = new Dtrans();
         $d->htrans_id = 2;
         $d->barang_id = 1;
@@ -44,7 +45,7 @@ class DtransSeeder extends Seeder
         $d->subtotal = 1000;
         $d->save();
 
-        // HTRANS 3
+        // DTRANS 4
         $d = new Dtrans();
         $d->htrans_id = 3;
         $d->barang_id = 2;

@@ -15,15 +15,19 @@ class KategoriSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // KATEGORI 1
         $k = new Kategori();
         $k->nama = 'Sayuran';
         $k->status = 1;
         $k->save();
+
+        // KATEGORI 2
         $k = new Kategori();
         $k->nama = 'Daging Mentah';
         $k->status = 1;
         $k->save();
+
+        // KATEGORI 3
         $k = new Kategori();
         $k->nama = 'Daging Olahan';
         $k->status = 1;
