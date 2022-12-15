@@ -54,5 +54,7 @@ class DtransSeeder extends Seeder
         $d->harga = 500;
         $d->subtotal = 5000;
         $d->save();
+
+        Dtrans::factory()->count(600)->create();
     }
 }

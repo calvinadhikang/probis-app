@@ -172,7 +172,7 @@ class LaporanController extends Controller
 
             if ($request->download == 1) {
                 # code...
-                $pdf = Pdf::loadView('laporan.retur' , [
+                $pdf = Pdf::loadView('laporan.Lretur' , [
                     'tgl' => $tgl,
                     'durasi' => $durasi,
                     'data' => $data

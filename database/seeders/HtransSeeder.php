@@ -94,5 +94,7 @@ class HtransSeeder extends Seeder
         // $h->total = 3000;
         // $h->status = 0;
         // $h->save();
+
+        Htrans::factory()->count(150)->create();
     }
 }
