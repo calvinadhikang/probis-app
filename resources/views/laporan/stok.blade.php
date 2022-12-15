@@ -58,7 +58,7 @@
                     <td>{{$item->id}}</td>
                     <td>{{$item->nama}}</td>
                     <td>{{$item->stok}}</td>
-                    <td>{{$item->harga}}</td>
+                    <td>Rp {{number_format($item->harga)}}</td>
                     <td>{{ App\Models\Merk::find($item->merk)->nama}}</td>
                     <td>{{ App\Models\Kategori::find($item->kategori)->nama }}</td>
                 </tr>

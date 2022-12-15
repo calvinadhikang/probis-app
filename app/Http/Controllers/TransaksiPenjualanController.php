@@ -56,7 +56,7 @@ class TransaksiPenjualanController extends Controller
 
     public function View()
     {
-        $data = DB::select('SELECT * FROM HTRANS');
+        $data = DB::table('HTrans')->paginate(10);
 
         return view('transaksi.penjualan.view', [
             "data" => $data
@@ -84,7 +84,8 @@ class TransaksiPenjualanController extends Controller
     public function AddAction(Request $request)
     {
         if ($request->qty <= 0) {
-            return back()->with('msg', 'QTY minimal 1')->with('type', 'danger');
+            toastr()->error('Quantity minimal 1');
+            return back();
         }
 
         $cart = Session::get('cart');
@@ -131,6 +132,7 @@ class TransaksiPenjualanController extends Controller
             Session::put('cart' , $cart);
         }
 
+        toastr()->success('Berhasil tambah barang ke keranjang');
         return back();
     }
 
@@ -153,6 +155,7 @@ class TransaksiPenjualanController extends Controller
         }
         Session::put('cart' , $cart);
 
+        toastr()->success('Berhasil mengurangi barang dari keranjang');
         return back();
     }
 
@@ -173,6 +176,7 @@ class TransaksiPenjualanController extends Controller
         $obj->subtotal = $obj->qty * $obj->harga;
         Session::put('cart' , $cart);
 
+        toastr()->success('Berhasil menambah barang dari keranjang');
         return back();
     }
 
@@ -180,14 +184,16 @@ class TransaksiPenjualanController extends Controller
     {
         $cart = Session::get('cart');
         if ($cart == null) {
-            return back()->with('msg', 'Keranjang tidak boleh kosong')->with('type', 'danger');
+            toastr()->error('Keranjang tidak boleh kosong');
+            return back();
         }
 
         $nama = $request->nama;
         $alamat = $request->alamat;
 
         if ($alamat == "" || $nama == "") {
-            return back()->with('msg', 'Nama dan Alamat tidak boleh kosong')->with('type', 'danger');
+            toastr()->error('Nama dan Alamat tidak boleh kosong !');
+            return back();
         }
 
         DB::beginTransaction();
@@ -240,11 +246,14 @@ class TransaksiPenjualanController extends Controller
             DB::commit();
 
             Session::put('Cart', null);
-            return redirect('/transaksi/penjualan')->with('msg', 'Berhasil Checkout')->with('type', 'success');
+
+            toastr()->success('Berhasil Checkout');
+            return redirect('/transaksi/penjualan');
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return back()->with('msg', 'Gagal Checkout'.$e->getMessage())->with('type', 'warning');
+            toastr()->error('Gagal Checkout '.$e->getMessage());
+            return back();
         }
     }
 

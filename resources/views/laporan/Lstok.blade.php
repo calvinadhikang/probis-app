@@ -8,47 +8,48 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <style>
-        table, tr, td, th {
-            border: 1px solid black;
-        }
+    .d-flex {
+        display: flex;
+    }
+    .red {
+        background-color: lightcoral;
+    }
+    .yellow {
+        background-color: yellowgreen;
+    }
+    .status {
+        border-radius: 20px;
+        padding: 2%;
+        margin: 2%;
+        width: 100px;
+        display: inline-block;
+    }
+    .border {
+        border: 1px solid black;
+    }
+    table, tr, td, th {
+        border: 1px solid black;
+    }
+    th {
+        text-align: center;
+    }
     </style>
 </head>
 
 <body class="bg-white">
     <div class="p-4">
         <div class="text-center">
-            <h1>Laporan Barang</h1>
+            <h1>Laporan Stok Barang</h1>
             <h4>Periode : {{$tgl}}</h4>
-            <div class="text-end">
-                <a href="/laporan" class="btn btn-danger">Kembali</a>
-            </div>
             <hr>
-            <br>
-            <h3>Top 5 Barang Best Seller</h3>
-            <canvas id="top5" class="w-100"></canvas>
-            <br>
-            <table class="table table-striped">
-                <tr>
-                    <th>ID</th>
-                    <th>Nama</th>
-                    <th>Total Pembelian</th>
-                    <th>Total Profit</th>
-                </tr>
-                @forelse ($dataTop as $item)
-                    <tr>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->nama}}</td>
-                        <td>{{ number_format($item->jumlah) }}</td>
-                        <td>Rp {{ number_format($item->total) }}</td>
-                    </tr>
-                @empty
 
-                @endforelse
-            </table>
-            <br>
-            <br>
             <h3 class="text-start">List Barang</h3>
-            <table class="table table-striped">
+            <div class="d-flex">
+                <div class="status red" style="width: 15%">Stok < 10</div>
+                <div class="status yellow" style="width: 15%">Stok < 50</div>
+                <div class="status border" style="width: 15%">Stok > 50</div>
+            </div>
+            <table class="table table-striped" border="1">
                 <tr>
                     <th>ID</th>
                     <th>Nama</th>
@@ -58,11 +59,20 @@
                     <th>Kategori</th>
                 </tr>
                 @forelse ($data as $item)
-                <tr>
+                @php
+                    $color = "";
+                    if ($item->stok < 10) {
+                        $color = "red";
+                    }
+                    else if ($item->stok < 50) {
+                        $color = "yellow";
+                    }
+                @endphp
+                <tr class="{{ $color }}">
                     <td>{{$item->id}}</td>
                     <td>{{$item->nama}}</td>
                     <td>{{$item->stok}}</td>
-                    <td>{{ number_format($item->harga) }}</td>
+                    <td>Rp {{ number_format($item->harga) }}</td>
                     <td>{{ App\Models\Merk::find($item->merk)->nama}}</td>
                     <td>{{ App\Models\Kategori::find($item->kategori)->nama }}</td>
                 </tr>

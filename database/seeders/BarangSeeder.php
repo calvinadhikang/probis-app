@@ -17,47 +17,7 @@ class BarangSeeder extends Seeder
      */
     public function run()
     {
-        // MERK 1
-        $m = new Merk();
-        $m->nama = 'Wings Food';
-        $m->status = 1;
-        $m->save();
 
-        // MERK 2
-        $m = new Merk();
-        $m->nama = 'Japfa Chicken';
-        $m->status = 1;
-        $m->save();
-
-        // MERK 3
-        $m = new Merk();
-        $m->nama = 'Unilever';
-        $m->status = 1;
-        $m->save();
-
-        // MERK 4
-        $m = new Merk();
-        $m->nama = 'Tiga Pilar Sejahtera';
-        $m->status = 1;
-        $m->save();
-
-        // MERK 5
-        $m = new Merk();
-        $m->nama = 'Estika Tata Tiara';
-        $m->status = 1;
-        $m->save();
-
-        // MERK 6
-        $m = new Merk();
-        $m->nama = 'Formosa Ingridient';
-        $m->status = 1;
-        $m->save();
-
-        // MERK 7
-        $m = new Merk();
-        $m->nama = 'Segar Kumala';
-        $m->status = 1;
-        $m->save();
 
 
 
@@ -125,6 +85,8 @@ class BarangSeeder extends Seeder
         $b->merk = 3;
         $b->kategori = 1;
         $b->save();
+
+        Barang::factory()->count(150)->create();
 
         // // BARANG 8
         // $b = new Barang();

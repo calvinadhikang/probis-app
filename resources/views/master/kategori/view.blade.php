@@ -8,6 +8,7 @@
     <a class="nav-link text-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
         href="{{ url('/master/barang/add') }}">Add</a>
 </nav>
+
 @endsection
 
 @section('content')

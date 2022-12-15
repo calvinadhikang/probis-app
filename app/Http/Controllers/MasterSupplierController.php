@@ -15,7 +15,7 @@ class MasterSupplierController extends Controller
         $nama = $request->nama;
         $email = $request->email;
         $telp = $request->telp;
-        $alamat = $request->nama;
+        $alamat = $request->alamat;
 
         $obj = new Supplier();
         $obj->nama = $nama;
@@ -24,7 +24,8 @@ class MasterSupplierController extends Controller
         $obj->telepon = $telp;
         $obj->save();
 
-        return back()->with('msg', 'Berhasil tambah supplier')->with('type', 'success');
+        toastr()->success('Berhasil tambah supplier '.$nama.' di alamat : '.$alamat);
+        return redirect('/master/supplier');
     }
 
     public function edit($id, Request $request)
@@ -36,7 +37,8 @@ class MasterSupplierController extends Controller
         $data->telepon = $request->telp;
         $data->save();
 
-        return redirect('master/supplier')->with('msg', "Berhasil edit supplier : $data->nama")->with('type', 'success');
+        toastr()->success('Berhasil edit supplier '.$data->nama);
+        return redirect('master/supplier');
     }
 
     public function ViewSupplier(Request $request)
@@ -47,15 +49,18 @@ class MasterSupplierController extends Controller
         }else{
             $data = Supplier::paginate(5);
         }
+
         return view('master.supplier.view', [
             'data'=>$data,
             'search'=>$search
         ]);
     }
+
     public function AddSupplier()
     {
        return view('master.supplier.add');
     }
+
     public function EditSupplier($id)
     {
         $data = Supplier::find($id);
@@ -70,7 +75,8 @@ class MasterSupplierController extends Controller
 
         DB::table('asal_barang')->where('id_barang','=',$barang->id)->where('id_supplier','=',$id)->delete();
 
-        return back()->with('msg', "berhasil hapus barang $barang->nama")->with('type', 'success');
+        toastr()->success('Berhasil hapus barang '.$barang->nama);
+        return back();
     }
 
     public function AddBarangSupplier($id, Request $request)
@@ -84,7 +90,8 @@ class MasterSupplierController extends Controller
 
         foreach ($list as $key => $value) {
             if ($value->id_barang == $barang->id) {
-                return back()->with('msg', "barang $barang->nama sudah ada")->with('type', 'danger');
+                toastr()->error("Gagal add, Barang $barang->nama sudah ada");
+                return back();
             }
         }
 
@@ -94,17 +101,21 @@ class MasterSupplierController extends Controller
         $obj->harga = $harga;
         $obj->save();
 
-        return back()->with('msg', "berhasil tambah barang $barang->nama")->with('type', 'success');
+        toastr()->success('Berhasil tambah barang '.$barang->nama);
+        return back();
     }
+
     public function EditBarangSupplier()
     {
        return view('master.editbarangsupply');
     }
+
     public function DetailSupplier($id)
     {
         $data = Supplier::find($id);
         $barang = Barang::all();
         $list = AsalBarang::where('id_supplier','=',$data->id)->get();
+
         return view('master.supplier.detail',[
             'data'=>$data,
             'barang'=>$barang,

@@ -19,9 +19,6 @@
         <div class="text-center">
             <h1>Laporan Barang</h1>
             <h4>Periode : {{$tgl}}</h4>
-            <div class="text-end">
-                <a href="/laporan" class="btn btn-danger">Kembali</a>
-            </div>
             <hr>
             <br>
             <h3>Top 5 Barang Best Seller</h3>

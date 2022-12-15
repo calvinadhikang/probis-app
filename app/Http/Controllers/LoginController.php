@@ -38,6 +38,6 @@ class LoginController extends Controller
             }
         }
 
-        return back()->with('type', 'danger')->with('msg', 'User tidak ditemukan');
+        return back()->with('msg', 'User tidak ditemukan')->with('type', 'danger');
     }
 }

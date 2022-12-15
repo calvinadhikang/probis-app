@@ -88,7 +88,8 @@ class MasterBarangController extends Controller
         $asal->harga = $request->harga;
         $asal->save();
 
-        return redirect('/master/barang')->with('msg', 'Berhasil tambah barang')->with('type', 'success');
+        toastr()->success('Berhasil tambah barang'.$request->nama);
+        return redirect('/master/barang');
     }
 
     public function formDetail(Request $request)
@@ -140,11 +141,6 @@ class MasterBarangController extends Controller
             "merk" => ["required"],
             "kategori" => ["required"]
         ]);
-
-        // $b = Barang::find($id);
-        // $b->nama = $in['nama'];
-        // $b->harga = $in['nama'];
-        // $b->save();
 
         $result = Barang::where('id', $id)->update([
             'nama' => $in["nama"],

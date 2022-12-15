@@ -68,7 +68,7 @@ class LaporanController extends Controller
 
             if ($request->download == 1) {
                 # code...
-                $pdf = Pdf::loadView('laporan.barang' , [
+                $pdf = Pdf::loadView('laporan.Lbarang' , [
                     'tgl' => date("Y-M-d"),
                     'data' => $data,
                     'dataTop' => $dataTop,
@@ -92,7 +92,7 @@ class LaporanController extends Controller
 
             if ($request->download == 1) {
                 # code...
-                $pdf = Pdf::loadView('laporan.stok' , [
+                $pdf = Pdf::loadView('laporan.Lstok' , [
                     'data' => $data,
                     'tgl' => date("Y-M-d")
                 ]);
@@ -131,7 +131,7 @@ class LaporanController extends Controller
 
             if ($request->download == 1) {
                 # code...
-                $pdf = Pdf::loadView('laporan.penjualan' , [
+                $pdf = Pdf::loadView('laporan.Lpenjualan' , [
                     'tgl' => $tgl,
                     'durasi' => $durasi,
                     'data' => $data

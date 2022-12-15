@@ -32,5 +32,7 @@ class KategoriSeeder extends Seeder
         $k->nama = 'Daging Olahan';
         $k->status = 1;
         $k->save();
+
+        Kategori::factory()->count(75)->create();
     }
 }

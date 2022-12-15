@@ -60,9 +60,15 @@ class MasterKaryawanController extends Controller
         $jenis_kelamin = $request->jenis_kelamin;
 
         if ($password != $confirmpassword) {
-            return redirect()->back()->with("msg", "Password dan Confirm tidak sama")->with('type', 'danger');
+            toastr()->warning('Password dan Confirm Password harus sama');
+            return redirect()->back();
         }
 
+        $obj = count(Karyawan::where('username','=',$username)->get());
+        if ($obj > 0) {
+            toastr()->error('Username tidak boleh kembar');
+            return redirect()->back();
+        }
 
         $data = new Karyawan();
         $data->username = $username;
@@ -75,7 +81,8 @@ class MasterKaryawanController extends Controller
         $data->status = 1;
         $data->save();
 
-        return redirect('/master/karyawan')->with("msg", "Berhasil add karyawan : $nama")->with('type', 'primary');
+        toastr()->success('Berhasil menambah karyawan '.$nama);
+        return redirect('/master/karyawan');
     }
 
     public function EditKaryawan(Request $request)
@@ -95,11 +102,21 @@ class MasterKaryawanController extends Controller
         $data = Karyawan::find($request->id);
         //cek old pass harus sama
         if ($data->password != $oldpassword) {
-            return back()->with('msg', 'Password lama salah')->with('type', 'danger');
+            toastr()->warning('Password lama salah !');
+            return back();
         }
 
         if ($password != $confirm_password) {
-            return back()->with('msg', 'Password dan Confirmation salah')->with('type', 'danger');
+            toastr()->warning('Password dan Confirm Password harus sama !');
+            return back();
+        }
+
+        if ($username != $data->username) {
+            $obj = count(Karyawan::where('username','=',$username)->get());
+            if ($obj > 0) {
+                toastr()->error('Username tidak boleh kembar');
+                return redirect()->back();
+            }
         }
 
         $data->username = $username;
@@ -112,6 +129,7 @@ class MasterKaryawanController extends Controller
         $data->status = $status;
         $data->save();
 
-        return redirect()->back()->with("msg", "Berhasil edit karyawan : $nama")->with('type', 'primary');
+        toastr()->success('Berhasil edit karyawan '.$nama);
+        return redirect('master/karyawan');
     }
 }

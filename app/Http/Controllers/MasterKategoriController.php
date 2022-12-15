@@ -29,7 +29,6 @@ class MasterKategoriController extends Controller
     {
         $data = Kategori::all();
         return response()->json($data, 200);
-        # code...
     }
 
     // POST FUNCTIONS
@@ -38,7 +37,14 @@ class MasterKategoriController extends Controller
         $nama = $request->nama;
 
         if ($nama == "") {
-            return redirect()->back()->with("msg", "Inputan tidak boleh kosong !")->with('type', 'danger');
+            toastr()->error('Gagal Add, Nama tidak boleh kosong !');
+            return redirect()->back();
+        }
+
+        $found = Kategori::where('nama','=',$nama)->get();
+        if (count($found) > 0) {
+            toastr()->error("Gagal Add, Nama tidak boleh kembar !");
+            return redirect()->back();
         }
 
         $data = new Kategori();
@@ -46,7 +52,9 @@ class MasterKategoriController extends Controller
         $data->status = 1;
         $data->save();
 
-        return redirect()->back()->with("msg", "Berhasil add kategori : $nama")->with('type', 'primary');
+        toastr()->success("Berhasil Add Kategori $nama");
+
+        return redirect()->back();
     }
 
     public function Toggle(Request $request)
@@ -59,6 +67,7 @@ class MasterKategoriController extends Controller
         }
         $data->save();
 
-        return redirect()->back()->with("msg", "Berhasil update kategori : $data->nama")->with('type', 'primary');
+        toastr()->success('Berhasil ganti status '.$data->nama);
+        return redirect()->back();
     }
 }

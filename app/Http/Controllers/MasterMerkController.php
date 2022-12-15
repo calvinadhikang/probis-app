@@ -29,12 +29,24 @@ class MasterMerkController extends Controller
     {
         $nama = $request->nama;
 
+        if ($nama == "") {
+            toastr()->error('Gagal Add, Nama tidak boleh kosong');
+            return back();
+        }
+
+        $found = count(Merk::where('nama','=',$nama)->get());
+        if ($found > 0) {
+            toastr()->error('Gagal Add, Nama tidak boleh kembar');
+            return back();
+        }
+
         $obj = new Merk();
         $obj->nama = $nama;
         $obj->status = 1;
         $obj->save();
 
-        return redirect()->back()->with("msg", "Berhasil add merk : $nama")->with('type', 'success');
+        toastr()->success('Berhasil tambah merk '.$nama);
+        return redirect()->back();
     }
 
     public function Toggle(Request $request)
@@ -49,6 +61,7 @@ class MasterMerkController extends Controller
         }
         $obj->save();
 
-        return back()->with('msg', 'Berhasil Toggle Status')->with('type', 'success');
+        toastr()->success('Berhasil toggle status '.$obj->nama);
+        return back();
     }
 }
