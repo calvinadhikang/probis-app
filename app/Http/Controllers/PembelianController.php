@@ -98,7 +98,8 @@ class PembelianController extends Controller
 
         //to cart
         if ($request->qty <= 0) {
-            return back()->with('msg', 'QTY minimal 1')->with('type', 'danger');
+            toastr()->error('QTY Minimal 1');
+            return back();
         }
 
         $cart = Session::get('cartPembelian');
@@ -142,6 +143,7 @@ class PembelianController extends Controller
             Session::put('cartPembelian' , $cart);
         }
 
+        toastr()->success('Berhasil add');
         return back();
     }
 
@@ -168,13 +170,15 @@ class PembelianController extends Controller
         Session::put('supplier', $supplier);
         Session::forget('cartPembelian');
         # code...
+
+        toastr()->success('Berhasil load data');
         return back();
     }
 
     //
     public function view()
     {
-        $data = HPembelian::all();
+        $data = HPembelian::latest()->paginate(10);
         return view('transaksi.pembelian.view',[
             'data' => $data
         ]);
@@ -212,6 +216,7 @@ class PembelianController extends Controller
         }
         Session::put('cartPembelian' , $cart);
 
+        toastr()->success('Berhasil mengurangi');
         return back();
     }
 
@@ -232,6 +237,7 @@ class PembelianController extends Controller
         $obj->subtotal = $obj->qty * $obj->harga;
         Session::put('cartPembelian' , $cart);
 
+        toastr()->success('Berhasil nambah');
         return back();
     }
 }
