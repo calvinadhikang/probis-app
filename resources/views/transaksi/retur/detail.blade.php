@@ -37,8 +37,8 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->qty }}</td>
-                        <td>{{ $item->harga }}</td>
-                        <td>{{ $item->subtotal }}</td>
+                        <td>Rp {{ number_format($item->harga) }}</td>
+                        <td>Rp {{ number_format($item->subtotal) }}</td>
                         {{-- <td>
                             @if ($item->status == 0)
                                 <div class="p-2 rounded bg-warning text-light text-center">Processed</div>
@@ -59,6 +59,6 @@
                 @endforelse
             </tbody>
         </table>
-        <h5 class="text-end">Grand Total : {{ $data->total }}</h5>
+        <h5 class="text-end">Grand Total : Rp {{ number_format($data->total) }}</h5>
     </div>
 @endsection

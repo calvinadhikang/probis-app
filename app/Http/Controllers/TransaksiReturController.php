@@ -18,7 +18,7 @@ class TransaksiReturController extends Controller
     public function pilih()
     {
         # code...
-        $data = Htrans::where('status','=',0)->get();
+        $data = Htrans::where('status','=',0)->paginate(10);
         return view('transaksi.retur.pilih', [
             'data' => $data
         ]);

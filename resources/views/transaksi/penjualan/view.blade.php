@@ -27,7 +27,7 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->alamat }}</td>
-                        <td>{{ $item->total }}</td>
+                        <td>Rp {{ number_format($item->total) }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>
                             @if ($item->status == 0)

@@ -39,8 +39,8 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $b->nama }}</td>
                         <td>{{ $item->qty }}</td>
-                        <td>{{ $item->harga }}</td>
-                        <td>{{ $item->subtotal }}</td>
+                        <td>Rp {{ number_format($item->harga) }}</td>
+                        <td>Rp {{ number_format($item->subtotal) }}</td>
                     </tr>
                 @empty
                     <tr>
@@ -49,6 +49,6 @@
                 @endforelse
             </tbody>
         </table>
-        <h5 class="text-end">Grand Total : {{ $data->total }}</h5>
+        <h5 class="text-end">Grand Total : Rp {{ number_format($data->total) }}</h5>
     </div>
 @endsection
