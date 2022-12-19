@@ -38,7 +38,7 @@
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->alamat }}</td>
                         <td>Rp {{ number_format($item->total) }}</td>
-                        <td>Rp {{ $item->created_at }}</td>
+                        <td>{{ $item->created_at }}</td>
                     </tr>
                     @empty
                     <tr>
