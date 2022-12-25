@@ -29,7 +29,7 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $supp->nama }}</td>
                         <td>{{ $supp->email }}</td>
-                        <td>{{ $item->total }}</td>
+                        <td>Rp {{ number_format($item->total) }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>
                             <a href="/transaksi/pembelian/detail/{{$item->id}}" class="p-2">
@@ -44,5 +44,6 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $data->withQueryString()->links() }}
     </div>
 @endsection

@@ -22,7 +22,7 @@
             </div>
             <div class="w-50 p-2">
                 Total Harga
-                <h4>{{ $data->total }}</h4>
+                <h4>Rp {{ number_format($data->total) }}</h4>
             </div>
             <div class="w-50 p-2">
                 Tanggal
@@ -46,7 +46,7 @@
                     @forelse ($detail as $item)
                     <tr>
                         <td>{{ $item->nama }}</td>
-                        <td>{{ $item->harga }}</td>
+                        <td>Rp {{ number_format($item->harga) }}</td>
                         <td>{{ $item->qty }}</td>
                         <td>
                             <input type="number" name="jumlah[]" value="0" class="form-control">

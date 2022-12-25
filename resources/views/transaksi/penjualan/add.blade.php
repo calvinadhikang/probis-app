@@ -37,8 +37,8 @@
                         <tr>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->qty }}</td>
-                            <td>{{ $item->harga }}</td>
-                            <td>{{ $item->subtotal }}</td>
+                            <td>Rp {{ number_format($item->harga) }}</td>
+                            <td>Rp {{ number_format($item->subtotal) }}</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     {{-- <form action="/transaksi/penjualan/tambah" method="POST">

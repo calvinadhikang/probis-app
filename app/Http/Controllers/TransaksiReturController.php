@@ -18,7 +18,7 @@ class TransaksiReturController extends Controller
     public function pilih()
     {
         # code...
-        $data = Htrans::where('status','=',0)->get();
+        $data = Htrans::where('status','=',0)->paginate(10);
         return view('transaksi.retur.pilih', [
             'data' => $data
         ]);
@@ -38,7 +38,7 @@ class TransaksiReturController extends Controller
 
     public function View()
     {
-        $data = hretur::all();
+        $data = hretur::latest()->paginate(10);
         return view('transaksi.retur.view', [
             'data' => $data
         ]);
@@ -131,11 +131,13 @@ class TransaksiReturController extends Controller
 
             DB::commit();
 
-            return redirect('/transaksi/retur')->with('msg', 'Berhasil Retur')->with('type', 'success');
+            toastr()->success('Berhasil membuat retur');
+            return redirect('/transaksi/retur');
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return back()->with('msg', 'Gagal Retur'.$e->getMessage())->with('type', 'warning');
+            toastr()->error('Gagal membuat retur');
+            return back();
         }
     }
 }

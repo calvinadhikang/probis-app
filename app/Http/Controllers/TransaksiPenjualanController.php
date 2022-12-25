@@ -56,7 +56,7 @@ class TransaksiPenjualanController extends Controller
 
     public function View()
     {
-        $data = DB::table('HTrans')->paginate(10);
+        $data = DB::table('HTrans')->latest()->paginate(10);
 
         return view('transaksi.penjualan.view', [
             "data" => $data
