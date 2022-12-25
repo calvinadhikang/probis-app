@@ -203,9 +203,7 @@ class TransaksiPenjualanController extends Controller
             foreach ($cart as $key => $value) {
                 $total += $value->subtotal;
             }
-
             $time = date('Y-m-d H:i:s');
-            // dd($time);
 
             //INSERT HEADER
             $lastId = DB::table('htrans')->insertGetId(array(
@@ -216,9 +214,7 @@ class TransaksiPenjualanController extends Controller
                 'created_at' => $time,
                 'updated_at' => $time,
             ));
-            // DB::insert("insert into htrans (nama, alamat, total, status, created_at, updated_at) values ('$nama', '$alamat', $total, 0, $time, $time)");
 
-            // $lastId = DB::getPdo()->lastInsertId();
             foreach ($cart as $key => $value) {
                 # code...
                 DB::table('dtrans')->insert(array(
@@ -239,8 +235,6 @@ class TransaksiPenjualanController extends Controller
                     return back()->with('msg', 'Gagal Checkout, STOK BARANG '.$toEdit->nama.' tidak cukup')->with('type', 'warning');
                 }
                 $toEdit->save();
-
-                // DB::insert("insert into dtrans (htrans_id, barang_id, nama, qty, harga, subtotal, created_at, updated_at) values ($lastId, $value->id, '$value->nama', $value->qty, $value->harga, $value->subtotal), $time, $time");
             }
 
             DB::commit();

@@ -73,9 +73,6 @@ Route::prefix('/master')->group(function() {
         Route::post('/addBarang/{id}', [MasterSupplierController::class, "AddBarangSupplier"]);
         Route::post('/removeBarang/{id}', [MasterSupplierController::class, "RemoveBarangSupplier"]);
     });
-    //     Route::get('/', [MasterKaryawanController::class, "View"]);
-    //     Route::get('/add', [MasterKaryawanController::class, "Add"]);
-    // });
 
     //MERK
     Route::prefix('/merk')->group(function() {

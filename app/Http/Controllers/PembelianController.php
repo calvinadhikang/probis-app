@@ -18,7 +18,6 @@ class PembelianController extends Controller
         $data = HPembelian::find($id);
         $supplier = Supplier::find($data->supplier_id);
         $detail = DB::select("SELECT * FROM DPEMBELIAN WHERE DPEMBELIAN_ID = $data->id");
-        // dd($detail);
 
         return view('transaksi.pembelian.detail', [
             'data' => $data,
@@ -44,7 +43,6 @@ class PembelianController extends Controller
             foreach ($cart as $key => $value) {
                 $total += $value->subtotal;
             }
-
             $time = date('Y-m-d H:i:s');
 
             //INSERT HEADER
@@ -54,9 +52,7 @@ class PembelianController extends Controller
                 'created_at' => $time,
                 'updated_at' => $time,
             ));
-            // DB::insert("insert into hpembelian (supplier_id, total) values ('$supplier->id', $total)");
 
-            // $lastId = DB::getPdo()->lastInsertId();
             foreach ($cart as $key => $value) {
                 # code...
                 DB::table('dpembelian')->insert(array(
@@ -72,8 +68,6 @@ class PembelianController extends Controller
                 $addStok = Barang::find($value->id);
                 $addStok->stok = $addStok->stok + $value->qty;
                 $addStok->save();
-
-                // DB::insert("insert into dpembelian (dpembelian_id, barang_id , qty, subtotal) values ($lastId, $value->id, $value->qty, $value->subtotal)");
             }
 
             DB::commit();

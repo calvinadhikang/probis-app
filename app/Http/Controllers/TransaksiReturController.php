@@ -105,7 +105,6 @@ class TransaksiReturController extends Controller
 
         try {
             $time = date('Y-m-d H:i:s');
-            // dd($time);
 
             //INSERT HEADER
             $lastId = DB::table('hretur')->insertGetId(array(
@@ -115,9 +114,7 @@ class TransaksiReturController extends Controller
                 'created_at' => $time,
                 'updated_at' => $time,
             ));
-            // DB::insert("insert into htrans (nama, alamat, total, status, created_at, updated_at) values ('$nama', '$alamat', $total, 0, $time, $time)");
-
-            // $lastId = DB::getPdo()->lastInsertId();
+            
             foreach ($arr as $key => $value) {
                 # code...
                 DB::table('dretur')->insert(array(
