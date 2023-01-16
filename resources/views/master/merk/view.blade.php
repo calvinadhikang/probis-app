@@ -33,13 +33,13 @@
 
     <br>
 
-    <table class="table table-striped">
+    <table class="table table-striped text-center">
         <thead class="table-success">
             <tr>
                 <th>ID MERK</th>
                 <th>NAMA MERK</th>
-                <th>Jumlah Produk dengan Merk</th>
-                <th>Status</th>
+                <th>JUMLAH PRODUK DENGAN MERK</th>
+                <th>STATUS</th>
                 <th>AKSI</th>
             </tr>
         </thead>
